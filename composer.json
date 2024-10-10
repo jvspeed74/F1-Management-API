@@ -44,6 +44,8 @@
   },
   "scripts": {
     "php-cs-fixer": "php-cs-fixer --rules=@PER-CS2.0",
-    "phpstan": "vendor/bin/phpstan -c phpstan.neon"
+    "phpstan": "vendor/bin/phpstan -c phpstan.neon",
+    "start": "php -S localhost:8080 -t public",
+    "test": "phpunit"
   }
 }
