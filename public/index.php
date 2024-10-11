@@ -3,12 +3,56 @@
 declare(strict_types=1);
 
 
+use App\Controllers\TeamController;
+use DI\ContainerBuilder;
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
 
+use function DI\autowire;
+
 require __DIR__ . '/../vendor/autoload.php';
+
+// Create the PHP-DI ContainerBuilder
+$containerBuilder = new ContainerBuilder();
+
+$containerBuilder->addDefinitions([
+    // Bind interfaces to their concrete implementations
+    App\Repositories\TeamRepositoryInterface::class => autowire(App\Repositories\TeamRepository::class),
+]);
+
+// Optionally, add definitions manually if needed (you can skip this for auto-wiring)
+// $containerBuilder->addDefinitions([
+//     // Manually define services if necessary (like config settings or shared services)
+// ]);
+
+$container = $containerBuilder->build();
+
+// Set the container in Slim AppFactory
+AppFactory::setContainer($container);
+
+// Set up Eloquent Capsule (Database Connection)
+$capsule = new Capsule();
+
+// Add your database connection configuration
+$capsule->addConnection([
+    'driver'    => 'mysql',                     // Database driver
+    'host'      => 'localhost',                 // Database host
+    'database'  => 'f1_db',        // Database name
+    'username'  => 'phpuser',             // Database username
+    'password'  => 'phpuser',             // Database password
+    'charset'   => 'utf8',                      // Charset (usually utf8)
+    'collation' => 'utf8_general_ci',           // Collation (usually utf8_unicode_ci)
+]);
+
+// Make the Capsule instance available globally via static methods (optional, but recommended)
+$capsule->setAsGlobal();
+
+// Setup the Eloquent ORM
+$capsule->bootEloquent();
+
 
 /**
  * Instantiate App
@@ -18,6 +62,7 @@ require __DIR__ . '/../vendor/autoload.php';
  * ServerRequest creator (included with Slim PSR-7)
  */
 $app = AppFactory::create();
+
 
 /**
  * The routing middleware should be added earlier than the ErrorMiddleware
@@ -44,6 +89,12 @@ $app->get('/hello/{name}', function (Request $request, Response $response, $args
     $response->getBody()->write("Hello, $name");
     return $response;
 });
+$app->get('/teams', TeamController::class . ':getAllTeams');
+$app->get('/teams/{id}', TeamController::class . ':getTeamById');
+$app->post('/teams', TeamController::class . ':createTeam');
+$app->put('/teams/{id}', TeamController::class . ':updateTeam');
+$app->delete('/teams/{id}', TeamController::class . ':deleteTeam');
+
 
 // Run app
 $app->run();
