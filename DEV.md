@@ -11,7 +11,7 @@
 
 - The project includes a preconfigured `composer.json` file.
 - The repository includes `composer.phar`, allowing Composer to be run without a global installation.
-- The PhpStorm IDE has a startup task to run `composer install` to get the `vendor` directory.
+- The PhpStorm IDE has a startup task to run `composer.phar install` to get the `vendor` directory.
 
 ## Coding Standards
 
@@ -31,9 +31,13 @@
 
 ## Environment Variables
 
-- The project includes a `.env` file, which is used to store environment variables.
-- The PHP dotenv package is included in the `composer.json` file to allow the `.env` file to be read.
+- The project requires a `.env` file, which is used to store environment variables.
 - The main use of this package is to reduce the coupling between our environments (i.e. database ports)
-- A default `.env` file is included in the repository, but any changes you make to it will not be committed because it
-  is
-  listed in the `.gitignore` file.
+- The PHP dotenv package is included in the `composer.json` file to allow the `.env` file to be read.
+- To get started:
+  1. Copy the contents of the `.env.example` file
+  2. Create a new file named `.env`.
+  3. Paste the contents into the `.env` file.
+  4. Update the values in the `.env` file to match your local environment.
+
+
