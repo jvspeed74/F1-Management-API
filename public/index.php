@@ -13,6 +13,11 @@ use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+// TODO Split file into smaller files in the config directory
+// TODO Update PHP-DI to version specific to Slim 4
+// TODO Add a service for logging
+// TODO Add a default error and exception handler
+
 // Create the PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
 
@@ -63,6 +68,9 @@ $app = AppFactory::create();
  */
 $app->addRoutingMiddleware();
 
+
+$app->addBodyParsingMiddleware();
+
 /**
  * Add Error Middleware
  *
@@ -85,7 +93,7 @@ $app->get('/hello/{name}', function (Request $request, Response $response, $args
 $app->get('/teams', TeamController::class . ':getAllTeams');
 $app->get('/teams/{id}', TeamController::class . ':getTeamById');
 $app->post('/teams', TeamController::class . ':createTeam');
-$app->put('/teams/{id}', TeamController::class . ':updateTeam');
+$app->patch('/teams/{id}', TeamController::class . ':updateTeam');
 $app->delete('/teams/{id}', TeamController::class . ':deleteTeam');
 
 
