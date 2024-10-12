@@ -2,9 +2,9 @@ openapi: 3.0.0
 info:
   title: F1 Database API
   description: API documentation for the F1 database based on table schemas.
-  version: 0.0.0
+  version: 1.0.0
 servers:
-  - url: http://localhost:8000
+  - url: http://localhost:8080
     description: Local server
 
 paths:
@@ -389,17 +389,36 @@ paths:
                 items:
                   $ref: '#/components/schemas/team'
     post:
-      summary: Create a new teams
+      summary: Create a new Team
       tags:
         - Teams
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/team'
+              type: object
+              properties:
+                full_name:
+                  type: string
+                short_name:
+                  type: string
+                headquarters:
+                  type: string
+                team_principal:
+                  type: string
+              required:
+                - full_name
+                - short_name
+                - headquarters
+                - team_principal
       responses:
         '201':
-          description: teams created
+          description: Information on the newly created team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/team'
   /teams/{id}:
     get:
       summary: Get a specific teams
@@ -669,14 +688,24 @@ components:
       properties:
         id:
           type: integer
+          example: 1
+          description: Unique identifier for the team
         full_name:
           type: string
+          example: "Mercedes-AMG Petronas Formula One Team"
+          description: Full name of the team
         short_name:
           type: string
+          example: "Mercedes"
+          description: Short name alias of the team
         headquarters:
           type: string
+          example: "Brackley, United Kingdom"
+          description: Location of the team's headquarters
         team_principal:
           type: string
+          example: "Toto Wolff"
+          description: Name of the team principal
 
     track:
       type: object
