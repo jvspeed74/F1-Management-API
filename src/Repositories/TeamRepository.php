@@ -11,13 +11,13 @@ class TeamRepository
 {
     protected Team $model;
 
-    // Inject the Team model via the constructor
+    /**
+     * @param Team $model
+     */
     public function __construct(Team $model)
     {
         $this->model = $model;
     }
-
-    // Fetch all teams
 
     /**
      * @return Collection<int, Team>
@@ -26,8 +26,6 @@ class TeamRepository
     {
         return $this->model::all();  // Uses Eloquent's all() method on the injected model
     }
-
-    // Fetch a team by ID
 
     /**
      * @param int $id
@@ -47,7 +45,6 @@ class TeamRepository
         return $team;
     }
 
-    // Create a new team
 
     /**
      * @param array<string, string> $data
@@ -58,7 +55,6 @@ class TeamRepository
         return $this->model->query()->create($data);
     }
 
-    // Update an existing team
 
     /**
      * @param int $id
@@ -80,7 +76,10 @@ class TeamRepository
         return false;
     }
 
-    // Delete a team by ID
+    /**
+     * @param int $id
+     * @return bool
+     */
     public function deleteTeam(int $id): bool
     {
         $team = $this->model->query()->find($id);  // Find the team by ID
