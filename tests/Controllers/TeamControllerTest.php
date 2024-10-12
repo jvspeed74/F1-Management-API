@@ -5,15 +5,13 @@ declare(strict_types=1);
 namespace Controllers;
 
 use App\Controllers\TeamController;
-use App\Repositories\TeamRepository;
-use PHPUnit\Framework\TestCase;
-use Mockery;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Slim\Psr7\Factory\ResponseFactory;
-use Slim\Psr7\Response;
-use Illuminate\Database\Eloquent\Collection;
 use App\Models\Team;
+use App\Repositories\TeamRepository;
+use Illuminate\Database\Eloquent\Collection;
+use Mockery;
+use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Psr7\Response;
 
 class TeamControllerTest extends TestCase
 {
