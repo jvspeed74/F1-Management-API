@@ -1,3 +1,4 @@
+# TODO Split the OpenAPI specification into multiple files for each resource
 openapi: 3.0.0
 info:
   title: F1 Database API
@@ -437,8 +438,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/team'
-    put:
-      summary: Update a specific teams
+    patch:
+      summary: Update a specific team
       tags:
         - Teams
       parameters:
@@ -451,10 +452,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/team'
+              properties:
+                full_name:
+                  type: string
+                  example: "Mercedes-AMG Petronas Formula One Team"
+                short_name:
+                  type: string
+                  example: "Mercedes"
+                headquarters:
+                  type: string
+                  example: "Brackley, United Kingdom"
+                team_principal:
+                  type: string
+                  example: "Toto Wolff"
       responses:
         '200':
-          description: teams updated
+          description: Team successfully updated
     delete:
       summary: Delete a specific teams
       tags:
