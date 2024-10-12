@@ -6,11 +6,7 @@ namespace App\Repositories;
 
 use App\Models\Team;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
-/**
- *
- */
 class TeamRepository
 {
     protected Team $model;
@@ -35,39 +31,61 @@ class TeamRepository
 
     /**
      * @param int $id
-     * @return Collection<int, Team>|Team|null
+     * @return Team|false
      */
-    public function getTeamById(int $id): Collection | Model | null
+    public function getTeamById(int $id): Team | false
     {
-        return $this
-            ->model
-            ->query()
-            ->find($id);
+        // Find the team by ID
+        $team = $this->model->query()->find($id);
+
+        // Return false if the team is not found
+        if (!$team) {
+            return false;
+        }
+
+        // Return the team if found
+        return $team;
     }
 
     // Create a new team
-    public function createTeam(array $data)
+
+    /**
+     * @param array<string, string> $data
+     * @return Team
+     */
+    public function createTeam(array $data): Team
     {
         return $this->model->query()->create($data);
     }
 
     // Update an existing team
-    public function updateTeam($id, array $data)
+
+    /**
+     * @param int $id
+     * @param array<string, string> $data
+     * @return Team|false
+     */
+    public function updateTeam(int $id, array $data): Team | false
     {
-        $team = $this->model->find($id);  // Find the team by ID
-        if ($team) {
-            $team->update($data);  // Update the team with the provided data
+        $team = $this->model->query()->find($id);  // Find the team by ID
+        if (!$team) {
+            return false;  // Return false if the team is not found
+        }
+
+        // Update the team with the provided data
+        if ($team->update($data)) {
             return $team;
         }
-        return null;  // Return null if the team is not found
+
+        return false;
     }
 
     // Delete a team by ID
-    public function deleteTeam(int $id): ?bool
+    public function deleteTeam(int $id): bool
     {
         $team = $this->model->query()->find($id);  // Find the team by ID
         if ($team) {
-            return $team->delete();
+            return (bool) $team->delete();
         }
         return false;  // Return false if the team is not found
     }
