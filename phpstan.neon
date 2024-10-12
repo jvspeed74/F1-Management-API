@@ -4,6 +4,6 @@ parameters:
         - src
         - config
         - public
-
-includes:
-    - vendor/phpstan/phpstan-phpunit/extension.neon
+    excludePaths:
+        - tests
+        - tests/**/*
