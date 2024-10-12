@@ -42,8 +42,8 @@
     "friendsofphp/php-cs-fixer": "^3.64"
   },
   "scripts": {
-    "php-cs-fixer": "php-cs-fixer --rules=@PER-CS2.0",
-    "phpstan": "vendor/bin/phpstan -c phpstan.neon",
+    "format": "vendor/bin/php-cs-fixer fix . --rules=@PER-CS2.0",
+    "phpstan": "vendor/bin/phpstan",
     "start": "php -S localhost:8080 -t public",
     "test": "phpunit"
   }
