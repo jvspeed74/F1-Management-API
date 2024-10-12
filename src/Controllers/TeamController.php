@@ -4,21 +4,27 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Repositories\TeamRepositoryInterface;
+use App\Repositories\TeamRepository;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class TeamController
 {
-    protected TeamRepositoryInterface $teamRepository;
+    protected TeamRepository $teamRepository;
 
     // Inject the repository via constructor
-    public function __construct(TeamRepositoryInterface $teamRepository)
+    public function __construct(TeamRepository $teamRepository)
     {
         $this->teamRepository = $teamRepository;
     }
 
     // Fetch all teams
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @return Response
+     */
     public function getAllTeams(Request $request, Response $response): Response
     {
         $teams = $this->teamRepository->getAllTeams();
@@ -27,18 +33,26 @@ class TeamController
     }
 
     // Fetch a team by ID
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param string[] $args
+     * @return Response
+     * @throws \JsonException
+     */
     public function getTeamById(Request $request, Response $response, array $args): Response
     {
-        $id = $args['id'];
+        $id = (int) $args['id'];
         $team = $this->teamRepository->getTeamById($id);
 
-        if ($team) {
-            $response->getBody()->write(json_encode($team));
-        } else {
+        if ($team === null) {
             $response = $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-            $response->getBody()->write(json_encode(["message" => "Team not found"]));
+            $response->getBody()->write(json_encode(["message" => "Team not found"], JSON_THROW_ON_ERROR));
+            return $response;
         }
 
+        $response->getBody()->write($team->toJson());
         return $response->withHeader('Content-Type', 'application/json');
     }
 
@@ -47,7 +61,7 @@ class TeamController
     {
         $data = $request->getParsedBody();
         $team = $this->teamRepository->createTeam($data);
-        $response->getBody()->write(json_encode($team));
+        $response->getBody()->write(json_encode($team, JSON_THROW_ON_ERROR));
         return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
     }
 
@@ -69,18 +83,25 @@ class TeamController
     }
 
     // Delete a team by ID
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param string[] $args
+     * @return Response
+     * @throws \JsonException
+     */
     public function deleteTeam(Request $request, Response $response, array $args): Response
     {
-        $id = $args['id'];
+        $id = (int) $args['id'];
         $deleted = $this->teamRepository->deleteTeam($id);
 
-        if ($deleted) {
-            $response->getBody()->write(json_encode(["message" => "Team deleted"]));
-        } else {
+        if (!$deleted) {
             $response = $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-            $response->getBody()->write(json_encode(["message" => "Team not found"]));
+            $response->getBody()->write(json_encode(["message" => "Team not found"], JSON_THROW_ON_ERROR));
+            return $response;
         }
 
-        return $response->withHeader('Content-Type', 'application/json');
+        return $response->withStatus(204)->withHeader('Content-Type', 'application/json');
     }
 }

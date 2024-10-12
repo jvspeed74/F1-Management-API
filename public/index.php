@@ -11,17 +11,10 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
 
-use function DI\autowire;
-
 require __DIR__ . '/../vendor/autoload.php';
 
 // Create the PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
-
-$containerBuilder->addDefinitions([
-    // Bind interfaces to their concrete implementations
-    App\Repositories\TeamRepositoryInterface::class => autowire(App\Repositories\TeamRepository::class),
-]);
 
 // Optionally, add definitions manually if needed (you can skip this for auto-wiring)
 // $containerBuilder->addDefinitions([
@@ -41,10 +34,10 @@ $capsule->addConnection([
     'driver'    => 'mysql',                     // Database driver
     'host'      => 'localhost',                 // Database host
     'database'  => 'f1_db',        // Database name
-    'username'  => 'phpuser',             // Database username
-    'password'  => 'phpuser',             // Database password
-    'charset'   => 'utf8',                      // Charset (usually utf8)
-    'collation' => 'utf8_general_ci',           // Collation (usually utf8_unicode_ci)
+    'username'  => 'root',             // Database username
+    'password'  => '',             // Database password
+    'charset'   => 'utf8mb4',                      // Charset (usually utf8)
+    'collation' => 'utf8mb4_general_ci',           // Collation (usually utf8_unicode_ci)
 ]);
 
 // Make the Capsule instance available globally via static methods (optional, but recommended)

@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  *
  */
-class TeamRepository implements TeamRepositoryInterface
+class TeamRepository
 {
     protected Team $model;
 
@@ -63,11 +63,11 @@ class TeamRepository implements TeamRepositoryInterface
     }
 
     // Delete a team by ID
-    public function deleteTeam($id)
+    public function deleteTeam(int $id): ?bool
     {
-        $team = $this->model->find($id);  // Find the team by ID
+        $team = $this->model->query()->find($id);  // Find the team by ID
         if ($team) {
-            return $team->delete();  // Delete the team
+            return $team->delete();
         }
         return false;  // Return false if the team is not found
     }
