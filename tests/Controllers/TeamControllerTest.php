@@ -9,10 +9,14 @@ use App\Models\Team;
 use App\Repositories\TeamRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Mockery;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Psr7\Response;
 
+#[CoversClass(TeamController::class)]
+#[UsesClass(TeamController::class)]
 class TeamControllerTest extends TestCase
 {
     protected function tearDown(): void
