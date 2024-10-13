@@ -8,7 +8,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\UsesClass;
 use App\RandomStringGenerator;
 
-
 #[CoversClass(RandomStringGenerator::class)]
 #[UsesClass(RandomStringGenerator::class)]
 class RandomStringGeneratorTest extends TestCase
