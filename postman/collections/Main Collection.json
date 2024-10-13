@@ -1,0 +1,2220 @@
+{
+	"info": {
+		"_postman_id": "dc3e1908-b493-4134-9bd1-4010658fbbd1",
+		"name": "Main Collection",
+		"description": "API documentation for the F1 database based on table schemas.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "38129481-dc3e1908-b493-4134-9bd1-4010658fbbd1"
+	},
+	"item": [
+		{
+			"name": "Cars",
+			"item": [
+				{
+					"name": "Get a list of all cars",
+					"id": "a09ddc22-9f91-465f-9160-72850e169653",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/car",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"car"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "8aab202d-fefe-45d7-abc9-bb00f198dc1e",
+							"name": "List of car objects",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/car",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"car"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<integer>\",\n    \"team\": {\n      \"id\": \"<integer>\",\n      \"shorthand_name\": \"<string>\"\n    },\n    \"model\": \"<string>\",\n    \"year\": \"<date>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"team\": {\n      \"id\": \"<integer>\",\n      \"shorthand_name\": \"<string>\"\n    },\n    \"model\": \"<string>\",\n    \"year\": \"<date>\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create a new car",
+					"id": "0b55c1fc-b350-4dda-a337-9041a3ccc31a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"team_id\": \"<integer>\",\n  \"model\": \"<string>\",\n  \"year\": \"<date>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/car",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"car"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "7d65c1ac-8d82-49ee-a4ce-f9acdfc94646",
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"team_id\": \"<integer>\",\n  \"model\": \"<string>\",\n  \"year\": \"<date>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/car",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"car"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<integer>\",\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"shorthand_name\": \"<string>\"\n  },\n  \"model\": \"<string>\",\n  \"year\": \"<date>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get car by ID",
+					"id": "aeb3184e-9718-4997-ba5a-36e22212e1f0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/car/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"car",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "ce4db7aa-235d-4916-8716-295259755fd2",
+							"name": "The car object found in the search",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/car/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"car",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<integer>\",\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"shorthand_name\": \"<string>\"\n  },\n  \"model\": \"<string>\",\n  \"year\": \"<date>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a car",
+					"id": "4ce5d97a-6242-435c-963b-60bef8a31b5f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"model\": \"<string>\",\n  \"year\": \"<date>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/car/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"car",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "bdb7e156-e4eb-42e5-b959-920488d60d9b",
+							"name": "Car successfully updated",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"model\": \"<string>\",\n  \"year\": \"<date>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/car/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"car",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<integer>\",\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"shorthand_name\": \"<string>\"\n  },\n  \"model\": \"<string>\",\n  \"year\": \"<date>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a car by ID",
+					"id": "28fce988-dcb4-4e60-b329-032ac21fbfb4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/car/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"car",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "51d22ee3-e106-4681-ad91-290a72e8ed70",
+							"name": "Car successfully deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/car/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"car",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				}
+			],
+			"id": "ea27a057-8752-49a9-8896-aab8935b6b3a"
+		},
+		{
+			"name": "Drivers",
+			"item": [
+				{
+					"name": "Get a list of all drivers",
+					"id": "83acc151-1335-49db-83af-e44d6cd9c338",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/drivers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"drivers"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "99f49abc-27f0-4e3c-b02c-8eb82883fe3c",
+							"name": "List of drivers",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/drivers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"team\": {\n      \"id\": \"<integer>\",\n      \"official_name\": \"<string>\"\n    },\n    \"nationality\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"birthday\": \"<date>\",\n    \"driver_number\": \"<integer>\",\n    \"career_points\": \"<number>\",\n    \"career_wins\": \"<integer>\",\n    \"career_podiums\": \"<integer>\",\n    \"championships\": \"<integer>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"team\": {\n      \"id\": \"<integer>\",\n      \"official_name\": \"<string>\"\n    },\n    \"nationality\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"birthday\": \"<date>\",\n    \"driver_number\": \"<integer>\",\n    \"career_points\": \"<number>\",\n    \"career_wins\": \"<integer>\",\n    \"career_podiums\": \"<integer>\",\n    \"championships\": \"<integer>\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create a new driver",
+					"id": "4a5d20e9-91e0-4e50-a264-5fd213a19f58",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"birthday\": \"<date>\",\n  \"driver_number\": \"<integer>\",\n  \"team_id\": \"<integer>\",\n  \"nationality_id\": \"<integer>\",\n  \"career_points\": \"<number>\",\n  \"career_wins\": \"<integer>\",\n  \"career_podiums\": \"<integer>\",\n  \"championships\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/drivers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"drivers"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "46fd5acb-bc7f-40a4-901e-58350fb964e2",
+							"name": "Driver created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"birthday\": \"<date>\",\n  \"driver_number\": \"<integer>\",\n  \"team_id\": \"<integer>\",\n  \"nationality_id\": \"<integer>\",\n  \"career_points\": \"<number>\",\n  \"career_wins\": \"<integer>\",\n  \"career_podiums\": \"<integer>\",\n  \"championships\": \"<integer>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/drivers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				},
+				{
+					"name": "Get driver by ID",
+					"id": "ca93d557-a949-495a-b32f-e17ca0ca7c94",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/drivers/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"drivers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "93268b15-16dd-47c0-8cd9-749800074559",
+							"name": "Driver retrieved successfully",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<integer>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"official_name\": \"<string>\"\n  },\n  \"nationality\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"birthday\": \"<date>\",\n  \"driver_number\": \"<integer>\",\n  \"career_points\": \"<number>\",\n  \"career_wins\": \"<integer>\",\n  \"career_podiums\": \"<integer>\",\n  \"championships\": \"<integer>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a specific drivers",
+					"id": "e3c1a647-cdb7-41a3-b221-eb97534661ed",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"<integer>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"official_name\": \"<string>\"\n  },\n  \"nationality\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"birthday\": \"<date>\",\n  \"driver_number\": \"<integer>\",\n  \"career_points\": \"<number>\",\n  \"career_wins\": \"<integer>\",\n  \"career_podiums\": \"<integer>\",\n  \"championships\": \"<integer>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/drivers/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"drivers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "3d935dbf-f3ed-44c7-bcbc-1e3b5a1c5233",
+							"name": "drivers updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<integer>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"official_name\": \"<string>\"\n  },\n  \"nationality\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"birthday\": \"<date>\",\n  \"driver_number\": \"<integer>\",\n  \"career_points\": \"<number>\",\n  \"career_wins\": \"<integer>\",\n  \"career_podiums\": \"<integer>\",\n  \"championships\": \"<integer>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				},
+				{
+					"name": "Delete a specific drivers",
+					"id": "37e1bf22-2ca8-48b9-92aa-2324541abe5e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/drivers/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"drivers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "91f3bc59-e4f0-4a8c-8504-b7cc84789482",
+							"name": "drivers deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				}
+			],
+			"id": "589fc47b-ba1f-4a83-83d9-30f8c56e1124"
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Get list of events",
+					"id": "ab61eaa0-35b6-4022-81d6-759e99c8b34f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "3cc4b213-c1a3-4515-acbb-d4d991749357",
+							"name": "List of events",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"scheduled_date\": \"<dateTime>\",\n    \"track\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"status\": \"Completed\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\",\n    \"scheduled_date\": \"<dateTime>\",\n    \"track\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"status\": \"Completed\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create a new events",
+					"id": "5e73ba2b-b928-45e8-90e9-183abe35b78f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"track\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"status\": \"Planned\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "7e348501-f39a-4f5d-9ff8-2f30d1dcd7ed",
+							"name": "events created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"track\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"status\": \"Planned\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				},
+				{
+					"name": "Get a specific events",
+					"id": "b6a5c1fc-32a5-4e01-82c6-ff501f0556aa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "ff75c51f-7811-4700-894c-d341c0899f7d",
+							"name": "events details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"track\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"status\": \"Planned\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a specific events",
+					"id": "67a76ec2-1398-448a-a713-a67ba7b556d5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"track\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"status\": \"Planned\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/events/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "d3d67b24-2523-4b6d-88a5-8ad1ffab65e1",
+							"name": "events updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"scheduled_date\": \"<dateTime>\",\n  \"track\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"status\": \"Planned\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				},
+				{
+					"name": "Delete a specific events",
+					"id": "adc63830-3b7b-44b2-bced-3707fd67ded3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/events/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "5fe7413d-e999-45c5-a272-2a442e40bc46",
+							"name": "events deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				}
+			],
+			"id": "9209acb6-8675-4786-afe5-003ba037b3e2"
+		},
+		{
+			"name": "Results",
+			"item": [
+				{
+					"name": "Get list of results",
+					"id": "53b86820-9e93-4819-a582-cb94f3cdf419",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/results",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "92772ae9-2742-4984-b9fe-b21f2682a6cb",
+							"name": "List of results",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/results",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"event\": {\n      \"id\": \"<integer>\",\n      \"title\": \"<string>\"\n    },\n    \"driver\": {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\"\n    },\n    \"team\": {\n      \"id\": \"<integer>\",\n      \"official_name\": \"<string>\"\n    },\n    \"start_pos\": \"<integer>\",\n    \"finish_pos\": \"<integer>\",\n    \"points\": \"<integer>\",\n    \"fastest_lap\": \"7:48:38.099\",\n    \"time_on_track\": \"7:10:23.602\",\n    \"dnf\": \"<boolean>\"\n  },\n  {\n    \"event\": {\n      \"id\": \"<integer>\",\n      \"title\": \"<string>\"\n    },\n    \"driver\": {\n      \"id\": \"<integer>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\"\n    },\n    \"team\": {\n      \"id\": \"<integer>\",\n      \"official_name\": \"<string>\"\n    },\n    \"start_pos\": \"<integer>\",\n    \"finish_pos\": \"<integer>\",\n    \"points\": \"<integer>\",\n    \"fastest_lap\": \"3:24:28.9\",\n    \"time_on_track\": \"12:54:51.5\",\n    \"dnf\": \"<boolean>\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create a new results",
+					"id": "c7f5919e-f964-4334-a4ef-05a169d5a803",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"event\": {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\"\n  },\n  \"driver\": {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  },\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"official_name\": \"<string>\"\n  },\n  \"start_pos\": \"<integer>\",\n  \"finish_pos\": \"<integer>\",\n  \"points\": \"<integer>\",\n  \"fastest_lap\": \"21:44:19\",\n  \"time_on_track\": \"05:26:45\",\n  \"dnf\": \"<boolean>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/results",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "95794934-0f18-4cf6-a4b2-812d19fbde60",
+							"name": "results created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"event\": {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\"\n  },\n  \"driver\": {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  },\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"official_name\": \"<string>\"\n  },\n  \"start_pos\": \"<integer>\",\n  \"finish_pos\": \"<integer>\",\n  \"points\": \"<integer>\",\n  \"fastest_lap\": \"21:44:19\",\n  \"time_on_track\": \"05:26:45\",\n  \"dnf\": \"<boolean>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/results",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				},
+				{
+					"name": "Get a specific results",
+					"id": "55c980b7-687e-4779-a074-9b5c6738c3d3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/results/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "09bf0b6f-11da-46f6-95c1-32f4656de82a",
+							"name": "results details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"event\": {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\"\n  },\n  \"driver\": {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  },\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"official_name\": \"<string>\"\n  },\n  \"start_pos\": \"<integer>\",\n  \"finish_pos\": \"<integer>\",\n  \"points\": \"<integer>\",\n  \"fastest_lap\": \"21:44:19\",\n  \"time_on_track\": \"05:26:45\",\n  \"dnf\": \"<boolean>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a specific results",
+					"id": "6e406365-f9ef-419f-a5e8-6e5257513b46",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"event\": {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\"\n  },\n  \"driver\": {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  },\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"official_name\": \"<string>\"\n  },\n  \"start_pos\": \"<integer>\",\n  \"finish_pos\": \"<integer>\",\n  \"points\": \"<integer>\",\n  \"fastest_lap\": \"21:44:19\",\n  \"time_on_track\": \"05:26:45\",\n  \"dnf\": \"<boolean>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/results/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "8959a33a-610a-4a5d-86ec-818bf60ee4cc",
+							"name": "results updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"event\": {\n    \"id\": \"<integer>\",\n    \"title\": \"<string>\"\n  },\n  \"driver\": {\n    \"id\": \"<integer>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  },\n  \"team\": {\n    \"id\": \"<integer>\",\n    \"official_name\": \"<string>\"\n  },\n  \"start_pos\": \"<integer>\",\n  \"finish_pos\": \"<integer>\",\n  \"points\": \"<integer>\",\n  \"fastest_lap\": \"21:44:19\",\n  \"time_on_track\": \"05:26:45\",\n  \"dnf\": \"<boolean>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				},
+				{
+					"name": "Delete a specific results",
+					"id": "77479f8f-3c66-4384-8ec6-79528808a324",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/results/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "e497ce62-438c-40b7-b6c7-899dfb956af9",
+							"name": "results deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				}
+			],
+			"id": "cc53c6d1-c4cb-4491-9b3b-f8be3af66c43"
+		},
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "Get list of teams",
+					"id": "ac55e653-3422-4db5-b10c-549924b94cd3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/teams",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "ba898f95-d77a-4df4-83c4-49269f7a5f65",
+							"name": "List of teams",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/teams",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<integer>\",\n    \"full_name\": \"<string>\",\n    \"short_name\": \"<string>\",\n    \"headquarters\": \"<string>\",\n    \"team_principal\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"full_name\": \"<string>\",\n    \"short_name\": \"<string>\",\n    \"headquarters\": \"<string>\",\n    \"team_principal\": \"<string>\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create a new Team",
+					"id": "62e37e95-d1d6-45a9-90a8-53bacabdae04",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"full_name\": \"<string>\",\n  \"short_name\": \"<string>\",\n  \"headquarters\": \"<string>\",\n  \"team_principal\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/teams",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "877c0a5d-7837-412c-8c28-bacf5557ff7b",
+							"name": "Information on the newly created team",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"full_name\": \"<string>\",\n  \"short_name\": \"<string>\",\n  \"headquarters\": \"<string>\",\n  \"team_principal\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/teams",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<integer>\",\n  \"full_name\": \"<string>\",\n  \"short_name\": \"<string>\",\n  \"headquarters\": \"<string>\",\n  \"team_principal\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a specific teams",
+					"id": "f041b90f-38db-4cd6-8fb3-6dd177f00c89",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/teams/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "86a09f9c-53ce-40a1-8d6d-69543d411ce7",
+							"name": "teams details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<integer>\",\n  \"full_name\": \"<string>\",\n  \"short_name\": \"<string>\",\n  \"headquarters\": \"<string>\",\n  \"team_principal\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a specific team",
+					"id": "5ac79079-c8c7-4d14-a622-18a8635aef80",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"full_name\": \"<string>\",\n  \"short_name\": \"<string>\",\n  \"headquarters\": \"<string>\",\n  \"team_principal\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/teams/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "8902f3ec-58e2-4d8a-9dc8-234f83cd01bd",
+							"name": "Team successfully updated",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"full_name\": \"<string>\",\n  \"short_name\": \"<string>\",\n  \"headquarters\": \"<string>\",\n  \"team_principal\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				},
+				{
+					"name": "Delete a specific teams",
+					"id": "a6bdd986-321d-448c-9f09-699a6dbab3a0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/teams/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "b533f076-5778-45f6-b6b5-48e76e73e73e",
+							"name": "teams deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				}
+			],
+			"id": "084ba91c-f263-4c6d-a87c-ea320c6f1541"
+		},
+		{
+			"name": "Tracks",
+			"item": [
+				{
+					"name": "Get list of tracks",
+					"id": "ad3cc07a-3ac2-435d-98be-d8b6182ded8e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tracks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tracks"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "817b0de5-7853-422b-94d4-6ebeb23c29e7",
+							"name": "List of tracks",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tracks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"length_km\": \"<number>\",\n    \"continent\": \"<string>\",\n    \"country\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"description\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"length_km\": \"<number>\",\n    \"continent\": \"<string>\",\n    \"country\": {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    \"description\": \"<string>\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create a new tracks",
+					"id": "caff5745-aa5a-4eb3-8b38-7090b12c1a77",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"length_km\": \"<number>\",\n  \"continent\": \"<string>\",\n  \"country\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"description\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tracks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tracks"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "8b614f22-7fd6-4b02-a408-11a8bc8be71a",
+							"name": "tracks created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"length_km\": \"<number>\",\n  \"continent\": \"<string>\",\n  \"country\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"description\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tracks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				},
+				{
+					"name": "Get a specific tracks",
+					"id": "2282bb27-f89a-493c-aeab-8bc41b582dd2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tracks/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tracks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "2ab874ca-f75c-44a7-ae94-12dc19e0e529",
+							"name": "tracks details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"length_km\": \"<number>\",\n  \"continent\": \"<string>\",\n  \"country\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"description\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a specific tracks",
+					"id": "a7b8daf4-eb2b-41d2-9d82-ba2f97c3f0c9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"length_km\": \"<number>\",\n  \"continent\": \"<string>\",\n  \"country\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"description\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tracks/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tracks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "30fffa09-2e5f-408e-8203-a9981579259f",
+							"name": "tracks updated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"length_km\": \"<number>\",\n  \"continent\": \"<string>\",\n  \"country\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\"\n  },\n  \"description\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				},
+				{
+					"name": "Delete a specific tracks",
+					"id": "a22808cc-467b-4ebe-914e-4c5b0d557c42",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/tracks/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tracks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<integer>",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "e5df6a9a-3ac1-4322-a121-cf8af48527e5",
+							"name": "tracks deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						}
+					]
+				}
+			],
+			"id": "8963351b-386d-4789-a563-a7db92308ad6"
+		}
+	],
+	"variable": [
+		{
+			"id": "e76050a3-4274-4af8-a8d3-1adc5ea49daf",
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}
