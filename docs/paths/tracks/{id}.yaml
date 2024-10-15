@@ -1,0 +1,48 @@
+get:
+  summary: Get a specific tracks
+  tags:
+    - Tracks
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: tracks details
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/track.yaml'
+put:
+  summary: Update a specific tracks
+  tags:
+    - Tracks
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/track.yaml'
+  responses:
+    '200':
+      description: tracks updated
+delete:
+  summary: Delete a specific tracks
+  tags:
+    - Tracks
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: tracks deleted

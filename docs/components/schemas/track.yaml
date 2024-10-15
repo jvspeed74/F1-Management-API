@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  length_km:
+    type: number
+  continent:
+    type: string
+  country:
+    $ref: './country.yaml'
+  description:
+    type: string

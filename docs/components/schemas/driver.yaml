@@ -1,0 +1,34 @@
+type: object
+properties:
+  id:
+    type: integer
+    example: 44
+  first_name:
+    type: string
+    example: "Lewis"
+  last_name:
+    type: string
+    example: "Hamilton"
+  team:
+    $ref: './team.yaml'
+  nationality:
+    $ref: './nationality.yaml'
+  birthday:
+    type: string
+    format: date
+    example: "1985-01-07"
+  driver_number:
+    type: integer
+    example: 44
+  career_points:
+    type: number
+    example: 4200.5
+  career_wins:
+    type: integer
+    example: 103
+  career_podiums:
+    type: integer
+    example: 182
+  championships:
+    type: integer
+    example: 7

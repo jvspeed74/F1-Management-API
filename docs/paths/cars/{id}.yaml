@@ -1,0 +1,57 @@
+get:
+  summary: Get car by ID
+  tags:
+    - Cars
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: The car object found in the search
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/car.yaml'
+patch:
+  summary: Update a car
+  tags:
+    - Cars
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    content:
+      application/json:
+        schema:
+          properties:
+            model:
+              type: string
+            year:
+              type: string
+              format: date
+  responses:
+    '200':
+      description: Car successfully updated
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/car.yaml'
+delete:
+  summary: Delete a car by ID
+  tags:
+    - Cars
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: Car successfully deleted

@@ -1,0 +1,60 @@
+  get:
+    summary: Get a specific teams
+    tags:
+      - Teams
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: teams details
+        content:
+          application/json:
+            schema:
+              $ref: '../../components/schemas/team.yaml'
+  patch:
+    summary: Update a specific team
+    tags:
+      - Teams
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      content:
+        application/json:
+          schema:
+            properties:
+              full_name:
+                type: string
+                example: "Mercedes-AMG Petronas Formula One Team"
+              short_name:
+                type: string
+                example: "Mercedes"
+              headquarters:
+                type: string
+                example: "Brackley, United Kingdom"
+              team_principal:
+                type: string
+                example: "Toto Wolff"
+    responses:
+      '200':
+        description: Team successfully updated
+  delete:
+    summary: Delete a specific teams
+    tags:
+      - Teams
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '204':
+        description: teams deleted

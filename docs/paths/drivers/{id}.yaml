@@ -1,0 +1,48 @@
+get:
+  summary: Get driver by ID
+  tags:
+    - Drivers
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: Driver retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/driver.yaml'
+put:
+  summary: Update a specific drivers
+  tags:
+    - Drivers
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/driver.yaml'
+  responses:
+    '200':
+      description: drivers updated
+delete:
+  summary: Delete a specific drivers
+  tags:
+    - Drivers
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: drivers deleted

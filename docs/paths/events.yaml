@@ -1,0 +1,25 @@
+  get:
+    summary: Get list of events
+    tags:
+      - Events
+    responses:
+      '200':
+        description: List of events
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../components/schemas/event.yaml'
+  post:
+    summary: Create a new events
+    tags:
+      - Events
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/event.yaml'
+    responses:
+      '201':
+        description: events created

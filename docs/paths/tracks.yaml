@@ -1,0 +1,25 @@
+  get:
+    summary: Get list of tracks
+    tags:
+      - Tracks
+    responses:
+      '200':
+        description: List of tracks
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '../components/schemas/track.yaml'
+  post:
+    summary: Create a new tracks
+    tags:
+      - Tracks
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/track.yaml'
+    responses:
+      '201':
+        description: tracks created

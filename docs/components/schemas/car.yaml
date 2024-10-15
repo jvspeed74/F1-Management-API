@@ -1,0 +1,15 @@
+type: object
+properties:
+  id:
+    type: integer
+    example: 1
+    readOnly: true
+  team:
+    $ref: './team.yaml'
+  model:
+    type: string
+    example: "W12"
+  year:
+    type: string
+    format: date
+    example: "2021-01-01"

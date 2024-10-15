@@ -1,0 +1,22 @@
+type: object
+properties:
+  id:
+    type: integer
+    example: 1
+    description: Unique identifier for the team
+  official_name:
+    type: string
+    example: "Mercedes-AMG Petronas Formula One Team"
+    description: Full name of the team
+  short_name:
+    type: string
+    example: "Mercedes"
+    description: Short name alias of the team
+  headquarters:
+    type: string
+    example: "Brackley, United Kingdom"
+    description: Location of the team's headquarters
+  team_principal:
+    type: string
+    example: "Toto Wolff"
+    description: Name of the team principal

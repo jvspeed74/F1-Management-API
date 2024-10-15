@@ -1,0 +1,48 @@
+  get:
+    summary: Get a specific results
+    tags:
+      - Results
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '200':
+        description: results details
+        content:
+          application/json:
+            schema:
+              $ref: '../../components/schemas/result.yaml'
+  put:
+    summary: Update a specific results
+    tags:
+      - Results
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/result.yaml'
+    responses:
+      '200':
+        description: results updated
+  delete:
+    summary: Delete a specific results
+    tags:
+      - Results
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      '204':
+        description: results deleted

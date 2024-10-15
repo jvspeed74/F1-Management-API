@@ -1,0 +1,23 @@
+type: object
+properties:
+  id:
+    type: integer
+    example: 5
+  event:
+    $ref: './event.yaml'
+  driver:
+    $ref: './driver.yaml'
+  team:
+    $ref: './team.yaml'
+  start_pos:
+    type: integer
+  finish_pos:
+    type: integer
+  points:
+    type: integer
+  fastest_lap:
+    $ref: './timeWithThousandth.yaml'
+  time_on_track:
+    $ref: './timeWithThousandth.yaml'
+  dnf:
+    type: boolean

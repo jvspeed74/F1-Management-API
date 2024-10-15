@@ -1,0 +1,18 @@
+type: object
+properties:
+  id:
+    type: integer
+  title:
+    type: string
+  scheduled_date:
+    type: string
+    format: date-time
+  track:
+    $ref: './track.yaml'
+  status:
+    type: string
+    enum:
+      - Planned
+      - Ongoing
+      - Cancelled
+      - Completed

@@ -1,0 +1,48 @@
+get:
+  summary: Get a specific events
+  tags:
+    - Events
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '200':
+      description: events details
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/event.yaml'
+put:
+  summary: Update a specific events
+  tags:
+    - Events
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/event.yaml'
+  responses:
+    '200':
+      description: events updated
+delete:
+  summary: Delete a specific events
+  tags:
+    - Events
+  parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    '204':
+      description: events deleted
