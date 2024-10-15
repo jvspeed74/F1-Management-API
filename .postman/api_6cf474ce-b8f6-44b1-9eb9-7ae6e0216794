@@ -9,13 +9,34 @@ id = 6cf474ce-b8f6-44b1-9eb9-7ae6e0216794
 
 [config.relations.collections]
 rootDirectory = postman/collections
-files[] = {"id":"38129481-dc3e1908-b493-4134-9bd1-4010658fbbd1","path":"Main Collection.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"Fallback\",\"indentCharacter\":\"Space\",\"parametersResolution\":\"Schema\",\"folderStrategy\":\"Tags\",\"includeAuthInfoInExample\":true,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"alwaysInheritAuthentication\":false,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Schema\",\"exampleParametersResolution\":\"Schema\"}"}}
+files[] = {"id":"38129481-b8defc4f-d89b-4ddc-ac34-814c3018518a","path":"Main Collection.json","metaData":{}}
 
 [config.relations.collections.metaData]
 
 [config.relations.apiDefinition]
-files[] = {"path":"openapi.yaml","metaData":{}}
+files[] = {"path":"docs/components/schemas/car.yaml","metaData":{}}
+files[] = {"path":"docs/components/schemas/country.yaml","metaData":{}}
+files[] = {"path":"docs/components/schemas/driver.yaml","metaData":{}}
+files[] = {"path":"docs/components/schemas/event.yaml","metaData":{}}
+files[] = {"path":"docs/components/schemas/nationality.yaml","metaData":{}}
+files[] = {"path":"docs/components/schemas/result.yaml","metaData":{}}
+files[] = {"path":"docs/components/schemas/team.yaml","metaData":{}}
+files[] = {"path":"docs/components/schemas/timeWithThousandth.yaml","metaData":{}}
+files[] = {"path":"docs/components/schemas/track.yaml","metaData":{}}
+files[] = {"path":"docs/openapi.yaml","metaData":{}}
+files[] = {"path":"docs/paths/cars.yaml","metaData":{}}
+files[] = {"path":"docs/paths/cars/{id}.yaml","metaData":{}}
+files[] = {"path":"docs/paths/drivers.yaml","metaData":{}}
+files[] = {"path":"docs/paths/drivers/{id}.yaml","metaData":{}}
+files[] = {"path":"docs/paths/events.yaml","metaData":{}}
+files[] = {"path":"docs/paths/events/{id}.yaml","metaData":{}}
+files[] = {"path":"docs/paths/results.yaml","metaData":{}}
+files[] = {"path":"docs/paths/results/{id}.yaml","metaData":{}}
+files[] = {"path":"docs/paths/teams.yaml","metaData":{}}
+files[] = {"path":"docs/paths/teams/{id}.yaml","metaData":{}}
+files[] = {"path":"docs/paths/tracks.yaml","metaData":{}}
+files[] = {"path":"docs/paths/tracks/{id}.yaml","metaData":{}}
 
 [config.relations.apiDefinition.metaData]
 type = openapi:3
-rootFiles[] = openapi.yaml
+rootFiles[] = docs/openapi.yaml
