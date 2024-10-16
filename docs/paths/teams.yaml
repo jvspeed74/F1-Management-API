@@ -1,10 +1,10 @@
 get:
-  summary: Get list of teams
+  summary: Get a list of all teams
   tags:
     - Teams
   responses:
     '200':
-      description: List of teams
+      description: Successful response
       content:
         application/json:
           schema:
@@ -38,3 +38,5 @@ post:
         application/json:
           schema:
             $ref: '../components/schemas/team.yaml'
+    '400':
+      $ref: '../components/responses.yaml#/400'
