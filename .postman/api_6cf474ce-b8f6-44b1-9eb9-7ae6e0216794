@@ -9,14 +9,17 @@ id = 6cf474ce-b8f6-44b1-9eb9-7ae6e0216794
 
 [config.relations.collections]
 rootDirectory = postman/collections
-files[] = {"id":"38129481-b8defc4f-d89b-4ddc-ac34-814c3018518a","path":"Main Collection.json","metaData":{}}
+files[] = {"id":"38129481-52e0a5ae-89c1-4842-b188-092dca37ee6a","path":"Main Collection.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"Fallback\",\"indentCharacter\":\"Space\",\"parametersResolution\":\"Example\",\"folderStrategy\":\"Tags\",\"includeAuthInfoInExample\":true,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"alwaysInheritAuthentication\":false,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Example\",\"exampleParametersResolution\":\"Example\"}"}}
 
 [config.relations.collections.metaData]
 
 [config.relations.apiDefinition]
+files[] = {"path":"docs/components/parameters.yaml","metaData":{}}
+files[] = {"path":"docs/components/responses.yaml","metaData":{}}
 files[] = {"path":"docs/components/schemas/car.yaml","metaData":{}}
 files[] = {"path":"docs/components/schemas/country.yaml","metaData":{}}
 files[] = {"path":"docs/components/schemas/driver.yaml","metaData":{}}
+files[] = {"path":"docs/components/schemas/error.yaml","metaData":{}}
 files[] = {"path":"docs/components/schemas/event.yaml","metaData":{}}
 files[] = {"path":"docs/components/schemas/nationality.yaml","metaData":{}}
 files[] = {"path":"docs/components/schemas/result.yaml","metaData":{}}
