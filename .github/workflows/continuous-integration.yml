@@ -3,7 +3,8 @@ name: Continuous Integration
 on:
   pull_request:
   push:
-
+    branches-ignore:
+      - docs
 permissions:
   contents: read
 
