@@ -1,0 +1,38 @@
+required: true
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        event_id:
+          type: integer
+          nullable: false
+          minimum: 0
+        driver_id:
+          type: integer
+          nullable: false
+          minimum: 0
+        team_id:
+          type: integer
+          nullable: true
+          minimum: 0
+        start_pos:
+          type: integer
+          nullable: false
+          minimum: 0
+        finish_pos:
+          type: integer
+          nullable: false
+          minimum: 1
+        points:
+          type: number
+          nullable: false
+          default: 0
+          minimum: 0
+        fastest_lap:
+          $ref: '../../schemas/timeWithThousandth.yaml'
+        time_on_track:
+          $ref: '../../schemas/timeWithThousandth.yaml'
+        dnf:
+          type: boolean
+          default: false
