@@ -1,5 +1,5 @@
 get:
-  summary: Get list of results
+  summary: Get a list of all results
   tags:
     - Results
   responses:
@@ -11,12 +11,29 @@ get:
             type: array
             items:
               $ref: '../components/schemas/result.yaml'
+    '500':
+      $ref: '../components/responses.yaml#/500'
 post:
   summary: Create a new result
   tags:
     - Results
   requestBody:
-    $ref: '../components/requestBodies/create/result.yaml'
+    required: true
+    content:
+      application/json:
+        schema:
+          allOf:
+            - $ref: '../components/schemas/result.yaml'
+          required:
+            - event_id
+            - driver_id
+            - team_id
+            - start_pos
+            - finish_pos
+            - points
+            - fastest_lap
+            - time_on_track
+            - dnf
   responses:
     '201':
       description: Successful Response
@@ -24,3 +41,7 @@ post:
         application/json:
           schema:
             $ref: '../components/schemas/result.yaml'
+    '400':
+      $ref: '../components/responses.yaml#/400'
+    '500':
+      $ref: '../components/responses.yaml#/500'

@@ -2,33 +2,63 @@ type: object
 properties:
   id:
     type: integer
-    example: 44
+    format: int32
+    minimum: 0
+    description: Unique identifier for the driver
+    readOnly: true
   first_name:
     type: string
-    example: "Lewis"
+    maxLength: 50
+    description: Driver's first name
   last_name:
     type: string
-    example: "Hamilton"
-  team:
-    $ref: './team.yaml'
-  nationality:
-    $ref: './nationality.yaml'
+    maxLength: 50
+    description: Driver's last name
+  team_id:
+    type: integer
+    format: int32
+    minimum: 0
+    nullable: true
+    description: Team ID the driver is associated with (nullable)
+  nationality_id:
+    type: integer
+    format: int32
+    minimum: 0
+    nullable: true
+    description: Nationality ID of the driver (nullable)
   birthday:
     type: string
     format: date
-    example: "1985-01-07"
+    description: Driver's date of birth
   driver_number:
     type: integer
-    example: 44
+    format: int32
+    description: Driver's racing number
   career_points:
     type: number
-    example: 4200.5
+    format: double
+    minimum: 0.00
+    maximum: 99999999.99
+    description: Total career points of the driver
+    default: 0.00
   career_wins:
     type: integer
-    example: 103
+    format: int32
+    minimum: 0
+    maximum: 65535
+    description: Total number of career wins
+    default: 0
   career_podiums:
     type: integer
-    example: 182
+    format: int32
+    minimum: 0
+    maximum: 65535
+    description: Total number of career podiums
+    default: 0
   championships:
     type: integer
-    example: 7
+    format: int32
+    minimum: 0
+    maximum: 65535
+    description: Number of championships won by the driver
+    default: 0

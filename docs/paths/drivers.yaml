@@ -1,10 +1,11 @@
 get:
   summary: Get a list of all drivers
+  description: This endpoint allows you to get a list of all drivers in the system.
   tags:
     - Drivers
   responses:
     '200':
-      description: List of drivers
+      description: Successful response
       content:
         application/json:
           schema:
@@ -13,6 +14,7 @@ get:
               $ref: '../components/schemas/driver.yaml'
 post:
   summary: Create a new driver
+  description: This endpoint allows you to create a new driver in the system.
   tags:
     - Drivers
   requestBody:
@@ -20,39 +22,8 @@ post:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            first_name:
-              type: string
-              example: "Lewis"
-            last_name:
-              type: string
-              example: "Hamilton"
-            team_id:
-              type: integer
-              example: 1
-            nationality_id:
-              type: integer
-              example: 5
-            birthday:
-              type: string
-              format: date
-              example: "1985-01-07"
-            driver_number:
-              type: integer
-              example: 44
-            career_points:
-              type: number
-              example: 4200.5
-            career_wins:
-              type: integer
-              example: 103
-            career_podiums:
-              type: integer
-              example: 182
-            championships:
-              type: integer
-              example: 7
+          allOf:
+            - $ref: '../components/schemas/driver.yaml'
           required:
             - first_name
             - last_name
@@ -60,4 +31,8 @@ post:
             - driver_number
   responses:
     '201':
-      description: Driver created
+      description: Successfully created a new driver
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/driver.yaml'
