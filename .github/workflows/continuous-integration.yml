@@ -5,6 +5,7 @@ on:
   push:
     branches-ignore:
       - docs
+      - docs/**
 permissions:
   contents: read
 
