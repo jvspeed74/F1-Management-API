@@ -1,11 +1,14 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 
-class Nationality extends Model{
+class Nationality extends Model
+{
 
     // Define the table name explicitly if it's not the plural of the model name
     protected $table = 'nationalities';
@@ -17,7 +20,5 @@ class Nationality extends Model{
     public $timestamps = false;
 
     // Define the fillable fields for mass assignment
-    protected $fillable = [ 'name'];
-
-
+    protected $fillable = ['name'];
 }

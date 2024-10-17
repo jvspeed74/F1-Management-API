@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
+
 namespace App\Models;
 
 
-
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Driver extends Model
 {
@@ -18,12 +20,26 @@ class Driver extends Model
     public $timestamps = false;
 
     // Define the fillable fields for mass assignment
-    protected $fillable = [ 'first_name', 'last_name', 'team_id', 'nationality_id', 'birthday', 'driver_number', 'career_points', 'career_wins', 'career_podiums', 'championships'];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'team_id',
+        'nationality_id',
+        'birthday',
+        'driver_number',
+        'career_points',
+        'career_wins',
+        'career_podiums',
+        'championships',
+    ];
 
-    public function team(){
+    public function team(): BelongsTo
+    {
         return $this->belongsTo(Team::class);
     }
-    public function nationality(){
+
+    public function nationality(): BelongsTo
+    {
         return $this->belongsTo(Nationality::class);
     }
 }
