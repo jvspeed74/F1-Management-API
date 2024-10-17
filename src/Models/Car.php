@@ -23,6 +23,9 @@ class Car extends Model
     protected $fillable = ['team_id', 'model', 'year'];
 
 
+    /**
+     * @return BelongsTo<Team, $this>
+     */
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class, 'team_id', 'id');
