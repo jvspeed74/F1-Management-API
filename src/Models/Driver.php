@@ -33,11 +33,17 @@ class Driver extends Model
         'championships',
     ];
 
+    /**
+     * @return BelongsTo<Team, $this>
+     */
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
     }
 
+    /**
+     * @return BelongsTo<Nationality, $this>
+     */
     public function nationality(): BelongsTo
     {
         return $this->belongsTo(Nationality::class);
