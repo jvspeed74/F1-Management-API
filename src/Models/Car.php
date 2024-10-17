@@ -19,4 +19,7 @@ class Car extends Model{
     // Define the fillable fields for mass assignment
     protected $fillable = ['team_id', 'model', 'year'];
 
+    public function team(){
+        $this -> belongsTo(Team::class, 'team_id', 'id');
+    }
 }

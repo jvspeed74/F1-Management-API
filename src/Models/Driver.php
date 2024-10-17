@@ -24,7 +24,7 @@ class Driver extends Model
         return $this->belongsTo(Team::class);
     }
     public function nationality(){
-        return $this->belongsTo()
+        return $this->belongsTo(Nationality::class);
     }
 }
 
