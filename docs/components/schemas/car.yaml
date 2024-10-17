@@ -9,13 +9,9 @@ properties:
     readOnly: true
     example: 1
   team_id:
-    type: integer
-    format: int32
-    minimum: 0
-    maximum: 65535
-    nullable: true
-    description: Team ID associated with the car (nullable)
-    example: 1
+    allOf:
+      - $ref: './team.yaml#/properties/id'
+      - readOnly: false
   model:
     type: string
     maxLength: 100
