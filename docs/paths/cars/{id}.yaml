@@ -1,57 +1,49 @@
 get:
   summary: Get car by ID
+  description: This endpoint returns a car record matching the provided ID
   tags:
     - Cars
   parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+    - $ref: '../../components/parameters.yaml#/id'
   responses:
     '200':
-      description: The car object found in the search
+      description: Successful Response
       content:
         application/json:
           schema:
             $ref: '../../components/schemas/car.yaml'
+    '404':
+      $ref: '../../components/responses.yaml#/404'
 patch:
   summary: Update a car
+  description: Update the fields of a car record
   tags:
     - Cars
   parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+    - $ref: '../../components/parameters.yaml#/id'
   requestBody:
+    required: true
     content:
       application/json:
         schema:
-          properties:
-            model:
-              type: string
-            year:
-              type: string
-              format: date
+          allOf:
+            - $ref: '../../components/schemas/car.yaml'
   responses:
     '200':
-      description: Car successfully updated
+      description: Successful Response
       content:
         application/json:
           schema:
             $ref: '../../components/schemas/car.yaml'
 delete:
   summary: Delete a car by ID
+  description: Delete a car record from the system
   tags:
     - Cars
   parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+    - $ref: '../../components/parameters.yaml#/id'
   responses:
     '204':
       description: Car successfully deleted
+    '404':
+      $ref: '../../components/responses.yaml#/404'
