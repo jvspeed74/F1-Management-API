@@ -22,3 +22,10 @@ properties:
     format: year
     pattern: '^\d{4}$'
     description: Year of the car model
+example: |
+  {
+    "id": 1,
+    "team_id": 1,
+    "model": "Ferrari 488 GT3",
+    "year": "2018"
+  }
