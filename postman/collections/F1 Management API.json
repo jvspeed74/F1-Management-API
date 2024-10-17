@@ -1,0 +1,5029 @@
+{
+	"info": {
+		"_postman_id": "af191cc8-0b20-4a32-ae85-6b6f89ec4dd0",
+		"name": "F1 Management API",
+		"description": "API documentation for the F1 database based on table schemas.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "38129481-af191cc8-0b20-4a32-ae85-6b6f89ec4dd0"
+	},
+	"item": [
+		{
+			"name": "Cars",
+			"item": [
+				{
+					"name": "Get a list of all cars",
+					"id": "16940265-c30f-437d-82ec-1151b176c8df",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/cars",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "398a3408-dcc7-49b4-9b14-638bc2c7e1a7",
+							"name": "Successful response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cars",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 1,\n    \"team_id\": 1,\n    \"model\": \"Ferrari 488 GT3\",\n    \"year\": \"2018\"\n  },\n  {\n    \"id\": 1,\n    \"team_id\": 1,\n    \"model\": \"Ferrari 488 GT3\",\n    \"year\": \"2018\"\n  }\n]"
+						},
+						{
+							"id": "7e50307a-52ce-48f8-9169-e3b4789893e8",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cars",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a new car",
+					"id": "bdb73ffb-7d9d-4347-8ced-361d5eeb0db9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cars",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "e8a07e65-6329-47e0-927f-7bfd1acece41",
+							"name": "Successfully created a new car",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cars",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}"
+						},
+						{
+							"id": "ea783f77-4b7b-4ab7-b43d-cdebb73d2dd0",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cars",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "a847a8fc-8dda-48f5-8499-16d9c7409ae4",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cars",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get car by ID",
+					"id": "4062f5c4-16cc-4384-ad49-29f2dba2492e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/cars/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						},
+						"description": "This endpoint returns a car record matching the provided ID"
+					},
+					"response": [
+						{
+							"id": "c4b1f624-3c01-4672-9b4c-c0aa0e79e69d",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cars/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}"
+						},
+						{
+							"id": "e468ae1e-7c0e-4751-861f-75f770e20edb",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cars/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "55065d69-e30c-4b37-829a-d6c3f24b89c6",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cars/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update fields for a car",
+					"id": "22564e1e-c1ba-4325-8131-de9fdf71a601",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cars/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						},
+						"description": "This endpoint updates a car record in the system."
+					},
+					"response": [
+						{
+							"id": "f65979a6-6ef2-46e0-a58c-a22a7217c1e4",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cars/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}"
+						},
+						{
+							"id": "35f6fc71-df0f-4bfe-82c1-1177192ac4d9",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cars/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "3b350351-49f5-4cce-961b-0bba354f1b27",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cars/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "1334b8d8-5eb1-4789-a184-ef12f0b53d98",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"team_id\": 1,\n  \"model\": \"Ferrari 488 GT3\",\n  \"year\": \"2018\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/cars/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a car",
+					"id": "fb4a3de7-e7e8-472c-bdb7-66e5c80622c3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/cars/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						},
+						"description": "This endpoint deletes a car record from the system."
+					},
+					"response": [
+						{
+							"id": "1557bf1b-b995-4f25-bf48-a4cb1420bb1c",
+							"name": "Car successfully deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/cars/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						},
+						{
+							"id": "adc0602d-f976-432c-9d37-8e17869e6465",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cars/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "c4af1a7f-c9b1-4312-8b1f-e44d8631a24f",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/cars/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"cars",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				}
+			],
+			"id": "cafbbcf1-3a00-4ba2-a708-75e2886fc0c7"
+		},
+		{
+			"name": "Drivers",
+			"item": [
+				{
+					"name": "Get a list of all drivers",
+					"id": "4361a9cb-4b62-4b36-8339-e059b71ffad7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/drivers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"drivers"
+							]
+						},
+						"description": "This endpoint allows you to get a list of all drivers in the system."
+					},
+					"response": [
+						{
+							"id": "3a705197-a6c5-4bba-a5e7-09531abd1a29",
+							"name": "Successful response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/drivers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 1,\n    \"first_name\": \"Lewis\",\n    \"last_name\": \"Hamilton\",\n    \"team_id\": 1,\n    \"nationality_id\": 44,\n    \"birthday\": \"1985-01-07\",\n    \"driver_number\": 44,\n    \"career_points\": 4135,\n    \"career_wins\": 103,\n    \"career_podiums\": 182,\n    \"championships\": 7\n  },\n  {\n    \"id\": 1,\n    \"first_name\": \"Lewis\",\n    \"last_name\": \"Hamilton\",\n    \"team_id\": 1,\n    \"nationality_id\": 44,\n    \"birthday\": \"1985-01-07\",\n    \"driver_number\": 44,\n    \"career_points\": 4135,\n    \"career_wins\": 103,\n    \"career_podiums\": 182,\n    \"championships\": 7\n  }\n]"
+						},
+						{
+							"id": "d16afbd9-fa6b-411d-9e79-78288da0e1ee",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/drivers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a new driver",
+					"id": "bbb4a8f6-4eb8-4e15-a29d-13df1f171ddf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/drivers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"drivers"
+							]
+						},
+						"description": "This endpoint allows you to create a new driver in the system."
+					},
+					"response": [
+						{
+							"id": "dbfe586d-8ff8-4ca8-97c7-70d6bcc4e60b",
+							"name": "Successfully created a new driver",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/drivers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}"
+						},
+						{
+							"id": "e687696d-1327-48bd-96fd-ed0991a0ce60",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/drivers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "846ec0a8-b529-49f3-8f12-54fb3c2b0cd0",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/drivers",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get driver by ID",
+					"id": "f2e6692d-2426-45e0-8e5b-ca3311d88dcb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/drivers/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"drivers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "f178d415-c272-40a9-8b4c-204ad536343b",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}"
+						},
+						{
+							"id": "94d0d744-e323-42dc-af7a-13f750d2c735",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "d331a95a-7f55-4a47-a8fa-c12385b2dc4b",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update fields for a driver",
+					"id": "01bbd5b0-de32-403b-87a9-1c2c0d86a2c6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/drivers/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"drivers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "26cc54f1-bb8a-4ce7-b73a-609b623ffaee",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}"
+						},
+						{
+							"id": "0a0f0908-0034-434d-80d4-be8c189195d7",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "73e82565-b601-402b-96d6-df0329f2c069",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "cad7667c-603d-4992-8d89-18144d925e83",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"first_name\": \"Lewis\",\n  \"last_name\": \"Hamilton\",\n  \"team_id\": 1,\n  \"nationality_id\": 44,\n  \"birthday\": \"1985-01-07\",\n  \"driver_number\": 44,\n  \"career_points\": 4135,\n  \"career_wins\": 103,\n  \"career_podiums\": 182,\n  \"championships\": 7\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a driver",
+					"id": "b49cd37c-a71e-41cc-9149-04dddea4076b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/drivers/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"drivers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "a0f98cd0-44a1-4f13-b364-38825fb86262",
+							"name": "Driver successfully deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						},
+						{
+							"id": "bc91cc01-8a8d-42f6-b227-d5814e1b425b",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "9433fe17-b991-47be-8f40-12080bc8cd33",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/drivers/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"drivers",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				}
+			],
+			"id": "c3e650ca-174a-467f-bdb5-e2af239d4ce8"
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Get a list of all events",
+					"id": "dcdf0b4d-5ffd-4073-a011-afd1a990fc99",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "This endpoint allows you to get a list of all events in the system."
+					},
+					"response": [
+						{
+							"id": "bfa44966-947f-491a-a146-c6aaf14494f5",
+							"name": "Successful response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 1,\n    \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n    \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n    \"track_id\": 1,\n    \"status\": \"Planned\"\n  },\n  {\n    \"id\": 1,\n    \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n    \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n    \"track_id\": 1,\n    \"status\": \"Planned\"\n  }\n]"
+						},
+						{
+							"id": "8fe75e75-7eee-4cd8-9443-dadfdcd76f91",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a new event",
+					"id": "0a49b060-c90f-4144-a40f-5f2efb1a0b84",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "This endpoint allows you to create a new event in the system. You need to provide the name, date, track_id, and event_type. The `id` field is read-only and will be generated by the system."
+					},
+					"response": [
+						{
+							"id": "c152c7f2-6f46-4233-a7e7-efd22185f64b",
+							"name": "Successfully created a new event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}"
+						},
+						{
+							"id": "0011888d-c26f-478a-bf50-e910f7f663ac",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "0ab71a99-416c-4e0c-a4a4-62f519c19e98",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/events",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get an event by ID",
+					"id": "ef4fe572-18ba-402f-89e9-bf23256b70e5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "9b4d3936-1a9f-443f-afce-dae194069e52",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}"
+						},
+						{
+							"id": "42c1a439-ca80-4d9c-bda3-4a26cc9993e7",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "0c0778b8-5af8-4252-9d9c-f76dea2e0945",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update fields for an event",
+					"id": "9cdfc3bf-7a3c-4dc7-a9fa-a9d0c5bcac28",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/events/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "8a6f8ce8-bb0e-4528-af45-e3cc7ff221c2",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}"
+						},
+						{
+							"id": "ab989f81-3bbc-4bbe-b16b-f155d807a580",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "82c05aab-bab0-4747-b858-a0189e3ec80a",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "6de663cc-a59d-487f-bf8d-648ec0edde71",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Formula 1 Grand Prix de Monaco 2024\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete an event",
+					"id": "605ce1ba-c24d-45af-a5b7-4d5130274e08",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "2c2e700a-aad6-4177-8d7b-bad3e41f6141",
+							"name": "Event successfully deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						},
+						{
+							"id": "4de54529-d500-4e5a-ab64-5168d06a8afd",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "6e7d3416-64db-4445-9d3d-41bdf5711775",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/events/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"events",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				}
+			],
+			"id": "2ac8c7f6-c384-482e-958f-5334078ccddc"
+		},
+		{
+			"name": "Results",
+			"item": [
+				{
+					"name": "Get a list of all results",
+					"id": "1be7a499-ad59-4849-b45d-c881f8f22677",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/results",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "2eb84d29-41c7-41c1-9bde-2829a753b494",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/results",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"event_id\": 1,\n    \"driver_id\": 1,\n    \"team_id\": 1,\n    \"start_pos\": 1,\n    \"finish_pos\": 20,\n    \"points\": 25,\n    \"fastest_lap\": \"01:23:45.678\",\n    \"time_on_track\": \"01:30:00.000\",\n    \"dnf\": false\n  },\n  {\n    \"event_id\": 1,\n    \"driver_id\": 1,\n    \"team_id\": 1,\n    \"start_pos\": 1,\n    \"finish_pos\": 20,\n    \"points\": 25,\n    \"fastest_lap\": \"01:23:45.678\",\n    \"time_on_track\": \"01:30:00.000\",\n    \"dnf\": false\n  }\n]"
+						},
+						{
+							"id": "76da8257-a2d2-484d-8efe-4059aa360d66",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/results",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a new result",
+					"id": "fad73334-fb82-46ce-82cd-aab33d070e09",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/results",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "ad89fcb1-11b3-4124-bdb7-dc5781fc7202",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/results",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}"
+						},
+						{
+							"id": "ade790de-9b97-4d3e-8145-feb129db336c",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/results",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "48aca7ce-4734-4fca-95ec-fc7adb35103a",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/results",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a result by ID",
+					"id": "48b2614e-68c4-4621-81b6-b70a1828b0b2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/results/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "b3b661c2-e9df-4ace-b3e5-00805722f9c6",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}"
+						},
+						{
+							"id": "2d08ba7a-cff5-497f-b630-adedb69917c0",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "71ac25d7-3952-4963-a391-171b01f0c39f",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update fields for a result",
+					"id": "2652bb98-2de9-40c5-b940-eef3796d83b4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/results/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "b943d88b-252c-4839-827a-aa81ff0d3e59",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						},
+						{
+							"id": "1a4a66e9-4131-434d-9d96-fed9f9c5db87",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "67546960-396c-4e59-b4f4-133de47b2343",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "de794d86-db8c-4d50-9b66-ad7018b7cc8c",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"event_id\": 1,\n  \"driver_id\": 1,\n  \"team_id\": 1,\n  \"start_pos\": 1,\n  \"finish_pos\": 20,\n  \"points\": 25,\n  \"fastest_lap\": \"01:23:45.678\",\n  \"time_on_track\": \"01:30:00.000\",\n  \"dnf\": false\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a result",
+					"id": "bdd7c811-871f-4c2a-bbb8-19f8ec885e6c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/results/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"results",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "7e12f66c-1b3a-4f57-b2ea-4050038701d2",
+							"name": "Result successfully deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						},
+						{
+							"id": "c3a335e1-ec78-4144-a791-d3f55c2e0c6f",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "7aee1cab-2e9d-4f29-b040-7bf1b7bda74b",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/results/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"results",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				}
+			],
+			"id": "ba54b7a5-6761-492b-bf3b-d5baea501275"
+		},
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "Get a list of all teams",
+					"id": "8b673aae-f072-46ac-a3ef-8fef6761f5aa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/teams",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams"
+							]
+						},
+						"description": "This endpoint allows you to get a list of all teams in the system."
+					},
+					"response": [
+						{
+							"id": "ac8f3c92-a827-42f3-b6de-0666c3a41ed7",
+							"name": "Successful response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/teams",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 1,\n    \"official_name\": \"Oracle Red Bull Racing\",\n    \"short_name\": \"Red Bull\",\n    \"headquarters\": \"Milton Keynes, United Kingdom\",\n    \"team_principal\": \"Christian Horner\"\n  },\n  {\n    \"id\": 1,\n    \"official_name\": \"Oracle Red Bull Racing\",\n    \"short_name\": \"Red Bull\",\n    \"headquarters\": \"Milton Keynes, United Kingdom\",\n    \"team_principal\": \"Christian Horner\"\n  }\n]"
+						},
+						{
+							"id": "6b1fe920-d034-478b-be17-6bb9842d3de0",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/teams",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a new Team",
+					"id": "7847b1ee-386d-4c3a-95c1-18ac04a91ed8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/teams",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams"
+							]
+						},
+						"description": "This endpoint allows you to create a new team in the system. You need to provide the official name, short name, headquarters, and team principal. The `id` field is read-only and will be generated by the system."
+					},
+					"response": [
+						{
+							"id": "05db582b-d189-4626-be62-305c4a42ce1b",
+							"name": "Successfully created a new team",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/teams",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}"
+						},
+						{
+							"id": "911cb66e-b664-423f-9ffa-9704dc4daf78",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/teams",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "13e4f70b-15dc-49ca-8624-4d05977516fe",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/teams",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get team by ID",
+					"id": "422890c0-1c7b-4ae3-8f97-7ca81455b786",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/teams/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "d5fe2c64-c500-45f7-8348-8d30f3320751",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}"
+						},
+						{
+							"id": "46172d42-cd34-449e-a25d-dccb722debb8",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "081540f3-de68-4f3f-9507-2357d7671895",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update fields for a team",
+					"id": "984e2d4b-7618-4297-b970-2321ac359119",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/teams/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "6d4f8a48-44ad-4bf7-8391-6bc032c8c591",
+							"name": "Team successfully updated",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}"
+						},
+						{
+							"id": "96a2d338-ddbb-4336-87ad-8b20ac33cdad",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "4890feef-5755-411a-a705-8bc8608434ba",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "0c15770c-e7f6-4415-bf00-6d66fa1ee3fb",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"official_name\": \"Oracle Red Bull Racing\",\n  \"short_name\": \"Red Bull\",\n  \"headquarters\": \"Milton Keynes, United Kingdom\",\n  \"team_principal\": \"Christian Horner\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a team",
+					"id": "6a3fbeac-e420-4a98-a08f-3de19d349466",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/teams/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"teams",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "2755ea20-8182-4fa9-8b43-d53185821894",
+							"name": "Team successfully deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						},
+						{
+							"id": "a237b710-b5cc-48ab-8afc-1a0a425cce7b",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "3b01c955-c761-4d05-9794-15f6ad27241b",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/teams/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"teams",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				}
+			],
+			"id": "b1e4a410-a31d-4a9d-abdd-7aaa53872c35"
+		},
+		{
+			"name": "Tracks",
+			"item": [
+				{
+					"name": "Get a list of all tracks",
+					"id": "a3e23bee-b40b-45ae-a402-baecceae700d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tracks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tracks"
+							]
+						},
+						"description": "This endpoint allows you to get a list of all tracks in the system."
+					},
+					"response": [
+						{
+							"id": "41438393-bc1f-4e7c-bc8b-b090c730cc9d",
+							"name": "Successful response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tracks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Circuit de Monaco\",\n    \"length_km\": 3.34,\n    \"continent\": \"Europe\",\n    \"country_id\": 1,\n    \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n  },\n  {\n    \"id\": 1,\n    \"name\": \"Circuit de Monaco\",\n    \"length_km\": 3.34,\n    \"continent\": \"Europe\",\n    \"country_id\": 1,\n    \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n  }\n]"
+						},
+						{
+							"id": "13feb5c9-c151-45d5-905a-25136911ad02",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tracks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a new track",
+					"id": "755e995b-bce9-46d2-967c-975bbad28ad2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tracks",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tracks"
+							]
+						},
+						"description": "This endpoint allows you to create a new track in the system. You need to provide the name, length in kilometers, and continent. The `id` field is read-only and will be generated by the system."
+					},
+					"response": [
+						{
+							"id": "55a0728e-3eed-4547-b646-7e19f1ca7f1f",
+							"name": "Successfully created a new track",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tracks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}"
+						},
+						{
+							"id": "ee878664-0468-4ea6-8071-97696c8316d2",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tracks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "492a9d71-667f-4070-871e-0885663358f9",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tracks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a track by ID",
+					"id": "54447a8a-bc9c-477d-bcd7-e4b641edd3ae",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tracks/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tracks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "74680744-e32f-4514-a55c-5a120313565a",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}"
+						},
+						{
+							"id": "b0c423dc-a92a-470c-93fd-0e9400fcc376",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "f084aaf2-55ec-43bd-a876-447e1ae8d5ac",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update fields for a track",
+					"id": "edbb1da2-8d58-4cb8-a9be-78cd89e9dc18",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tracks/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tracks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "b374d7c7-f61e-4c2b-a810-e128f75be82a",
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 1,\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}"
+						},
+						{
+							"id": "62c3f507-a208-40f7-8e02-c62fb2b132bb",
+							"name": "Bad request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "2a73cce8-5e35-4bc4-b07c-fc7a69c261eb",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "2a63d352-673a-4cf5-95a4-52d046912a63",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Circuit de Monaco\",\n  \"length_km\": 3.34,\n  \"continent\": \"Europe\",\n  \"country_id\": 1,\n  \"description\": \"The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a track",
+					"id": "680d0441-209d-402f-8d3c-89dae152dfc5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tracks/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tracks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "96598837",
+									"description": "(Required) Unique identifier for the resource"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "19e3d9fb-824b-4861-8719-d6eec2ea9538",
+							"name": "Track successfully deleted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": []
+						},
+						{
+							"id": "6dfa28d6-8c8d-4181-a6c8-6c1509a75818",
+							"name": "Resource not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						},
+						{
+							"id": "257cd643-d062-4213-8674-450cb3490150",
+							"name": "Internal server error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/tracks/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"tracks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Error Message\"\n}"
+						}
+					]
+				}
+			],
+			"id": "2457b52d-8ddd-4013-9ce2-c2b6d0926af3"
+		}
+	],
+	"variable": [
+		{
+			"id": "7c1b0e1e-b3cf-49c9-99e9-02e78b12fac8",
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}

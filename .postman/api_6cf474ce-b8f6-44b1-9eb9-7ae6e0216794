@@ -9,7 +9,7 @@ id = 6cf474ce-b8f6-44b1-9eb9-7ae6e0216794
 
 [config.relations.collections]
 rootDirectory = postman/collections
-files[] = {"id":"38129481-52e0a5ae-89c1-4842-b188-092dca37ee6a","path":"Main Collection.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"Fallback\",\"indentCharacter\":\"Space\",\"parametersResolution\":\"Example\",\"folderStrategy\":\"Tags\",\"includeAuthInfoInExample\":true,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"alwaysInheritAuthentication\":false,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Example\",\"exampleParametersResolution\":\"Example\"}"}}
+files[] = {"id":"38129481-af191cc8-0b20-4a32-ae85-6b6f89ec4dd0","path":"F1 Management API.json","metaData":{"generateCollectionPreferences":"{\"requestNameSource\":\"Fallback\",\"indentCharacter\":\"Space\",\"parametersResolution\":\"Example\",\"folderStrategy\":\"Tags\",\"includeAuthInfoInExample\":true,\"enableOptionalParameters\":true,\"keepImplicitHeaders\":false,\"includeDeprecated\":true,\"alwaysInheritAuthentication\":false,\"updateCollectionSync\":true,\"requestParametersResolution\":\"Example\",\"exampleParametersResolution\":\"Example\"}"}}
 
 [config.relations.collections.metaData]
 
@@ -24,7 +24,6 @@ files[] = {"path":"docs/components/schemas/event.yaml","metaData":{}}
 files[] = {"path":"docs/components/schemas/nationality.yaml","metaData":{}}
 files[] = {"path":"docs/components/schemas/result.yaml","metaData":{}}
 files[] = {"path":"docs/components/schemas/team.yaml","metaData":{}}
-files[] = {"path":"docs/components/schemas/timeWithThousandth.yaml","metaData":{}}
 files[] = {"path":"docs/components/schemas/track.yaml","metaData":{}}
 files[] = {"path":"docs/openapi.yaml","metaData":{}}
 files[] = {"path":"docs/paths/cars.yaml","metaData":{}}
