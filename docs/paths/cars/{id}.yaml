@@ -17,7 +17,7 @@ get:
     '500':
       $ref: '../../components/responses.yaml#/500'
 patch:
-  summary: Update a car
+  summary: Update fields for a car
   description: This endpoint updates a car record in the system.
   tags:
     - Cars

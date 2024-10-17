@@ -16,7 +16,7 @@ get:
     '500':
       $ref: '../../components/responses.yaml#/500'
 patch:
-  summary: Update a team
+  summary: Update fields for a team
   tags:
     - Teams
   parameters:

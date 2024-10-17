@@ -16,7 +16,7 @@ get:
     '500':
       $ref: '../../components/responses.yaml#/500'
 patch:
-  summary: Update a driver
+  summary: Update fields for a driver
   tags:
     - Drivers
   parameters:
