@@ -13,8 +13,10 @@ get:
             $ref: '../../components/schemas/team.yaml'
     '404':
       $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
 patch:
-  summary: Update a team
+  summary: Update fields for a team
   tags:
     - Teams
   parameters:
@@ -24,12 +26,7 @@ patch:
     content:
       application/json:
         schema:
-          allOf:
-            - $ref: '../../components/schemas/team.yaml'
-            - type: object
-              properties:
-                id:
-                  readOnly: true
+          $ref: '../../components/schemas/team.yaml'
   responses:
     '200':
       description: Team successfully updated
@@ -41,6 +38,8 @@ patch:
       $ref: '../../components/responses.yaml#/400'
     '404':
       $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
 delete:
   summary: Delete a team
   tags:
@@ -52,3 +51,5 @@ delete:
       description: Team successfully deleted
     '404':
       $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'

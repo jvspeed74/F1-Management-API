@@ -2,7 +2,13 @@ type: object
 properties:
   id:
     type: integer
-    example: 67
+    format: int32
+    minimum: 0
+    maximum: 255
+    example: 1
+    readOnly: true
   name:
     type: string
-    example: "Australia"
+    nullable: false
+    maxLength: 50
+    example: 'United Kingdom'

@@ -4,13 +4,15 @@ get:
     - Cars
   responses:
     '200':
-      description: List of car objects
+      description: Successful response
       content:
         application/json:
           schema:
             type: array
             items:
               $ref: '../components/schemas/car.yaml'
+    '500':
+      $ref: '../components/responses.yaml#/500'
 post:
   summary: Create a new car
   tags:
@@ -20,15 +22,8 @@ post:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            team_id:
-              type: integer
-            model:
-              type: string
-            year:
-              type: string
-              format: date
+          allOf:
+            - $ref: '../components/schemas/car.yaml'
           required:
             - team_id
             - model
@@ -40,3 +35,7 @@ post:
         application/json:
           schema:
             $ref: '../components/schemas/car.yaml'
+    '400':
+      $ref: '../components/responses.yaml#/400'
+    '500':
+      $ref: '../components/responses.yaml#/500'

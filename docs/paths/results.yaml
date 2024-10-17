@@ -1,25 +1,47 @@
 get:
-  summary: Get list of results
+  summary: Get a list of all results
   tags:
     - Results
   responses:
     '200':
-      description: List of results
+      description: Successful Response
       content:
         application/json:
           schema:
             type: array
             items:
               $ref: '../components/schemas/result.yaml'
+    '500':
+      $ref: '../components/responses.yaml#/500'
 post:
-  summary: Create a new results
+  summary: Create a new result
   tags:
     - Results
   requestBody:
+    required: true
     content:
       application/json:
         schema:
-          $ref: '../components/schemas/result.yaml'
+          allOf:
+            - $ref: '../components/schemas/result.yaml'
+          required:
+            - event_id
+            - driver_id
+            - team_id
+            - start_pos
+            - finish_pos
+            - points
+            - fastest_lap
+            - time_on_track
+            - dnf
   responses:
     '201':
-      description: results created
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/result.yaml'
+    '400':
+      $ref: '../components/responses.yaml#/400'
+    '500':
+      $ref: '../components/responses.yaml#/500'

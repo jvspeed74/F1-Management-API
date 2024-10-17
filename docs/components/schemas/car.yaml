@@ -2,14 +2,28 @@ type: object
 properties:
   id:
     type: integer
-    example: 1
+    format: int32
+    minimum: 0
+    maximum: 65535
+    description: Unique identifier for the car
     readOnly: true
-  team:
-    $ref: './team.yaml'
+    example: 1
+  team_id:
+    type: integer
+    format: int32
+    minimum: 0
+    maximum: 65535
+    nullable: true
+    description: Team ID associated with the car (nullable)
+    example: 1
   model:
     type: string
-    example: "W12"
+    maxLength: 100
+    description: Car model name
+    example: 'Ferrari 488 GT3'
   year:
     type: string
-    format: date
-    example: "2021-01-01"
+    format: year
+    pattern: '^\d{4}$'
+    description: Year of the car model
+    example: '2018'

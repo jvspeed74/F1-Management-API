@@ -3,46 +3,53 @@ get:
   tags:
     - Drivers
   parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+    - $ref: '../../components/parameters.yaml#/id'
   responses:
     '200':
-      description: Driver retrieved successfully
+      description: Successful Response
       content:
         application/json:
           schema:
             $ref: '../../components/schemas/driver.yaml'
-put:
-  summary: Update a specific drivers
+    '404':
+      $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
+patch:
+  summary: Update fields for a driver
   tags:
     - Drivers
   parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+    - $ref: '../../components/parameters.yaml#/id'
   requestBody:
+    required: true
     content:
       application/json:
         schema:
           $ref: '../../components/schemas/driver.yaml'
   responses:
     '200':
-      description: drivers updated
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/driver.yaml'
+    '400':
+      $ref: '../../components/responses.yaml#/400'
+    '404':
+      $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
 delete:
-  summary: Delete a specific drivers
+  summary: Delete a driver
   tags:
     - Drivers
   parameters:
-    - name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+    - $ref: '../../components/parameters.yaml#/id'
   responses:
     '204':
-      description: drivers deleted
+      description: Driver successfully deleted
+    '404':
+      $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
