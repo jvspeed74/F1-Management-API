@@ -1,48 +1,51 @@
-  get:
-    summary: Get a specific results
-    tags:
-      - Results
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-    responses:
-      '200':
-        description: results details
-        content:
-          application/json:
-            schema:
-              $ref: '../../components/schemas/result.yaml'
-  put:
-    summary: Update a specific results
-    tags:
-      - Results
-    parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-    requestBody:
+get:
+  summary: Get a result by ID
+  tags:
+    - Results
+  parameters:
+    - $ref: '../../components/parameters.yaml#/id'
+  responses:
+    '200':
+      description: Successful Response
       content:
         application/json:
           schema:
             $ref: '../../components/schemas/result.yaml'
-    responses:
-      '200':
-        description: results updated
-  delete:
-    summary: Delete a specific results
-    tags:
-      - Results
-    parameters:
-      - name: id
-        in: path
-        required: true
+    '404':
+      $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
+patch:
+  summary: Update fields for a result
+  tags:
+    - Results
+  parameters:
+    - $ref: '../../components/parameters.yaml#/id'
+  requestBody:
+    required: true
+    content:
+      application/json:
         schema:
-          type: integer
-    responses:
-      '204':
-        description: results deleted
+          $ref: '../../components/schemas/result.yaml'
+  responses:
+    '200':
+      description: Successful Response
+    '400':
+      $ref: '../../components/responses.yaml#/400'
+    '404':
+      $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
+delete:
+  summary: Delete a result
+  tags:
+    - Results
+  parameters:
+    - $ref: '../../components/parameters.yaml#/id'
+  responses:
+    '204':
+      description: Result successfully deleted
+    '404':
+      $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'

@@ -11,6 +11,10 @@ get:
         application/json:
           schema:
             $ref: '../../components/schemas/driver.yaml'
+    '404':
+      $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
 patch:
   summary: Update a driver
   tags:
@@ -30,6 +34,12 @@ patch:
         application/json:
           schema:
             $ref: '../../components/schemas/driver.yaml'
+    '400':
+      $ref: '../../components/responses.yaml#/400'
+    '404':
+      $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
 delete:
   summary: Delete a driver
   tags:
@@ -41,3 +51,5 @@ delete:
       description: Driver successfully deleted
     '404':
       $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'

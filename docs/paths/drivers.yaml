@@ -12,6 +12,8 @@ get:
             type: array
             items:
               $ref: '../components/schemas/driver.yaml'
+    '500':
+      $ref: '../components/responses.yaml#/500'
 post:
   summary: Create a new driver
   description: This endpoint allows you to create a new driver in the system.
@@ -36,3 +38,7 @@ post:
         application/json:
           schema:
             $ref: '../components/schemas/driver.yaml'
+    '400':
+      $ref: '../components/responses.yaml#/400'
+    '500':
+      $ref: '../components/responses.yaml#/500'

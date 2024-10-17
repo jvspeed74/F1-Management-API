@@ -15,7 +15,7 @@ properties:
   scheduled_date:
     type: string
     format: date-time
-    nullable: true  # FIXME Update DB schema to make this field nullable and default null
+    nullable: true
     default: null
     example: '2024-05-26T18:00:00Z'
   track_id:

@@ -14,9 +14,11 @@ get:
             $ref: '../../components/schemas/car.yaml'
     '404':
       $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
 patch:
   summary: Update a car
-  description: Update the fields of a car record
+  description: This endpoint updates a car record in the system.
   tags:
     - Cars
   parameters:
@@ -35,9 +37,15 @@ patch:
         application/json:
           schema:
             $ref: '../../components/schemas/car.yaml'
+    '400':
+      $ref: '../../components/responses.yaml#/400'
+    '404':
+      $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
 delete:
-  summary: Delete a car by ID
-  description: Delete a car record from the system
+  summary: Delete a car
+  description: This endpoint deletes a car record from the system.
   tags:
     - Cars
   parameters:
@@ -47,3 +55,5 @@ delete:
       description: Car successfully deleted
     '404':
       $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
