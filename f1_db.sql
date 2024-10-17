@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 11, 2024 at 09:02 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Oct 17, 2024 at 05:16 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -320,7 +320,7 @@ INSERT INTO `drivers` (`id`, `first_name`, `last_name`, `team_id`, `nationality_
 CREATE TABLE `events` (
   `id` smallint(5) UNSIGNED NOT NULL,
   `title` varchar(100) NOT NULL,
-  `scheduled_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `scheduled_date` timestamp NULL DEFAULT NULL,
   `track_id` smallint(5) UNSIGNED DEFAULT NULL,
   `status` enum('Planned','Ongoing','Completed','Cancelled') NOT NULL DEFAULT 'Planned'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
