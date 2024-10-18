@@ -21,6 +21,9 @@ class Country extends Model
     // Define the fillable fields for mass assignment
     protected $fillable = ['name'];
 
+    /**
+     * @return HasMany<Track, $this>
+     */
     public function track(): HasMany
     {
         return $this->hasMany(Track::class, 'country_id', 'id');

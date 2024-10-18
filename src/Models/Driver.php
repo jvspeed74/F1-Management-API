@@ -33,6 +33,9 @@ class Driver extends Model
         'championships',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $casts = [
         'career_points' => 'float',
     ];

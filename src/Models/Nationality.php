@@ -21,6 +21,9 @@ class Nationality extends Model
     // Define the fillable fields for mass assignment
     protected $fillable = ['name'];
 
+    /**
+     * @return HasMany<Driver, $this>
+     */
     public function drivers(): HasMany
     {
         return $this->hasMany(Driver::class, 'nationality_id', 'id');

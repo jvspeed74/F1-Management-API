@@ -23,12 +23,15 @@ class Track extends Model
     protected $fillable = ['name', 'length_km', 'continent', 'country_id', 'description'];
 
     // Cast length_km as float
+    /**
+     * @var string[]
+     */
     protected $casts = [
         'length_km' => 'float',
     ];
 
     /**
-     * @return BelongsTo
+     * @return BelongsTo<Country, $this>
      */
     public function country(): BelongsTo
     {

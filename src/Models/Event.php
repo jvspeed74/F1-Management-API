@@ -21,6 +21,9 @@ class Event extends Model
     // Define the fillable fields for mass assignment
     protected $fillable = ['title', 'scheduled_date', 'track_id', 'status'];
 
+    /**
+     * @return BelongsTo<Track, $this>
+     */
     public function track(): BelongsTo
     {
         return $this->belongsTo(Track::class, 'track_id', 'id');
