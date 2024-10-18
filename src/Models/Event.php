@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Event extends Model
 {
@@ -20,4 +21,8 @@ class Event extends Model
     // Define the fillable fields for mass assignment
     protected $fillable = ['title', 'scheduled_date', 'track_id', 'status'];
 
+    public function track(): BelongsTo
+    {
+        return $this->belongsTo(Track::class, 'track_id', 'id');
+    }
 }

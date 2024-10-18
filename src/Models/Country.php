@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Track extends Model
+class Country extends Model
 {
     // Define the table name explicitly if it's not the plural of the model name
-    protected $table = 'tracks';
+    protected $table = 'countries';
 
     // Primary key is 'id', and Eloquent will automatically handle it
     protected $primaryKey = 'id';
@@ -19,13 +19,10 @@ class Track extends Model
     public $timestamps = false;
 
     // Define the fillable fields for mass assignment
-    protected $fillable = ['name', 'length_km', 'continent', 'country_id', 'description'];
+    protected $fillable = ['name'];
 
-    /**
-     * @return BelongsTo
-     */
-    public function country(): BelongsTo
+    public function track(): HasMany
     {
-        return $this->belongsTo(Country::class, 'country_id', 'id');
+        return $this->hasMany(Track::class, 'country_id', 'id');
     }
 }
