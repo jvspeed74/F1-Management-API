@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use InvalidArgumentException;
 
 class Driver extends Model
 {
@@ -32,6 +33,10 @@ class Driver extends Model
         'championships',
     ];
 
+    protected $casts = [
+        'career_points' => 'float',
+    ];
+
     /**
      * @return BelongsTo<Team, $this>
      */
@@ -46,5 +51,17 @@ class Driver extends Model
     public function nationality(): BelongsTo
     {
         return $this->belongsTo(Nationality::class);
+    }
+
+    /**
+     * Override the save method to enforce non-negative length_km
+     */
+    protected static function booted(): void
+    {
+        static::saving(function ($driver) {
+            if ($driver->career_points < 0) {
+                throw new InvalidArgumentException('Career points must be a non-negative number.');
+            }
+        });
     }
 }
