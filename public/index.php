@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 
+use App\Controllers\CarController;
+use App\Controllers\DriverController;
 use App\Controllers\EventController;
 use App\Controllers\TeamController;
 use App\Controllers\TrackController;
@@ -109,6 +111,18 @@ $app->get('/tracks/{id}', TrackController::class . ':getTrackById');
 $app->post('/tracks', TrackController::class . ':createTrack');
 $app->patch('/tracks/{id}', TrackController::class . ':updateTrack');
 $app->delete('/tracks/{id}', TrackController::class . ':deleteTrack');
+
+$app->get('/drivers', DriverController::class . ':getAllDrivers');
+$app->get('/drivers/{id}', DriverController::class . ':getDriverById');
+$app->post('/drivers', DriverController::class . ':createDriver');
+$app->patch('/drivers/{id}', DriverController::class . ':updateDriver');
+$app->delete('/drivers/{id}', DriverController::class . ':deleteDriver');
+
+$app->get('/cars', CarController::class . ':getAllCars');
+$app->get('/cars/{id}', CarController::class . ':getCarById');
+$app->post('/cars', CarController::class . ':createCar');
+$app->patch('/cars/{id}', CarController::class . ':updateCar');
+$app->delete('/cars/{id}', CarController::class . ':deleteCar');
 
 // Run app
 $app->run();
