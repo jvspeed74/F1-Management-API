@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Car extends Model
 {
-
     // Define the table name explicitly if it's not the plural of the model name
     protected $table = 'cars';
 

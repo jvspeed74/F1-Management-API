@@ -45,7 +45,7 @@ class CarController
     public function getCarById(Request $request, Response $response, array $args): Response
     {
         // Extract the ID from the request arguments
-        $id = (int)$args['id'];
+        $id = (int) $args['id'];
 
         // Send the ID to the repository to fetch the team from the database
         $car = $this->carRepository->getCarById($id);
@@ -84,7 +84,7 @@ class CarController
 
         // Convert object to array if necessary
         if (is_object($data)) {
-            $data = (array)$data;
+            $data = (array) $data;
         }
 
         // Send the filtered data to the repository to create the car in the database
@@ -108,7 +108,7 @@ class CarController
     public function updateCar(Request $request, Response $response, array $args): Response
     {
         // Extract the ID from the request arguments
-        $id = (int)$args['id'];
+        $id = (int) $args['id'];
 
         // getParsedBody can return array|object|null based on the Content-Type header
         // Since the content type is application/json, it will return an array OR an object
@@ -124,7 +124,7 @@ class CarController
 
         // Convert object to array if necessary
         if (is_object($data)) {
-            $data = (array)$data;
+            $data = (array) $data;
         }
 
         // Send the filtered data to the repository to update the team in the database
@@ -153,7 +153,7 @@ class CarController
     public function deleteCar(Request $request, Response $response, array $args): Response
     {
         // Extract the ID from the request arguments
-        $id = (int)$args['id'];
+        $id = (int) $args['id'];
 
         // Send the ID to the repository to delete the car from the database
         $deleted = $this->carRepository->deleteCar($id);

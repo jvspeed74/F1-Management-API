@@ -1,9 +1,8 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Repositories;
-
-
 
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Collection;

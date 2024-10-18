@@ -6,10 +6,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Nationality extends Model
 {
-
     // Define the table name explicitly if it's not the plural of the model name
     protected $table = 'nationalities';
 
