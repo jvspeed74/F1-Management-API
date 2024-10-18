@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: F1 Database API
+  title: F1 Management API
   description: API documentation for the F1 database based on table schemas.
   version: 1.0.0
 servers:
@@ -19,10 +19,6 @@ paths:
     $ref: './paths/events.yaml'
   /events/{id}:
     $ref: './paths/events/{id}.yaml'
-  /results:
-    $ref: './paths/results.yaml'
-  /results/{id}:
-    $ref: './paths/results/{id}.yaml'
   /teams:
     $ref: './paths/teams.yaml'
   /teams/{id}:
