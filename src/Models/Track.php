@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Track extends Model
 {
-// Define the table name explicitly if it's not the plural of the model name
-protected $table = 'tracks';
+    // Define the table name explicitly if it's not the plural of the model name
+    protected $table = 'tracks';
 
-// Primary key is 'id', and Eloquent will automatically handle it
-protected $primaryKey = 'id';
+    // Primary key is 'id', and Eloquent will automatically handle it
+    protected $primaryKey = 'id';
 
-// Disable timestamps since the table doesn't have created_at/updated_at columns
-public $timestamps = false;
+    // Disable timestamps since the table doesn't have created_at/updated_at columns
+    public $timestamps = false;
 
-// Define the fillable fields for mass assignment
-protected $fillable = ['name', 'length_km', 'continent', 'country_id', 'description'];
+    // Define the fillable fields for mass assignment
+    protected $fillable = ['name', 'length_km', 'continent', 'country_id', 'description'];
 
 }
