@@ -3,7 +3,9 @@
 declare(strict_types=1);
 
 
+use App\Controllers\EventController;
 use App\Controllers\TeamController;
+use App\Controllers\TrackController;
 use DI\ContainerBuilder;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -96,6 +98,17 @@ $app->post('/teams', TeamController::class . ':createTeam');
 $app->patch('/teams/{id}', TeamController::class . ':updateTeam');
 $app->delete('/teams/{id}', TeamController::class . ':deleteTeam');
 
+$app->get('/events', EventController::class . ':getAllEvents');
+$app->get('/events/{id}', EventController::class . ':getEventById');
+$app->post('/events', EventController::class . ':createEvent');
+$app->patch('/events/{id}', EventController::class . ':updateEvent');
+$app->delete('/events/{id}', EventController::class . ':deleteEvent');
+
+$app->get('/tracks', TrackController::class . ':getAllTracks');
+$app->get('/tracks/{id}', TrackController::class . ':getTrackById');
+$app->post('/tracks', TrackController::class . ':createTrack');
+$app->patch('/tracks/{id}', TrackController::class . ':updateTrack');
+$app->delete('/tracks/{id}', TrackController::class . ':deleteTrack');
 
 // Run app
 $app->run();
