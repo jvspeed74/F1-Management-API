@@ -32,7 +32,7 @@ class CarRepository
      * @param int $id
      * @return Car|false
      */
-    public function getDriverById(int $id): Car | false
+    public function getCarById(int $id): Car | false
     {
         // Find the Driver by ID
         $car = $this->model->query()->find($id);
@@ -51,7 +51,7 @@ class CarRepository
      * @param array<string, string> $data
      * @return Car
      */
-    public function createDriver(array $data): Car
+    public function createCar(array $data): Car
     {
         return $this->model->query()->create($data);
     }
@@ -62,7 +62,7 @@ class CarRepository
      * @param array<string, string> $data
      * @return Car|false
      */
-    public function updateDriver(int $id, array $data): Car | false
+    public function updateCar(int $id, array $data): Car | false
     {
         $car = $this->model->query()->find($id);  // Find the driver by ID
         if (!$car) {
