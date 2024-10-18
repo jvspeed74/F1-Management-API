@@ -10,12 +10,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class TrackController
 {
-    protected TrackRepository $TrackRepository;
+    protected TrackRepository $trackRepository;
 
     // Inject the repository via constructor
-    public function __construct(TrackRepository $TrackRepository)
+    public function __construct(TrackRepository $trackRepository)
     {
-        $this->TrackRepository = $TrackRepository;
+        $this->trackRepository = $trackRepository;
     }
 
     // Fetch all tracks
@@ -27,7 +27,7 @@ class TrackController
      */
     public function getAllTracks(Request $request, Response $response): Response
     {
-        $tracks = $this->TrackRepository->getAllTracks();
+        $tracks = $this->trackRepository->getAllTracks();
         $response->getBody()->write($tracks->toJson());
         return $response->withHeader('Content-Type', 'application/json');
     }
@@ -47,7 +47,7 @@ class TrackController
         $id = (int) $args['id'];
 
         // Send the ID to the repository to fetch the track from the database
-        $track = $this->TrackRepository->getTrackById($id);
+        $track = $this->trackRepository->getTrackById($id);
 
         // If the track was not found, return a 404 response
         if (!$track) {
@@ -88,7 +88,7 @@ class TrackController
 
         // Send the filtered data to the repository to create the track in the database
         // TODO Filter the data before sending it to the repository
-        $track = $this->TrackRepository->createTrack($data);
+        $track = $this->trackRepository->createTrack($data);
 
         // Return the created track as JSON with a 201 status code
         $response->getBody()->write($track->toJson());
@@ -128,7 +128,7 @@ class TrackController
 
         // Send the filtered data to the repository to update the track in the database
         // TODO Filter the data before sending it to the repository
-        $track = $this->TrackRepository->updateTrack($id, $data);
+        $track = $this->trackRepository->updateTrack($id, $data);
 
         // If the update was not successful, return a 404 response
         if (!$track) {
@@ -155,7 +155,7 @@ class TrackController
         $id = (int) $args['id'];
 
         // Send the ID to the repository to delete the track from the database
-        $deleted = $this->TrackRepository->deleteTrack($id);
+        $deleted = $this->trackRepository->deleteTrack($id);
 
         // If the track was not found, return a 404 response
         if (!$deleted) {
