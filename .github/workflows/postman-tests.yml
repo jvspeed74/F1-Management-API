@@ -57,7 +57,7 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman tests
-        run: newman run ./postman/collections/F1 Management API.json --env-var baseUrl=http://localhost:8080
+        run: newman run "./postman/collections/F1 Management API.json" --env-var baseUrl=localhost:8080
 
       - name: Shutdown PHP server
         run: killall php
