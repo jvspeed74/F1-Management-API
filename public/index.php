@@ -41,7 +41,7 @@ $capsule = new Capsule();
 // Add your database connection configuration
 $capsule->addConnection([
     'driver'    => 'mysql',                     // Database driver
-    'host'      => 'mariadb',                 // Database host
+    'host'      => '127.0.0.1',                 // Database host
     'database'  => 'f1_db',        // Database name
     'username'  => 'root',             // Database username
     'password'  => '',             // Database password
