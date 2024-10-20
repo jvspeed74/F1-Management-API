@@ -45,28 +45,14 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Start PHP server
-        run: php -S localhost:8080 -t public > php_server.log 2>&1 &
+        run: php -S 127.0.0.1:8080 -t public > php_server.log 2>&1 &
         working-directory: ./ # Ensure this is the correct path to your public folder
-
-      - name: Wait for MariaDB to be ready
-        run: |
-          until mysqladmin ping -h mariadb --silent; do
-            echo "Waiting for MariaDB..."
-            sleep 5
-          done
-
-      - name: Wait for PHP server to be ready
-        run: |
-          until curl -s http://localhost:8080 > /dev/null; do
-            echo "Waiting for PHP server..."
-            sleep 5
-          done
 
       - name: Install Newman
         run: npm install -g newman
 
       - name: Run Postman tests
-        run: newman run "./postman/collections/F1 Management API.json" --env-var baseUrl=http://localhost:8080
+        run: newman run "./postman/collections/F1 Management API.json" --env-var baseUrl=http://127.0.0.1:8080
 
       - name: Display PHP server logs
         if: always()
