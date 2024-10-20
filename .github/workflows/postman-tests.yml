@@ -39,13 +39,13 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: mysqli
+          extensions: mysqli, pdo_mysql
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
       - name: Start PHP server
-        run: php -S localhost:8080 -t public &
+        run: php -S localhost:8080 -t public > php_server.log 2>&1 &
         working-directory: ./ # Ensure this is the correct path to your public folder
 
       - name: Wait for PHP server to be ready
@@ -61,5 +61,10 @@ jobs:
       - name: Run Postman tests
         run: newman run "./postman/collections/F1 Management API.json" --env-var baseUrl=http://localhost:8080
 
+      - name: Display PHP server logs
+        if: always()
+        run: cat php_server.log
+
       - name: Shutdown PHP server
+        if: always()
         run: killall php
