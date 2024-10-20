@@ -44,6 +44,11 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
+      - name: Import f1_db.sql into MariaDB
+        run: |
+          echo "Importing f1_db.sql..."
+          mysql -h 127.0.0.1 -u root < f1_db.sql
+
       - name: Start PHP server
         run: php -S 127.0.0.1:8080 -t public > php_server.log 2>&1 &
         working-directory: ./ # Ensure this is the correct path to your public folder
