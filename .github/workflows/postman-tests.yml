@@ -1,0 +1,63 @@
+name: Run Postman Tests
+
+on:
+  push:
+    branches:
+      - actions/*
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+          MYSQL_DATABASE: f1_db
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+        ports:
+          - 3306:3306
+        volumes:
+          - ${{ github.workspace }}:/docker-entrypoint-initdb.d
+        # The volumes line will automatically import any .sql files from this directory into the MariaDB container
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mysqli
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Start PHP server
+        run: php -S localhost:8080 -t public &
+        working-directory: ./ # Ensure this is the correct path to your public folder
+
+      - name: Wait for PHP server to be ready
+        run: |
+          until curl -s http://localhost:8080 > /dev/null; do
+            echo "Waiting for PHP server..."
+            sleep 5
+          done
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Postman tests
+        run: newman run ./postman/collections/F1 Management API.json --env-var baseUrl=http://localhost:8080
+
+      - name: Shutdown PHP server
+        run: killall php
