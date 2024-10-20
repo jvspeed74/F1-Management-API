@@ -9,15 +9,16 @@ on:
       - main
 
 jobs:
-  test:
+  postman-tests:
     runs-on: ubuntu-latest
 
     services:
       mariadb:
         image: mariadb:latest
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-          MYSQL_DATABASE: f1_db
+          MARIADB_ALLOW_EMPTY_PASSWORD: "yes"
+          MARIADB_DATABASE: f1_db
+          MARIADB_USER: root
         options: >-
           --health-cmd="healthcheck.sh --connect --innodb_initialized"
           --health-interval=10s
@@ -57,7 +58,7 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman tests
-        run: newman run "./postman/collections/F1 Management API.json" --env-var baseUrl=localhost:8080
+        run: newman run "./postman/collections/F1 Management API.json" --env-var baseUrl=http://localhost:8080
 
       - name: Shutdown PHP server
         run: killall php
