@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use App\Controllers\{CarController, DriverController, EventController, TeamController, TrackController};
+use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
-use Psr\Http\Message\ResponseInterface as Response;
 
 /**
  * Register application routes.
@@ -23,46 +23,46 @@ return function (App $app): void {
 
     // Team routes
     $app->group('/teams', function (RouteCollectorProxy $group) {
-        $group->get('', TeamController::class . ':getAllTeams');
-        $group->get('/{id}', TeamController::class . ':getTeamById');
-        $group->post('', TeamController::class . ':createTeam');
-        $group->patch('/{id}', TeamController::class . ':updateTeam');
-        $group->delete('/{id}', TeamController::class . ':deleteTeam');
+        $group->get('', [TeamController::class, 'getAllTeams']);
+        $group->get('/{id:\d+}', [TeamController::class, 'getTeamById']);
+        $group->post('', [TeamController::class, 'createTeam']);
+        $group->patch('/{id:\d+}', [TeamController::class, 'updateTeam']);
+        $group->delete('/{id:\d+}', [TeamController::class, 'deleteTeam']);
     });
 
     // Event routes
     $app->group('/events', function (RouteCollectorProxy $group) {
-        $group->get('', EventController::class . ':getAllEvents');
-        $group->get('/{id}', EventController::class . ':getEventById');
-        $group->post('', EventController::class . ':createEvent');
-        $group->patch('/{id}', EventController::class . ':updateEvent');
-        $group->delete('/{id}', EventController::class . ':deleteEvent');
+        $group->get('', [EventController::class, 'getAllEvents']);
+        $group->get('/{id:\d+}', [EventController::class, 'getEventById']);
+        $group->post('', [EventController::class, 'createEvent']);
+        $group->patch('/{id:\d+}', [EventController::class, 'updateEvent']);
+        $group->delete('/{id:\d+}', [EventController::class, 'deleteEvent']);
     });
 
     // Track routes
     $app->group('/tracks', function (RouteCollectorProxy $group) {
-        $group->get('', TrackController::class . ':getAllTracks');
-        $group->get('/{id}', TrackController::class . ':getTrackById');
-        $group->post('', TrackController::class . ':createTrack');
-        $group->patch('/{id}', TrackController::class . ':updateTrack');
-        $group->delete('/{id}', TrackController::class . ':deleteTrack');
+        $group->get('', [TrackController::class, 'getAllTracks']);
+        $group->get('/{id:\d+}', [TrackController::class, 'getTrackById']);
+        $group->post('', [TrackController::class, 'createTrack']);
+        $group->patch('/{id:\d+}', [TrackController::class, 'updateTrack']);
+        $group->delete('/{id:\d+}', [TrackController::class, 'deleteTrack']);
     });
 
     // Driver routes
     $app->group('/drivers', function (RouteCollectorProxy $group) {
-        $group->get('', DriverController::class . ':getAllDrivers');
-        $group->get('/{id}', DriverController::class . ':getDriverById');
-        $group->post('', DriverController::class . ':createDriver');
-        $group->patch('/{id}', DriverController::class . ':updateDriver');
-        $group->delete('/{id}', DriverController::class . ':deleteDriver');
+        $group->get('', [DriverController::class, 'getAllDrivers']);
+        $group->get('/{id:\d+}', [DriverController::class, 'getDriverById']);
+        $group->post('', [DriverController::class, 'createDriver']);
+        $group->patch('/{id:\d+}', [DriverController::class, 'updateDriver']);
+        $group->delete('/{id:\d+}', [DriverController::class, 'deleteDriver']);
     });
 
     // Car routes
     $app->group('/cars', function (RouteCollectorProxy $group) {
-        $group->get('', CarController::class . ':getAllCars');
-        $group->get('/{id}', CarController::class . ':getCarById');
-        $group->post('', CarController::class . ':createCar');
-        $group->patch('/{id}', CarController::class . ':updateCar');
-        $group->delete('/{id}', CarController::class . ':deleteCar');
+        $group->get('', [CarController::class, 'getAllCars']);
+        $group->get('/{id:\d+}', [CarController::class, 'getCarById']);
+        $group->post('', [CarController::class, 'createCar']);
+        $group->patch('/{id:\d+}', [CarController::class, 'updateCar']);
+        $group->delete('/{id:\d+}', [CarController::class, 'deleteCar']);
     });
 };
