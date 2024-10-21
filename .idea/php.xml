@@ -123,6 +123,7 @@
       <path value="$PROJECT_DIR$/vendor/phpstan/phpstan-phpunit" />
       <path value="$PROJECT_DIR$/vendor/php-di/slim-bridge" />
       <path value="$PROJECT_DIR$/vendor/slim/http" />
+      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
