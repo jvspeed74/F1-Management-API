@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Interfaces\EventRepositoryInterface;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Collection;
 
-class EventRepository
+class EventRepository implements EventRepositoryInterface
 {
     protected Event $model;
 

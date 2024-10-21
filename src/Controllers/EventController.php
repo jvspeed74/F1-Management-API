@@ -1,14 +1,16 @@
-<?php
+<?php /** @noinspection PhpMultipleClassDeclarationsInspection */
 
 declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Interfaces\EventControllerInterface;
 use App\Repositories\EventRepository;
+use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class EventController
+class EventController implements EventControllerInterface
 {
     protected EventRepository $eventRepository;
 
@@ -18,34 +20,25 @@ class EventController
         $this->eventRepository = $eventRepository;
     }
 
-    // Fetch all teams
-
     /**
-     * @param Request $request
      * @param Response $response
      * @return Response
      */
-    public function getAllEvents(Request $request, Response $response): Response
+    public function getAllEvents(Response $response): Response
     {
         $events = $this->eventRepository->getAllEvents();
         $response->getBody()->write($events->toJson());
         return $response->withHeader('Content-Type', 'application/json');
     }
 
-    // Fetch a event by ID
-
     /**
-     * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function getEventById(Request $request, Response $response, array $args): Response
+    public function getEventById(Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
-
         // Send the ID to the repository to fetch the event from the database
         $event = $this->eventRepository->getEventById($id);
 
@@ -65,7 +58,7 @@ class EventController
      * @param Request $request
      * @param Response $response
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function createEvent(Request $request, Response $response): Response
     {
@@ -95,19 +88,15 @@ class EventController
         return $response->withStatus(201)->withHeader('Content-Type', 'application/json');
     }
 
-    // Update an event by ID
-
     /**
      * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function updateEvent(Request $request, Response $response, array $args): Response
+    public function updateEvent(Request $request, Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
 
         // getParsedBody can return array|object|null based on the Content-Type header
         // Since the content type is application/json, it will return an array OR an object
@@ -143,17 +132,13 @@ class EventController
     }
 
     /**
-     * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function deleteEvent(Request $request, Response $response, array $args): Response
+    public function deleteEvent(Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
-
         // Send the ID to the repository to delete the event from the database
         $deleted = $this->eventRepository->deleteEvent($id);
 

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Interfaces\TrackRepositoryInterface;
 use App\Models\Track;
 use Illuminate\Database\Eloquent\Collection;
 
-class TrackRepository
+class TrackRepository implements TrackRepositoryInterface
 {
     protected Track $model;
 

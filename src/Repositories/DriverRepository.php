@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Interfaces\DriverRepositoryInterface;
 use App\Models\Driver;
 use Illuminate\Database\Eloquent\Collection;
 
-class DriverRepository
+class DriverRepository implements DriverRepositoryInterface
 {
     protected Driver $model;
 
