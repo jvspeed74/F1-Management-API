@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpUnhandledExceptionInspection */
+
 declare(strict_types=1);
 
 namespace Controllers;
@@ -42,12 +44,11 @@ class TeamControllerTest extends TestCase
         // Create the controller
         $controller = new TeamController($teamRepository);
 
-        // Mock the request and response
-        $request = Mockery::mock(ServerRequestInterface::class);
+        // Mock the response
         $response = new Response();
 
         // Call the controller method
-        $result = $controller->getAllTeams($request, $response);
+        $result = $controller->getAllTeams($response);
 
         // Assert that the response is JSON and the status is 200
         $this->assertSame(200, $result->getStatusCode());
@@ -74,14 +75,10 @@ class TeamControllerTest extends TestCase
         $controller = new TeamController($teamRepository);
 
         // Mock the request and response
-        $request = Mockery::mock(ServerRequestInterface::class);
         $response = new Response();
 
-        // Mock the request arguments
-        $args = ['id' => 1];
-
         // Call the controller method
-        $result = $controller->getTeamById($request, $response, $args);
+        $result = $controller->getTeamById($response, 1);
 
         // Assert that the response is JSON and the status is 200
         $this->assertSame(200, $result->getStatusCode());
@@ -104,14 +101,10 @@ class TeamControllerTest extends TestCase
         $controller = new TeamController($teamRepository);
 
         // Mock the request and response
-        $request = Mockery::mock(ServerRequestInterface::class);
         $response = new Response();
 
-        // Mock the request arguments
-        $args = ['id' => 1];
-
         // Call the controller method
-        $result = $controller->getTeamById($request, $response, $args);
+        $result = $controller->getTeamById($response, 1);
 
         // Assert that the response is JSON, the status is 404, and the correct message is returned
         $this->assertSame(404, $result->getStatusCode());
@@ -181,11 +174,8 @@ class TeamControllerTest extends TestCase
             ->once()
             ->andReturn(['official_name' => 'Updated Team']);
 
-        // Mock the request arguments
-        $args = ['id' => 1];
-
         // Call the controller method
-        $result = $controller->updateTeam($request, $response, $args);
+        $result = $controller->updateTeam($request, $response, 1);
 
         // Assert that the response is JSON, the status is 200, and the updated team is returned
         $this->assertSame(200, $result->getStatusCode());
@@ -211,11 +201,9 @@ class TeamControllerTest extends TestCase
         $request = Mockery::mock(ServerRequestInterface::class);
         $response = new Response();
 
-        // Mock the request arguments
-        $args = ['id' => 1];
 
         // Call the controller method
-        $result = $controller->deleteTeam($request, $response, $args);
+        $result = $controller->deleteTeam($response, 1);
 
         // Assert that the response status is 204 (No Content)
         $this->assertSame(204, $result->getStatusCode());
@@ -236,14 +224,11 @@ class TeamControllerTest extends TestCase
         $controller = new TeamController($teamRepository);
 
         // Mock the request and response
-        $request = Mockery::mock(ServerRequestInterface::class);
         $response = new Response();
 
-        // Mock the request arguments
-        $args = ['id' => 1];
 
         // Call the controller method
-        $result = $controller->deleteTeam($request, $response, $args);
+        $result = $controller->deleteTeam($response, 1);
 
         // Assert that the response is JSON, the status is 404, and the correct message is returned
         $this->assertSame(404, $result->getStatusCode());

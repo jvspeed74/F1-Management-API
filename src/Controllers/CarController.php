@@ -1,15 +1,19 @@
 <?php
 
+/** @noinspection PhpMultipleClassDeclarationsInspection */
+
 
 declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Interfaces\CarControllerInterface;
 use App\Repositories\CarRepository;
+use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class CarController
+class CarController implements CarControllerInterface
 {
     protected CarRepository $carRepository;
 
@@ -22,31 +26,24 @@ class CarController
     // Fetch all cars
 
     /**
-     * @param Request $request
      * @param Response $response
      * @return Response
      */
-    public function getAllCars(Request $request, Response $response): Response
+    public function getAllCars(Response $response): Response
     {
         $cars = $this->carRepository->getAllCars();
         $response->getBody()->write($cars->toJson());
         return $response->withHeader('Content-Type', 'application/json');
     }
 
-    // Fetch a car by ID
-
     /**
-     * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function getCarById(Request $request, Response $response, array $args): Response
+    public function getCarById(Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
-
         // Send the ID to the repository to fetch the team from the database
         $car = $this->carRepository->getCarById($id);
 
@@ -66,7 +63,7 @@ class CarController
      * @param Request $request
      * @param Response $response
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function createCar(Request $request, Response $response): Response
     {
@@ -101,14 +98,12 @@ class CarController
     /**
      * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function updateCar(Request $request, Response $response, array $args): Response
+    public function updateCar(Request $request, Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
 
         // getParsedBody can return array|object|null based on the Content-Type header
         // Since the content type is application/json, it will return an array OR an object
@@ -144,17 +139,13 @@ class CarController
     }
 
     /**
-     * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function deleteCar(Request $request, Response $response, array $args): Response
+    public function deleteCar(Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
-
         // Send the ID to the repository to delete the car from the database
         $deleted = $this->carRepository->deleteCar($id);
 

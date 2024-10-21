@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Interfaces\TeamRepositoryInterface;
 use App\Models\Team;
 use Illuminate\Database\Eloquent\Collection;
 
-class TeamRepository
+class TeamRepository implements TeamRepositoryInterface
 {
     protected Team $model;
 
