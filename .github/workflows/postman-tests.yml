@@ -1,12 +1,10 @@
 name: Run Postman Tests
 
 on:
-  push:
-    branches:
-      - actions/*
   pull_request:
     branches:
       - main
+      - dev
 
 jobs:
   postman-tests:
@@ -35,6 +33,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -51,7 +61,7 @@ jobs:
 
       - name: Start PHP server
         run: php -S 127.0.0.1:8080 -t public > php_server.log 2>&1 &
-        working-directory: ./ # Ensure this is the correct path to your public folder
+        working-directory: ./ # Path to the public folder from the project root
 
       - name: Install Newman
         run: npm install -g newman
