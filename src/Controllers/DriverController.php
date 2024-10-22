@@ -1,14 +1,18 @@
 <?php
 
+/** @noinspection PhpMultipleClassDeclarationsInspection */
+
 declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Interfaces\DriverControllerInterface;
 use App\Repositories\DriverRepository;
+use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class DriverController
+class DriverController implements DriverControllerInterface
 {
     protected DriverRepository $driverRepository;
 
@@ -21,11 +25,10 @@ class DriverController
     // Fetch all drivers
 
     /**
-     * @param Request $request
      * @param Response $response
      * @return Response
      */
-    public function getAllDrivers(Request $request, Response $response): Response
+    public function getAllDrivers(Response $response): Response
     {
         $drivers = $this->driverRepository->getAllDrivers();
         $response->getBody()->write($drivers->toJson());
@@ -35,16 +38,13 @@ class DriverController
     // Fetch a driver by ID
 
     /**
-     * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function getDriverById(Request $request, Response $response, array $args): Response
+    public function getDriverById(Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
 
         // Send the ID to the repository to fetch the driver from the database
         $driver = $this->driverRepository->getDriverById($id);
@@ -65,7 +65,7 @@ class DriverController
      * @param Request $request
      * @param Response $response
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function createDriver(Request $request, Response $response): Response
     {
@@ -100,14 +100,12 @@ class DriverController
     /**
      * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function updateDriver(Request $request, Response $response, array $args): Response
+    public function updateDriver(Request $request, Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
 
         // getParsedBody can return array|object|null based on the Content-Type header
         // Since the content type is application/json, it will return an array OR an object
@@ -143,17 +141,13 @@ class DriverController
     }
 
     /**
-     * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function deleteDriver(Request $request, Response $response, array $args): Response
+    public function deleteDriver(Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
-
         // Send the ID to the repository to delete the team from the database
         $deleted = $this->driverRepository->deleteDriver($id);
 

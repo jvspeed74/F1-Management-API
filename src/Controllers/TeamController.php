@@ -1,14 +1,18 @@
 <?php
 
+/** @noinspection PhpMultipleClassDeclarationsInspection */
+
 declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Interfaces\TeamControllerInterface;
 use App\Repositories\TeamRepository;
+use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class TeamController
+class TeamController implements TeamControllerInterface
 {
     protected TeamRepository $teamRepository;
 
@@ -21,11 +25,10 @@ class TeamController
     // Fetch all teams
 
     /**
-     * @param Request $request
      * @param Response $response
      * @return Response
      */
-    public function getAllTeams(Request $request, Response $response): Response
+    public function getAllTeams(Response $response): Response
     {
         $teams = $this->teamRepository->getAllTeams();
         $response->getBody()->write($teams->toJson());
@@ -35,17 +38,13 @@ class TeamController
     // Fetch a team by ID
 
     /**
-     * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function getTeamById(Request $request, Response $response, array $args): Response
+    public function getTeamById(Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
-
         // Send the ID to the repository to fetch the team from the database
         $team = $this->teamRepository->getTeamById($id);
 
@@ -65,7 +64,7 @@ class TeamController
      * @param Request $request
      * @param Response $response
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function createTeam(Request $request, Response $response): Response
     {
@@ -100,15 +99,12 @@ class TeamController
     /**
      * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function updateTeam(Request $request, Response $response, array $args): Response
+    public function updateTeam(Request $request, Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
-
         // getParsedBody can return array|object|null based on the Content-Type header
         // Since the content type is application/json, it will return an array OR an object
         // We need to handle both cases by converting the object to an array
@@ -143,16 +139,13 @@ class TeamController
     }
 
     /**
-     * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function deleteTeam(Request $request, Response $response, array $args): Response
+    public function deleteTeam(Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
 
         // Send the ID to the repository to delete the team from the database
         $deleted = $this->teamRepository->deleteTeam($id);
