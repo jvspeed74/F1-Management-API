@@ -1,7 +1,12 @@
 name: Continuous Integration
 
 on:
+  pull_request:
+    branches:
+      - main
+      - dev
   push:
+
 permissions:
   contents: read
 
@@ -52,6 +57,7 @@ jobs:
     name: "Test"
     runs-on: ubuntu-latest
     needs: build
+    if: ${{ github.event_name == 'pull_request' }}
 
     services:
       mariadb:
