@@ -109,6 +109,15 @@ jobs:
         run: php -S 127.0.0.1:8080 -t public > php_server.log 2>&1 &
         working-directory: ./ # Path to the public folder from the project root
 
+      - name: Cache node_modules for Newman
+        id: node-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install Newman
         run: npm install -g newman
 
