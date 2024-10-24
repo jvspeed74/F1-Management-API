@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Interfaces\CarRepositoryInterface;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Collection;
 
-class CarRepository
+class CarRepository implements CarRepositoryInterface
 {
     protected Car $model;
 

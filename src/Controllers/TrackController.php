@@ -1,14 +1,18 @@
 <?php
 
+/** @noinspection PhpMultipleClassDeclarationsInspection */
+
 declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Interfaces\TrackControllerInterface;
 use App\Repositories\TrackRepository;
+use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class TrackController
+class TrackController implements TrackControllerInterface
 {
     protected TrackRepository $trackRepository;
 
@@ -21,11 +25,10 @@ class TrackController
     // Fetch all tracks
 
     /**
-     * @param Request $request
      * @param Response $response
      * @return Response
      */
-    public function getAllTracks(Request $request, Response $response): Response
+    public function getAllTracks(Response $response): Response
     {
         $tracks = $this->trackRepository->getAllTracks();
         $response->getBody()->write($tracks->toJson());
@@ -35,17 +38,13 @@ class TrackController
     // Fetch a track by ID
 
     /**
-     * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function getTrackById(Request $request, Response $response, array $args): Response
+    public function getTrackById(Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
-
         // Send the ID to the repository to fetch the track from the database
         $track = $this->trackRepository->getTrackById($id);
 
@@ -65,7 +64,7 @@ class TrackController
      * @param Request $request
      * @param Response $response
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function createTrack(Request $request, Response $response): Response
     {
@@ -100,15 +99,12 @@ class TrackController
     /**
      * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function updateTrack(Request $request, Response $response, array $args): Response
+    public function updateTrack(Request $request, Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
-
         // getParsedBody can return array|object|null based on the Content-Type header
         // Since the content type is application/json, it will return an array OR an object
         // We need to handle both cases by converting the object to an array
@@ -143,17 +139,13 @@ class TrackController
     }
 
     /**
-     * @param Request $request
      * @param Response $response
-     * @param string[] $args
+     * @param int $id
      * @return Response
-     * @throws \JsonException
+     * @throws JsonException
      */
-    public function deleteTrack(Request $request, Response $response, array $args): Response
+    public function deleteTrack(Response $response, int $id): Response
     {
-        // Extract the ID from the request arguments
-        $id = (int) $args['id'];
-
         // Send the ID to the repository to delete the track from the database
         $deleted = $this->trackRepository->deleteTrack($id);
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2024 at 01:37 AM
+-- Generation Time: Oct 24, 2024 at 02:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -320,7 +320,7 @@ INSERT INTO `drivers` (`id`, `first_name`, `last_name`, `team_id`, `nationality_
 CREATE TABLE `events` (
   `id` smallint(5) UNSIGNED NOT NULL,
   `title` varchar(100) NOT NULL,
-  `scheduled_date` timestamp NULL DEFAULT NULL,
+  `scheduled_date` date DEFAULT NULL,
   `track_id` smallint(5) UNSIGNED DEFAULT NULL,
   `status` enum('Planned','Ongoing','Completed','Cancelled') NOT NULL DEFAULT 'Planned'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -329,22 +329,51 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `title`, `scheduled_date`, `track_id`, `status`) VALUES
-(1, 'Formula 1 Grand Prix de Monaco 2024', '2024-05-26 18:00:00', 1, 'Completed'),
-(2, 'Formula 1 Aramco British Grand Prix 2024', '2024-07-07 18:00:00', 2, 'Completed'),
-(3, 'Formula 1 Pirelli Gran Premio D\'Italia 2024', '2024-09-08 18:00:00', 3, 'Completed'),
-(4, 'Formula 1 Rolex Belgian Grand Prix 2024', '2024-08-25 18:00:00', 4, 'Completed'),
-(5, 'Formula 1 Honda Japanese Grand Prix 2024', '2024-10-13 18:00:00', 5, 'Completed'),
-(6, 'Formula 1 Pirelli Grand Prix du Canada 2024', '2024-06-09 18:00:00', 6, 'Completed'),
-(7, 'Formula 1 Singapore Airlines Singapore Grand Prix 2024', '2024-09-22 18:00:00', 7, 'Completed'),
-(8, 'Formula 1 Heineken Grande Prêmio de São Paulo 2024', '2024-11-17 19:00:00', 8, 'Planned'),
-(9, 'Formula 1 Lenovo United States Grand Prix 2024', '2024-10-20 18:00:00', 9, 'Planned'),
-(10, 'Formula 1 Etihad Airways Abu Dhabi Grand Prix 2024', '2024-12-01 19:00:00', 10, 'Planned'),
-(11, 'Formula 1 Rolex Australian Grand Prix 2024', '2024-03-17 18:00:00', 11, 'Completed'),
-(12, 'Formula 1 STC Saudi Arabian Grand Prix 2024', '2024-03-31 18:00:00', 12, 'Completed'),
-(13, 'Formula 1 Rolex Großer Preis von Österreich 2024', '2024-07-14 18:00:00', 13, 'Completed'),
-(14, 'Formula 1 Gulf Air Bahrain Grand Prix 2024', '2024-03-03 19:00:00', 14, 'Completed'),
-(15, 'Formula 1 Qatar Airways Hungarian Grand Prix 2024', '2024-08-04 18:00:00', 15, 'Completed');
+INSERT INTO `events` (`id`, `title`, `scheduled_date`, `track_id`, `status`) VALUES (1,
+                                                                                     'Formula 1 Grand Prix de Monaco 2024',
+                                                                                     '2024-05-26', 1, 'Completed'),
+                                                                                    (2,
+                                                                                     'Formula 1 Aramco British Grand Prix 2024',
+                                                                                     '2024-07-07', 2, 'Completed'),
+                                                                                    (3,
+                                                                                     'Formula 1 Pirelli Gran Premio D\'Italia 2024',
+                                                                                     '2024-09-08', 3, 'Completed'),
+                                                                                    (4,
+                                                                                     'Formula 1 Rolex Belgian Grand Prix 2024',
+                                                                                     '2024-08-25', 4, 'Completed'),
+                                                                                    (5,
+                                                                                     'Formula 1 Honda Japanese Grand Prix 2024',
+                                                                                     '2024-10-13', 5, 'Completed'),
+                                                                                    (6,
+                                                                                     'Formula 1 Pirelli Grand Prix du Canada 2024',
+                                                                                     '2024-06-09', 6, 'Completed'),
+                                                                                    (7,
+                                                                                     'Formula 1 Singapore Airlines Singapore Grand Prix 2024',
+                                                                                     '2024-09-22', 7, 'Completed'),
+                                                                                    (8,
+                                                                                     'Formula 1 Heineken Grande Prêmio de São Paulo 2024',
+                                                                                     '2024-11-17', 8, 'Planned'),
+                                                                                    (9,
+                                                                                     'Formula 1 Lenovo United States Grand Prix 2024',
+                                                                                     '2024-10-20', 9, 'Planned'),
+                                                                                    (10,
+                                                                                     'Formula 1 Etihad Airways Abu Dhabi Grand Prix 2024',
+                                                                                     '2024-12-01', 10, 'Planned'),
+                                                                                    (11,
+                                                                                     'Formula 1 Rolex Australian Grand Prix 2024',
+                                                                                     '2024-03-17', 11, 'Completed'),
+                                                                                    (12,
+                                                                                     'Formula 1 STC Saudi Arabian Grand Prix 2024',
+                                                                                     '2024-03-31', 12, 'Completed'),
+                                                                                    (13,
+                                                                                     'Formula 1 Rolex Großer Preis von Österreich 2024',
+                                                                                     '2024-07-14', 13, 'Completed'),
+                                                                                    (14,
+                                                                                     'Formula 1 Gulf Air Bahrain Grand Prix 2024',
+                                                                                     '2024-03-03', 14, 'Completed'),
+                                                                                    (15,
+                                                                                     'Formula 1 Qatar Airways Hungarian Grand Prix 2024',
+                                                                                     '2024-08-04', 15, 'Completed');
 
 -- --------------------------------------------------------
 
