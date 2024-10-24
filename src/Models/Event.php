@@ -22,6 +22,13 @@ class Event extends Model
     protected $fillable = ['title', 'scheduled_date', 'track_id', 'status'];
 
     /**
+     * @var string[]
+     */
+    protected $casts = [
+        'scheduled_date' => 'date:Y-m-d',
+    ];
+
+    /**
      * @return BelongsTo<Track, $this>
      */
     public function track(): BelongsTo
