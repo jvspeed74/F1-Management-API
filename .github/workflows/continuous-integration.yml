@@ -6,13 +6,11 @@ on:
       - main
       - dev
   push:
+    branches-ignore:
+      - '**'
 
 permissions:
   contents: read
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   build:
