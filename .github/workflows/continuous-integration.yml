@@ -2,10 +2,11 @@ name: Continuous Integration
 
 on:
   pull_request:
+    branches:
+      - main
+      - dev
   push:
-    branches-ignore:
-      - docs
-      - docs/**
+
 permissions:
   contents: read
 
@@ -51,3 +52,82 @@ jobs:
 
     - name: Run PHPUnit tests with coverage
       run: phpunit tests --coverage-text
+
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ github.event_name == 'pull_request' }}
+
+    services:
+      mariadb:
+        image: mariadb:latest
+        env:
+          MARIADB_ALLOW_EMPTY_PASSWORD: "yes"
+          MARIADB_DATABASE: f1_db
+          MARIADB_USER: root
+          MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "yes"
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        ports:
+          - 3306:3306
+        volumes:
+          - ${{ github.workspace }}:/docker-entrypoint-initdb.d
+        # The volumes line will automatically import any .sql files from this directory into the MariaDB container
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Restore Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install PHP with extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mysqli, pdo_mysql
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Import f1_db.sql into MariaDB
+        run: |
+          echo "Importing f1_db.sql..."
+          mysql -h 127.0.0.1 -u root < f1_db.sql
+
+      - name: Start PHP server
+        run: php -S 127.0.0.1:8080 -t public > php_server.log 2>&1 &
+        working-directory: ./ # Path to the public folder from the project root
+
+      - name: Cache node_modules for Newman
+        id: node-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Postman tests
+        run: newman run "./postman/collections/F1 Management API.json" --env-var baseUrl=http://127.0.0.1:8080
+
+      - name: Display PHP server logs
+        if: always()
+        run: cat php_server.log
+
+      - name: Shutdown PHP server
+        if: always()
+        run: killall php
