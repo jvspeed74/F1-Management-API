@@ -10,48 +10,52 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id}}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: "Build"
     runs-on: ubuntu-24.04
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v4
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
-    - name: Install dependencies with Composer
-      run: composer install --prefer-dist --no-progress
+      - name: Install dependencies with Composer
+        run: composer install --prefer-dist --no-progress
 
-    - name: Install PHP with extensions
-      uses: shivammathur/setup-php@2.31.1
-      with:
-        php-version: '8.2'
-        tools: phpstan, cs2pr, php-cs-fixer, phpunit
-        coverage: xdebug
+      - name: Install PHP with extensions
+        uses: shivammathur/setup-php@2.31.1
+        with:
+          php-version: '8.2'
+          tools: phpstan, cs2pr, php-cs-fixer, phpunit
+          coverage: xdebug
 
-    - name: Code Quality (PHPStan)
-      run: phpstan analyse
+      - name: Code Quality (PHPStan)
+        run: phpstan analyse
 
-    - name: Code Standards (PER-CS2.0)
-      run: php-cs-fixer check src --rules=@PER-CS2.0 --format=checkstyle | cs2pr
+      - name: Code Standards (PER-CS2.0)
+        run: php-cs-fixer check src --rules=@PER-CS2.0 --format=checkstyle | cs2pr
 
-    - name: Setup problem matchers for PHPUnit
-      run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-    - name: Run PHPUnit tests with coverage
-      run: phpunit tests --coverage-text
+      - name: Run PHPUnit tests with coverage
+        run: phpunit tests --coverage-text
 
   test:
     name: "Test"
