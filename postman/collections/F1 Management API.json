@@ -2374,7 +2374,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"New Event\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
+							"raw": "{\n  \"title\": \"New Event\",\n  \"scheduled_date\": \"2024-05-26\",\n  \"track_id\": 1,\n  \"status\": \"Planned\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -2797,7 +2797,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"title\": \"Updated Event\",\n  \"scheduled_date\": \"2024-05-26T18:00:00Z\",\n  \"track_id\": 2,\n  \"status\": \"Cancelled\"\n}",
+							"raw": "{\n  \"title\": \"Updated Event\",\n  \"scheduled_date\": \"2024-05-26\",\n  \"track_id\": 2,\n  \"status\": \"Cancelled\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
