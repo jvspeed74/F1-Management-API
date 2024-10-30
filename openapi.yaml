@@ -8,22 +8,761 @@ servers:
     description: Local server
 paths:
   /cars:
-    $ref: './paths/cars.yaml'
+    get:
+      summary: Get a list of all cars
+      tags:
+        - Cars
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/car'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      summary: Create a new car
+      tags:
+        - Cars
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/car'
+              required:
+                - team_id
+                - model
+                - year
+      responses:
+        '201':
+          description: Successfully created a new car
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/car'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
   /cars/{id}:
-    $ref: './paths/cars/{id}.yaml'
+    get:
+      summary: Get car by ID
+      description: This endpoint returns a car record matching the provided ID
+      tags:
+        - Cars
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/car'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    patch:
+      summary: Update fields for a car
+      description: This endpoint updates a car record in the system.
+      tags:
+        - Cars
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/car'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/car'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a car
+      description: This endpoint deletes a car record from the system.
+      tags:
+        - Cars
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Car successfully deleted
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
   /drivers:
-    $ref: './paths/drivers.yaml'
+    get:
+      summary: Get a list of all drivers
+      description: This endpoint allows you to get a list of all drivers in the system.
+      tags:
+        - Drivers
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/driver'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      summary: Create a new driver
+      description: This endpoint allows you to create a new driver in the system.
+      tags:
+        - Drivers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/driver'
+              required:
+                - first_name
+                - last_name
+                - birthday
+                - driver_number
+      responses:
+        '201':
+          description: Successfully created a new driver
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/driver'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
   /drivers/{id}:
-    $ref: './paths/drivers/{id}.yaml'
+    get:
+      summary: Get driver by ID
+      tags:
+        - Drivers
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/driver'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    patch:
+      summary: Update fields for a driver
+      tags:
+        - Drivers
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/driver'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/driver'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a driver
+      tags:
+        - Drivers
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Driver successfully deleted
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
   /events:
-    $ref: './paths/events.yaml'
+    get:
+      summary: Get a list of all events
+      description: This endpoint allows you to get a list of all events in the system.
+      tags:
+        - Events
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/event'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      summary: Create a new event
+      description: This endpoint allows you to create a new event in the system. You need to provide the name, date, track_id, and event_type. The `id` field is read-only and will be generated by the system.
+      tags:
+        - Events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/event'
+              required:
+                - title
+      responses:
+        '201':
+          description: Successfully created a new event
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
   /events/{id}:
-    $ref: './paths/events/{id}.yaml'
+    get:
+      summary: Get an event by ID
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    patch:
+      summary: Update fields for an event
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/event'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete an event
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Event successfully deleted
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
   /teams:
-    $ref: './paths/teams.yaml'
+    get:
+      summary: Get a list of all teams
+      description: This endpoint allows you to get a list of all teams in the system.
+      tags:
+        - Teams
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/team'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      summary: Create a new Team
+      description: This endpoint allows you to create a new team in the system. You need to provide the official name, short name, headquarters, and team principal. The `id` field is read-only and will be generated by the system.
+      tags:
+        - Teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/team'
+              required:
+                - official_name
+                - short_name
+                - headquarters
+                - team_principal
+      responses:
+        '201':
+          description: Successfully created a new team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/team'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
   /teams/{id}:
-    $ref: './paths/teams/{id}.yaml'
+    get:
+      summary: Get team by ID
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/team'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    patch:
+      summary: Update fields for a team
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/team'
+      responses:
+        '200':
+          description: Team successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/team'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a team
+      tags:
+        - Teams
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Team successfully deleted
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
   /tracks:
-    $ref: './paths/tracks.yaml'
+    get:
+      summary: Get a list of all tracks
+      description: This endpoint allows you to get a list of all tracks in the system.
+      tags:
+        - Tracks
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/track'
+        '500':
+          $ref: '#/components/responses/500'
+    post:
+      summary: Create a new track
+      description: This endpoint allows you to create a new track in the system. You need to provide the name, length in kilometers, and continent. The `id` field is read-only and will be generated by the system.
+      tags:
+        - Tracks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/track'
+              required:
+                - name
+                - length_km
+                - continent
+      responses:
+        '201':
+          description: Successfully created a new track
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/track'
+        '400':
+          $ref: '#/components/responses/400'
+        '500':
+          $ref: '#/components/responses/500'
   /tracks/{id}:
-    $ref: './paths/tracks/{id}.yaml'
+    get:
+      summary: Get a track by ID
+      tags:
+        - Tracks
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/track'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    patch:
+      summary: Update fields for a track
+      tags:
+        - Tracks
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/track'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/track'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+    delete:
+      summary: Delete a track
+      tags:
+        - Tracks
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '204':
+          description: Track successfully deleted
+        '404':
+          $ref: '#/components/responses/404'
+        '500':
+          $ref: '#/components/responses/500'
+components:
+  schemas:
+    car:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          description: Unique identifier for the car
+          readOnly: true
+          example: 1
+        team_id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          nullable: true
+          description: Team ID associated with the car (nullable)
+          example: 1
+        model:
+          type: string
+          maxLength: 100
+          description: Car model name
+          example: Ferrari 488 GT3
+        year:
+          type: string
+          format: year
+          pattern: ^\d{4}$
+          description: Year of the car model
+          example: '2018'
+    error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Error Message
+    driver:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          description: Unique identifier for the driver
+          readOnly: true
+          example: 1
+        first_name:
+          type: string
+          maxLength: 50
+          description: Driver's first name
+          example: Lewis
+        last_name:
+          type: string
+          maxLength: 50
+          description: Driver's last name
+          example: Hamilton
+        team_id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          nullable: true
+          description: Team ID the driver is associated with (nullable)
+          example: 1
+        nationality_id:
+          type: integer
+          format: int32
+          minimum: 0
+          nullable: true
+          description: Nationality ID of the driver (nullable)
+          example: 44
+        birthday:
+          type: string
+          format: date
+          description: Driver's date of birth
+          example: '1985-01-07'
+        driver_number:
+          type: integer
+          format: int32
+          description: Driver's racing number
+          example: 44
+        career_points:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 99999999.99
+          description: Total career points of the driver
+          default: 0
+          example: 4135
+        career_wins:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          description: Total number of career wins
+          default: 0
+          example: 103
+        career_podiums:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          description: Total number of career podiums
+          default: 0
+          example: 182
+        championships:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          description: Number of championships won by the driver
+          default: 0
+          example: 7
+    event:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          example: 1
+          readOnly: true
+        title:
+          type: string
+          nullable: false
+          maxLength: 100
+          example: Formula 1 Grand Prix de Monaco 2024
+        scheduled_date:
+          type: string
+          format: date-time
+          nullable: true
+          default: null
+          example: '2024-05-26T18:00:00Z'
+        track_id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          example: 1
+        status:
+          type: string
+          enum:
+            - Planned
+            - Ongoing
+            - Completed
+            - Cancelled
+          example: Planned
+          default: Planned
+    team:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          readOnly: true
+          example: 1
+        official_name:
+          type: string
+          nullable: false
+          maxLength: 100
+          example: Oracle Red Bull Racing
+        short_name:
+          type: string
+          nullable: false
+          maxLength: 50
+          example: Red Bull
+        headquarters:
+          type: string
+          nullable: false
+          maxLength: 100
+          example: Milton Keynes, United Kingdom
+        team_principal:
+          type: string
+          nullable: false
+          maxLength: 50
+          example: Christian Horner
+    track:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 65535
+          readOnly: true
+          example: 1
+        name:
+          type: string
+          nullable: false
+          maxLength: 100
+          example: Circuit de Monaco
+        length_km:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 999.99
+          nullable: false
+          example: 3.34
+        continent:
+          type: string
+          enum:
+            - Africa
+            - Asia
+            - Europe
+            - North America
+            - South America
+            - Australia
+            - Antarctica
+          nullable: false
+          example: Europe
+        country_id:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 255
+          nullable: true
+          example: 1
+        description:
+          type: string
+          nullable: false
+          maxLength: 255
+          default: ''
+          example: The Circuit de Monaco is a street circuit laid out on the city streets of Monte Carlo and La Condamine around the harbour of the principality of Monaco.
+  responses:
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+    '500':
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 0
+      description: Unique identifier for the resource
