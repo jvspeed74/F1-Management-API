@@ -40,7 +40,7 @@
     "phpstan/phpstan-mockery": "^1.1"
   },
   "scripts": {
-    "format": "vendor/bin/php-cs-fixer fix . --rules=@PER-CS2.0",
+    "format": "vendor/bin/php-cs-fixer fix",
     "analyze": "vendor/bin/phpstan analyze -c phpstan.neon",
     "start": [
       "Composer\\Config::disableProcessTimeout",
