@@ -22,7 +22,7 @@ jobs:
         uses: Legion2/swagger-ui-action@v1.3.0
         with:
           output: swagger-ui
-          spec-file: docs/openapi.json
+          spec-file: docs/openapi.yaml
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
