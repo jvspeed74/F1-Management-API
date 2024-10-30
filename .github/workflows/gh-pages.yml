@@ -18,11 +18,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Merge OpenAPI Files Together
+        uses: fluximus-prime/redocly-cli-github-action@v1
+        with:
+          args: 'bundle docs/openapi.yaml --output openapi.yaml'
+
       - name: Generate Swagger UI
         uses: Legion2/swagger-ui-action@v1.3.0
         with:
           output: swagger-ui
-          spec-file: docs/openapi.yaml
+          spec-file: openapi.yaml  # Point to the merged OpenAPI file location
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
