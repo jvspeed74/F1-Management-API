@@ -3,9 +3,9 @@ name: Swagger UI Deployment to GitHub Pages
 on:
   push:
     branches:
-      - 26-swagger-ui-generation-w-auto-deployment-to-github-pages
-#    paths:
-#      - 'docs/**'  # Only run workflow when changes are made in the docs folder
+      - main
+    paths:
+      - 'docs/**'  # Only run workflow when changes are made in the docs folder
   workflow_dispatch:
 
 jobs:
