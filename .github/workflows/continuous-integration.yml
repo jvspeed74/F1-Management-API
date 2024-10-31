@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install dependencies with Composer
-        run: composer install --prefer-dist --no-progress
+        run: composer install --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
 
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@2.31.1
@@ -47,13 +47,13 @@ jobs:
         run: phpstan analyse
 
       - name: Code Standards (PER-CS2.0)
-        run: php-cs-fixer check src --rules=@PER-CS2.0 --format=checkstyle | cs2pr
+        run: php-cs-fixer check --format=checkstyle | cs2pr
 
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-      - name: Run PHPUnit tests with coverage
-        run: phpunit tests --coverage-text
+      - name: Run PestPHP tests
+        run: vendor/bin/pest --ci
 
   test:
     name: "Test"
@@ -100,7 +100,7 @@ jobs:
           extensions: mysqli, pdo_mysql
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
 
       - name: Import f1_db.sql into MariaDB
         run: |
