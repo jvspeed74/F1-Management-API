@@ -33,6 +33,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
 
+      - name: Cache node_modules for Redocly CLI
+        id: node-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install/Restore Redocly CLI
+        run: npm i -g @redocly/cli@latest
+
       - name: Install dependencies with Composer
         run: composer install --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
 
@@ -44,10 +56,13 @@ jobs:
           coverage: xdebug
 
       - name: Code Quality (PHPStan)
-        run: phpstan analyse
+        run: phpstan analyze --error-format=checkstyle | cs2pr --colorize
 
       - name: Code Standards (PER-CS2.0)
-        run: php-cs-fixer check --format=checkstyle | cs2pr
+        run: php-cs-fixer check --format=checkstyle | cs2pr --colorize
+
+      - name: OpenAPI Standards
+        run: redocly lint docs/openapi.yaml --format=checkstyle | cs2pr --colorize
 
       - name: Setup problem matchers for PHPUnit
         run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
