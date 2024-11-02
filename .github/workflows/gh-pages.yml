@@ -1,0 +1,37 @@
+name: Swagger UI Deployment to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'  # Only run workflow when changes are made in the docs folder
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Merge OpenAPI Files Together
+        uses: fluximus-prime/redocly-cli-github-action@v1
+        with:
+          args: 'bundle docs/openapi.yaml --output openapi.yaml'
+
+      - name: Generate Swagger UI
+        uses: Legion2/swagger-ui-action@v1.3.0
+        with:
+          output: swagger-ui
+          spec-file: openapi.yaml  # Point to the merged OpenAPI file location
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: swagger-ui
