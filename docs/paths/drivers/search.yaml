@@ -1,0 +1,26 @@
+get:
+  summary: Search for drivers
+  tags:
+    - Drivers
+  parameters:
+    - name: q
+      in: query
+      required: true
+      schema:
+        type: string
+      description: The search query to find drivers by name.
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../components/schemas/driver.yaml'
+    '400':
+      $ref: '../../components/responses.yaml#/400'
+    '404':
+      $ref: '../../components/responses.yaml#/404'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
