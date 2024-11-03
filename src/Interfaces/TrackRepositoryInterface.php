@@ -10,9 +10,13 @@ use Illuminate\Database\Eloquent\Collection;
 interface TrackRepositoryInterface
 {
     /**
+     * @param int $page
+     * @param int $limit
+     * @param string $sortBy
+     * @param string $order
      * @return Collection<int, Track>
      */
-    public function getAllTracks(): Collection;
+    public function getAllTracks(int $page, int $limit, string $sortBy, string $order): Collection;
 
     /**
      * @param int $id

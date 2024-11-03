@@ -26,13 +26,45 @@ class TrackController implements TrackControllerInterface
 
     /**
      * @param Response $response
+     * @param Request $request
      * @return Response
      */
-    public function getAllTracks(Response $response): Response
+    public function getAllTracks(Request $request, Response $response): Response
     {
-        $tracks = $this->trackRepository->getAllTracks();
-        $response->getBody()->write($tracks->toJson());
-        return $response->withHeader('Content-Type', 'application/json');
+        $page = (int) $request->getQueryParam('page', 1);
+        $limit = (int) $request->getQueryParam('limit', 10);
+        $sortBy = $request->getQueryParam('sort_by', 'id');
+        $order = $request->getQueryParam('order', 'asc');
+
+        if ($page < 1) {
+            return $response->withStatus(400)->write('Invalid page number. Must be greater than 0.');
+        }
+
+        if ($limit < 1 || $limit > 100) {
+            return $response->withStatus(400)->write('Invalid limit. Must be between 1 and 100.');
+        }
+
+        if (!in_array($order, ['asc', 'desc'], true)) {
+            return $response->withStatus(400)->write('Invalid order. Must be "asc" or "desc".');
+        }
+
+        try {
+            $tracks = $this->trackRepository->getAllTracks($page, $limit, $sortBy, $order);
+
+            $totalCount = $this->trackRepository->getTotalCount();
+            $totalPages = ceil($totalCount / $limit);
+
+            $response->getBody()->write($tracks->toJson());
+
+            return $response
+                ->withHeader('Content-Type', 'application/json')
+                ->withHeader('X-Total-Count', (string) $totalCount)
+                ->withHeader('X-Total-Pages', (string) $totalPages)
+                ->withHeader('X-Current-Page', (string) $page)
+                ->withHeader('X-Items-Per-Page', (string) $limit);
+        } catch (\Exception $e) {
+            return $response->withStatus(500)->write('Internal Server Error: ' . $e->getMessage());
+        }
     }
 
     // Fetch a track by ID

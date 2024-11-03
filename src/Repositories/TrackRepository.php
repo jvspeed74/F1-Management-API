@@ -21,11 +21,33 @@ class TrackRepository implements TrackRepositoryInterface
     }
 
     /**
+     * @param int $page
+     * @param int $limit
+     * @param string $sortBy
+     * @param string $order
      * @return Collection<int, Track>
      */
-    public function getAllTracks(): Collection
+    public function getAllTracks(int $page, int $limit, string $sortBy, string $order): Collection
     {
-        return $this->model::all();  // Uses Eloquent's all() method on the injected model
+        $trackSortFields = [`id`, `name`, `length_km`, `continent`, `country_id`, `description`];
+        if (!in_array($sortBy, $trackSortFields, true)) {
+            throw new \InvalidArgumentException('Invalid sort field: ' . $sortBy);
+        }
+
+        if (!in_array($order, ['asc', 'desc'], true)) {
+            throw new \InvalidArgumentException('Invalid order: ' . $order);
+        }
+
+        return $this->model::orderBy($sortBy, $order)
+            ->paginate($limit, ['*'], 'page', $page);
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalCount(): int
+    {
+        return $this->model::count(); // Get total count of tracks
     }
 
     /**
