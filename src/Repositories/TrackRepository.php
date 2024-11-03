@@ -39,9 +39,9 @@ class TrackRepository implements TrackRepositoryInterface
             throw new \InvalidArgumentException('Invalid order: ' . $order);
         }
 
-        $trackModel = new \App\Models\Track();
-
-        return $trackModel->orderBy($sortBy, $order);
+        return $this->model::query()
+            ->orderBy($sortBy, $order)
+            ->paginate($limit, ['*'], 'page', $page);
     }
 
     /**
@@ -49,7 +49,7 @@ class TrackRepository implements TrackRepositoryInterface
      */
     public function getTotalCount(): int
     {
-        return $this->model->count();
+        return $this->model::query()->count();
     }
 
     /**

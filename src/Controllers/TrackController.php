@@ -31,7 +31,8 @@ class TrackController implements TrackControllerInterface
      */
     public function getAllTracks(Request $request, Response $response): Response
     {
-        $page = (int) $request->getQueryParam('page', 1);
+        $queryParams = $request->getQueryParams();
+        $page = (int) ($queryParams['page'] ?? 1);
         $queryParams = $request->getQueryParams();
         $limit = (int) ($queryParams['limit'] ?? 10);
         $queryParams = $request->getQueryParams();
