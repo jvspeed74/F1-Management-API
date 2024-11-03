@@ -32,20 +32,26 @@ class TrackController implements TrackControllerInterface
     public function getAllTracks(Request $request, Response $response): Response
     {
         $page = (int) $request->getQueryParam('page', 1);
-        $limit = (int) $request->getQueryParam('limit', 10);
-        $sortBy = $request->getQueryParam('sort_by', 'id');
-        $order = $request->getQueryParam('order', 'asc');
+        $queryParams = $request->getQueryParams();
+        $limit = (int) ($queryParams['limit'] ?? 10);
+        $queryParams = $request->getQueryParams();
+        $sortBy = $queryParams['sort_by'] ?? 'id';
+        $queryParams = $request->getQueryParams();
+        $order = $queryParams['order'] ?? 'asc';
 
         if ($page < 1) {
-            return $response->withStatus(400)->write('Invalid page number. Must be greater than 0.');
+            $response->getBody()->write('Invalid page number. Must be greater than 0.');
+            return $response->withStatus(400);
         }
 
         if ($limit < 1 || $limit > 100) {
-            return $response->withStatus(400)->write('Invalid limit. Must be between 1 and 100.');
+            $response->getBody()->write('Invalid limit. Must be between 1 and 100.');
+            return $response->withStatus(400);
         }
 
         if (!in_array($order, ['asc', 'desc'], true)) {
-            return $response->withStatus(400)->write('Invalid order. Must be "asc" or "desc".');
+            $response->getBody()->write('Invalid order. Must be "asc" or "desc".');
+            return $response->withStatus(400);
         }
 
         try {
@@ -63,7 +69,8 @@ class TrackController implements TrackControllerInterface
                 ->withHeader('X-Current-Page', (string) $page)
                 ->withHeader('X-Items-Per-Page', (string) $limit);
         } catch (\Exception $e) {
-            return $response->withStatus(500)->write('Internal Server Error: ' . $e->getMessage());
+            $response->getBody()->write('Internal Server Error: ' . $e->getMessage());
+            return $response->withStatus(500);
         }
     }
 

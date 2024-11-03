@@ -29,7 +29,8 @@ class TrackRepository implements TrackRepositoryInterface
      */
     public function getAllTracks(int $page, int $limit, string $sortBy, string $order): Collection
     {
-        $trackSortFields = [`id`, `name`, `length_km`, `continent`, `country_id`, `description`];
+        $trackSortFields = ['id', 'name', 'length_km', 'continent', 'country_id', 'description'];
+
         if (!in_array($sortBy, $trackSortFields, true)) {
             throw new \InvalidArgumentException('Invalid sort field: ' . $sortBy);
         }
@@ -38,8 +39,9 @@ class TrackRepository implements TrackRepositoryInterface
             throw new \InvalidArgumentException('Invalid order: ' . $order);
         }
 
-        return $this->model::orderBy($sortBy, $order)
-            ->paginate($limit, ['*'], 'page', $page);
+        $trackModel = new \App\Models\Track();
+
+        return $trackModel->orderBy($sortBy, $order);
     }
 
     /**
@@ -47,7 +49,7 @@ class TrackRepository implements TrackRepositoryInterface
      */
     public function getTotalCount(): int
     {
-        return $this->model::count(); // Get total count of tracks
+        return $this->model->count();
     }
 
     /**
