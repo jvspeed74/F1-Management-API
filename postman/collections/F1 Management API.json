@@ -3377,7 +3377,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/tracks?page=&sort_by=name&limit=3",
+							"raw": "{{baseUrl}}/tracks?page=1&sort_by=name&limit=3",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -3387,7 +3387,7 @@
 							"query": [
 								{
 									"key": "page",
-									"value": ""
+									"value": "1"
 								},
 								{
 									"key": "sort_by",
