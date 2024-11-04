@@ -28,65 +28,52 @@ class TrackController implements TrackControllerInterface
      * @param Response $response
      * @param Request $request
      * @return Response
+     * @throws JsonException
      */
     public function getAllTracks(Request $request, Response $response): Response
     {
         $queryParams = $request->getQueryParams();
         $page = (int) ($queryParams['page'] ?? 1);
-        $queryParams = $request->getQueryParams();
         $limit = (int) ($queryParams['limit'] ?? 10);
-        $queryParams = $request->getQueryParams();
         $sortBy = $queryParams['sort_by'] ?? 'id';
-        $queryParams = $request->getQueryParams();
         $order = $queryParams['order'] ?? 'asc';
 
         if ($page < 1) {
-            $response->getBody()->write('Invalid page number. Must be greater than 0.');
-            return $response->withStatus(400);
+            $response->getBody()->write(json_encode(['message' => 'Invalid page number. Must be greater than 0.'], JSON_THROW_ON_ERROR));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
         }
 
         if ($limit < 1 || $limit > 100) {
-            $response->getBody()->write('Invalid limit. Must be between 1 and 100.');
-            return $response->withStatus(400);
+            $response->getBody()->write(json_encode(['message' => 'Invalid limit. Must be between 1 and 100.'], JSON_THROW_ON_ERROR));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+
+        $trackSortFields = ['id', 'name', 'length_km', 'continent', 'country_id', 'description'];
+
+        if (!in_array($sortBy, $trackSortFields, true)) {
+            $response->getBody()->write(json_encode(['message' => 'Invalid sort field: ' . $sortBy], JSON_THROW_ON_ERROR));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
         }
 
         if (!in_array($order, ['asc', 'desc'], true)) {
-            $response->getBody()->write('Invalid order. Must be "asc" or "desc".');
-            return $response->withStatus(400);
+            $response->getBody()->write(json_encode(['message' => 'Invalid order. Must be "asc" or "desc".'], JSON_THROW_ON_ERROR));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
         }
 
-        try {
-            $tracks = $this->trackRepository->getAllTracks($page, $limit, $sortBy, $order);
+        $tracks = $this->trackRepository->getAllTracks($page, $limit, $sortBy, $order);
 
-            $totalCount = $this->trackRepository->getTotalCount();
-            $totalPages = ceil($totalCount / $limit);
+        $totalCount = $this->trackRepository->getTotalCount();
+        $totalPages = ceil($totalCount / $limit);
 
-            $responseData = [
-                'data' => $tracks->items(),
-                'total' => $totalCount,
-                'totalPages' => $totalPages,
-                'currentPage' => $tracks->currentPage(),
-            ];
+        $response->getBody()->write(json_encode($tracks->items(), JSON_THROW_ON_ERROR));
 
-            $jsonResponse = json_encode($responseData);
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withHeader('X-Total-Count', (string) $totalCount)
+            ->withHeader('X-Total-Pages', (string) $totalPages)
+            ->withHeader('X-Current-Page', (string) $page)
+            ->withHeader('X-Items-Per-Page', (string) $limit);
 
-            if ($jsonResponse === false) {
-                $response->getBody()->write('Internal Server Error: ' . json_last_error_msg());
-                return $response->withStatus(500);
-            }
-
-            $response->getBody()->write($jsonResponse);
-
-            return $response
-                ->withHeader('Content-Type', 'application/json')
-                ->withHeader('X-Total-Count', (string) $totalCount)
-                ->withHeader('X-Total-Pages', (string) $totalPages)
-                ->withHeader('X-Current-Page', (string) $page)
-                ->withHeader('X-Items-Per-Page', (string) $limit);
-        } catch (\Exception $e) {
-            $response->getBody()->write('Internal Server Error: ' . $e->getMessage());
-            return $response->withStatus(500);
-        }
     }
 
     // Fetch a track by ID
