@@ -7,6 +7,7 @@ namespace App\Repositories;
 use App\Interfaces\TrackRepositoryInterface;
 use App\Models\Track;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class TrackRepository implements TrackRepositoryInterface
 {
@@ -21,11 +22,35 @@ class TrackRepository implements TrackRepositoryInterface
     }
 
     /**
-     * @return Collection<int, Track>
+     * @param int $page
+     * @param int $limit
+     * @param string $sortBy
+     * @param string $order
+     * @return LengthAwarePaginator
      */
-    public function getAllTracks(): Collection
+    public function getAllTracks(int $page, int $limit, string $sortBy, string $order): LengthAwarePaginator
     {
-        return $this->model::all();  // Uses Eloquent's all() method on the injected model
+        $trackSortFields = ['id', 'name', 'length_km', 'continent', 'country_id', 'description'];
+
+        if (!in_array($sortBy, $trackSortFields, true)) {
+            throw new \InvalidArgumentException('Invalid sort field: ' . $sortBy);
+        }
+
+        if (!in_array($order, ['asc', 'desc'], true)) {
+            throw new \InvalidArgumentException('Invalid order: ' . $order);
+        }
+
+        return $this->model::query()
+            ->orderBy($sortBy, $order)
+            ->paginate($limit, ['*'], 'page', $page);
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalCount(): int
+    {
+        return $this->model::query()->count();
     }
 
     /**

@@ -6,13 +6,18 @@ namespace App\Interfaces;
 
 use App\Models\Track;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface TrackRepositoryInterface
 {
     /**
-     * @return Collection<int, Track>
+     * @param int $page
+     * @param int $limit
+     * @param string $sortBy
+     * @param string $order
+     * @return LengthAwarePaginator
      */
-    public function getAllTracks(): Collection;
+    public function getAllTracks(int $page, int $limit, string $sortBy, string $order): LengthAwarePaginator;
 
     /**
      * @param int $id

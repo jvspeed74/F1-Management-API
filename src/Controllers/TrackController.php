@@ -26,13 +26,67 @@ class TrackController implements TrackControllerInterface
 
     /**
      * @param Response $response
+     * @param Request $request
      * @return Response
      */
-    public function getAllTracks(Response $response): Response
+    public function getAllTracks(Request $request, Response $response): Response
     {
-        $tracks = $this->trackRepository->getAllTracks();
-        $response->getBody()->write($tracks->toJson());
-        return $response->withHeader('Content-Type', 'application/json');
+        $queryParams = $request->getQueryParams();
+        $page = (int) ($queryParams['page'] ?? 1);
+        $queryParams = $request->getQueryParams();
+        $limit = (int) ($queryParams['limit'] ?? 10);
+        $queryParams = $request->getQueryParams();
+        $sortBy = $queryParams['sort_by'] ?? 'id';
+        $queryParams = $request->getQueryParams();
+        $order = $queryParams['order'] ?? 'asc';
+
+        if ($page < 1) {
+            $response->getBody()->write('Invalid page number. Must be greater than 0.');
+            return $response->withStatus(400);
+        }
+
+        if ($limit < 1 || $limit > 100) {
+            $response->getBody()->write('Invalid limit. Must be between 1 and 100.');
+            return $response->withStatus(400);
+        }
+
+        if (!in_array($order, ['asc', 'desc'], true)) {
+            $response->getBody()->write('Invalid order. Must be "asc" or "desc".');
+            return $response->withStatus(400);
+        }
+
+        try {
+            $tracks = $this->trackRepository->getAllTracks($page, $limit, $sortBy, $order);
+
+            $totalCount = $this->trackRepository->getTotalCount();
+            $totalPages = ceil($totalCount / $limit);
+
+            $responseData = [
+                'data' => $tracks->items(),
+                'total' => $totalCount,
+                'totalPages' => $totalPages,
+                'currentPage' => $tracks->currentPage(),
+            ];
+
+            $jsonResponse = json_encode($responseData);
+
+            if ($jsonResponse === false) {
+                $response->getBody()->write('Internal Server Error: ' . json_last_error_msg());
+                return $response->withStatus(500);
+            }
+
+            $response->getBody()->write($jsonResponse);
+
+            return $response
+                ->withHeader('Content-Type', 'application/json')
+                ->withHeader('X-Total-Count', (string) $totalCount)
+                ->withHeader('X-Total-Pages', (string) $totalPages)
+                ->withHeader('X-Current-Page', (string) $page)
+                ->withHeader('X-Items-Per-Page', (string) $limit);
+        } catch (\Exception $e) {
+            $response->getBody()->write('Internal Server Error: ' . $e->getMessage());
+            return $response->withStatus(500);
+        }
     }
 
     // Fetch a track by ID
