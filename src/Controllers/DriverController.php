@@ -161,4 +161,23 @@ class DriverController implements DriverControllerInterface
         // Return a 204 response (no content) if the team was successfully deleted
         return $response->withStatus(204)->withHeader('Content-Type', 'application/json');
     }
+
+    /**
+     * @throws JsonException
+     */
+    public function searchDrivers(Request $request, Response $response): Response
+    {
+        $q = $request->getQueryParams()['q'] ?? '';
+
+        if (!$q) {
+            $response = $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+            $response->getBody()->write(json_encode(["message" => "Missing search query"], JSON_THROW_ON_ERROR));
+            return $response;
+        }
+
+        $drivers = $this->driverRepository->searchDrivers($q);
+
+        $response->getBody()->write($drivers->toJson());
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 }

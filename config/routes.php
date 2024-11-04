@@ -55,6 +55,7 @@ return function (App $app): void {
         $group->post('', [DriverController::class, 'createDriver']);
         $group->patch('/{id:\d+}', [DriverController::class, 'updateDriver']);
         $group->delete('/{id:\d+}', [DriverController::class, 'deleteDriver']);
+        $group->get('/search', [DriverController::class, 'searchDrivers']);
     });
 
     // Car routes
