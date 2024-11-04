@@ -41,6 +41,11 @@ docs/paths/drivers/{id}.yaml:
     - '#/get'
     - '#/delete'
     - '#/patch'
+docs/paths/drivers/search.yaml:
+  operation-operationId:
+    - '#/get/operationId'
+  security-defined:
+    - '#/get'
 docs/paths/events.yaml:
   operation-operationId:
     - '#/get/operationId'
