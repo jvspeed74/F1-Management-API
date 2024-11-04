@@ -3349,6 +3349,14 @@
 									"        pm.expect(track.country_id).to.be.a('number').above(0);\r",
 									"    });\r",
 									"});\r",
+									"\r",
+									"pm.test(\"Check response headers\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json\");\r",
+									"    pm.response.to.have.header(\"X-Total-Count\");\r",
+									"    pm.response.to.have.header(\"X-Total-Pages\");\r",
+									"    pm.response.to.have.header(\"X-Current-Page\");\r",
+									"    pm.response.to.have.header(\"X-Items-Per-Page\");\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -3369,12 +3377,26 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/tracks",
+							"raw": "{{baseUrl}}/tracks?page=1&sort_by=name&limit=3",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"tracks"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "sort_by",
+									"value": "name"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
 							]
 						},
 						"description": "This endpoint allows you to get a list of all tracks in the system."
