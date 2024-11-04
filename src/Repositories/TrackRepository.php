@@ -7,6 +7,7 @@ namespace App\Repositories;
 use App\Interfaces\TrackRepositoryInterface;
 use App\Models\Track;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class TrackRepository implements TrackRepositoryInterface
 {
@@ -25,9 +26,9 @@ class TrackRepository implements TrackRepositoryInterface
      * @param int $limit
      * @param string $sortBy
      * @param string $order
-     * @return Collection<int, Track>
+     * @return LengthAwarePaginator<int, Track>
      */
-    public function getAllTracks(int $page, int $limit, string $sortBy, string $order): Collection
+    public function getAllTracks(int $page, int $limit, string $sortBy, string $order): LengthAwarePaginator
     {
         $trackSortFields = ['id', 'name', 'length_km', 'continent', 'country_id', 'description'];
 
