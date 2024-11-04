@@ -28,6 +28,7 @@ files[] = {"path":"docs/openapi.yaml","metaData":{}}
 files[] = {"path":"docs/paths/cars.yaml","metaData":{}}
 files[] = {"path":"docs/paths/cars/{id}.yaml","metaData":{}}
 files[] = {"path":"docs/paths/drivers.yaml","metaData":{}}
+files[] = {"path":"docs/paths/drivers/search.yaml","metaData":{}}
 files[] = {"path":"docs/paths/drivers/{id}.yaml","metaData":{}}
 files[] = {"path":"docs/paths/events.yaml","metaData":{}}
 files[] = {"path":"docs/paths/events/{id}.yaml","metaData":{}}
