@@ -61,7 +61,14 @@ class TrackController implements TrackControllerInterface
             $totalCount = $this->trackRepository->getTotalCount();
             $totalPages = ceil($totalCount / $limit);
 
-            $response->getBody()->write($tracks->toJson());
+            $responseData = [
+                'data' => $tracks->items(),
+                'total' => $totalCount,
+                'totalPages' => $totalPages,
+                'currentPage' => $tracks->currentPage(),
+            ];
+
+            $response->getBody()->write(json_encode($responseData));
 
             return $response
                 ->withHeader('Content-Type', 'application/json')

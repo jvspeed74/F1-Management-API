@@ -26,7 +26,7 @@ class TrackRepository implements TrackRepositoryInterface
      * @param int $limit
      * @param string $sortBy
      * @param string $order
-     * @return LengthAwarePaginator<int, Track>
+     * @return LengthAwarePaginator
      */
     public function getAllTracks(int $page, int $limit, string $sortBy, string $order): LengthAwarePaginator
     {
