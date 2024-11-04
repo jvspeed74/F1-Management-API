@@ -68,7 +68,14 @@ class TrackController implements TrackControllerInterface
                 'currentPage' => $tracks->currentPage(),
             ];
 
-            $response->getBody()->write(json_encode($responseData));
+            $jsonResponse = json_encode($responseData);
+
+            if ($jsonResponse === false) {
+                $response->getBody()->write('Internal Server Error: ' . json_last_error_msg());
+                return $response->withStatus(500);
+            }
+
+            $response->getBody()->write($jsonResponse);
 
             return $response
                 ->withHeader('Content-Type', 'application/json')
