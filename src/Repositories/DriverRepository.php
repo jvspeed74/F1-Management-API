@@ -89,4 +89,23 @@ class DriverRepository implements DriverRepositoryInterface
         }
         return false;  // Return false if the driver is not found
     }
+
+    /**
+     * @param string $q
+     * @return Collection<int, Driver>
+     */
+    public function searchDrivers(string $q): Collection
+    {
+        $terms = explode(' ', $q);
+        return $this->model
+            ->query()
+            ->where(function ($query) use ($terms) {
+                foreach ($terms as $term) {
+                    $query
+                        ->orWhere('first_name', 'LIKE', "%$term%")
+                        ->orWhere('last_name', 'LIKE', "%$term%");
+                }
+            })
+            ->get();
+    }
 }
