@@ -24,7 +24,7 @@ class Nationality extends Model
     /**
      * @return HasMany<Driver, $this>
      */
-    public function drivers(): HasMany
+    public function driver(): HasMany
     {
         return $this->hasMany(Driver::class, 'nationality_id', 'id');
     }
