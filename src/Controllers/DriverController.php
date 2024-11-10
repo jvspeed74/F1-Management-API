@@ -14,7 +14,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class DriverController extends AbstractAPIController
 {
-
     // Inject the repository via constructor
     public function __construct(DriverRepository $driverRepository)
     {

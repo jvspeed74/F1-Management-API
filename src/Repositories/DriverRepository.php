@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DriverRepository extends AbstractRepository
 {
-
     /**
      * @param Driver $model
      */
