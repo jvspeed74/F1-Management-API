@@ -6,20 +6,19 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Contracts\DriverControllerInterface;
+use App\Contracts\AbstractAPIController;
 use App\Repositories\DriverRepository;
 use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class DriverController implements DriverControllerInterface
+class DriverController extends AbstractAPIController
 {
-    protected DriverRepository $driverRepository;
 
     // Inject the repository via constructor
     public function __construct(DriverRepository $driverRepository)
     {
-        $this->driverRepository = $driverRepository;
+        $this->repository = $driverRepository;
     }
 
     // Fetch all drivers
@@ -28,9 +27,9 @@ class DriverController implements DriverControllerInterface
      * @param Response $response
      * @return Response
      */
-    public function getAllDrivers(Response $response): Response
+    public function getAll(Response $response): Response
     {
-        $drivers = $this->driverRepository->getAllDrivers();
+        $drivers = $this->repository->getAll();
         $response->getBody()->write($drivers->toJson());
         return $response->withHeader('Content-Type', 'application/json');
     }
@@ -43,11 +42,11 @@ class DriverController implements DriverControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function getDriverById(Response $response, int $id): Response
+    public function getById(Response $response, int $id): Response
     {
 
         // Send the ID to the repository to fetch the driver from the database
-        $driver = $this->driverRepository->getDriverById($id);
+        $driver = $this->repository->getById($id);
 
         // If the driver was not found, return a 404 response
         if (!$driver) {
@@ -67,7 +66,7 @@ class DriverController implements DriverControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function createDriver(Request $request, Response $response): Response
+    public function create(Request $request, Response $response): Response
     {
         // getParsedBody can return array|object|null based on the Content-Type header
         // Since the content type is application/json, it will return an array OR an object
@@ -88,7 +87,7 @@ class DriverController implements DriverControllerInterface
 
         // Send the filtered data to the repository to create the driver in the database
         // TODO Filter the data before sending it to the repository
-        $driver = $this->driverRepository->createDriver($data);
+        $driver = $this->repository->create($data);
 
         // Return the created driver as JSON with a 201 status code
         $response->getBody()->write($driver->toJson());
@@ -104,7 +103,7 @@ class DriverController implements DriverControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function updateDriver(Request $request, Response $response, int $id): Response
+    public function update(Request $request, Response $response, int $id): Response
     {
 
         // getParsedBody can return array|object|null based on the Content-Type header
@@ -126,7 +125,7 @@ class DriverController implements DriverControllerInterface
 
         // Send the filtered data to the repository to update the driver in the database
         // TODO Filter the data before sending it to the repository
-        $driver = $this->driverRepository->updateDriver($id, $data);
+        $driver = $this->repository->update($id, $data);
 
         // If the update was not successful, return a 404 response
         if (!$driver) {
@@ -146,10 +145,10 @@ class DriverController implements DriverControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function deleteDriver(Response $response, int $id): Response
+    public function delete(Response $response, int $id): Response
     {
         // Send the ID to the repository to delete the team from the database
-        $deleted = $this->driverRepository->deleteDriver($id);
+        $deleted = $this->repository->delete($id);
 
         // If the driver was not found, return a 404 response
         if (!$deleted) {
@@ -165,7 +164,7 @@ class DriverController implements DriverControllerInterface
     /**
      * @throws JsonException
      */
-    public function searchDrivers(Request $request, Response $response): Response
+    public function search(Request $request, Response $response): Response
     {
         $q = $request->getQueryParams()['q'] ?? '';
 
@@ -175,7 +174,7 @@ class DriverController implements DriverControllerInterface
             return $response;
         }
 
-        $drivers = $this->driverRepository->searchDrivers($q);
+        $drivers = $this->repository->search($q);
 
         $response->getBody()->write($drivers->toJson());
         return $response->withHeader('Content-Type', 'application/json');

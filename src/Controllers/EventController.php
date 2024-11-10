@@ -6,29 +6,27 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Contracts\EventControllerInterface;
+use App\Contracts\AbstractAPIController;
 use App\Repositories\EventRepository;
 use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class EventController implements EventControllerInterface
+class EventController extends AbstractAPIController
 {
-    protected EventRepository $eventRepository;
 
-    // Inject the repository via constructor
     public function __construct(EventRepository $eventRepository)
     {
-        $this->eventRepository = $eventRepository;
+        $this->repository = $eventRepository;
     }
 
     /**
      * @param Response $response
      * @return Response
      */
-    public function getAllEvents(Response $response): Response
+    public function getAll(Response $response): Response
     {
-        $events = $this->eventRepository->getAllEvents();
+        $events = $this->repository->getAll();
         $response->getBody()->write($events->toJson());
         return $response->withHeader('Content-Type', 'application/json');
     }
@@ -39,10 +37,10 @@ class EventController implements EventControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function getEventById(Response $response, int $id): Response
+    public function getById(Response $response, int $id): Response
     {
         // Send the ID to the repository to fetch the event from the database
-        $event = $this->eventRepository->getEventById($id);
+        $event = $this->repository->getById($id);
 
         // If the event was not found, return a 404 response
         if (!$event) {
@@ -62,7 +60,7 @@ class EventController implements EventControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function createEvent(Request $request, Response $response): Response
+    public function create(Request $request, Response $response): Response
     {
         // getParsedBody can return array|object|null based on the Content-Type header
         // Since the content type is application/json, it will return an array OR an object
@@ -83,7 +81,7 @@ class EventController implements EventControllerInterface
 
         // Send the filtered data to the repository to create the event in the database
         // TODO Filter the data before sending it to the repository
-        $event = $this->eventRepository->createEvent($data);
+        $event = $this->repository->create($data);
 
         // Return the created event as JSON with a 201 status code
         $response->getBody()->write($event->toJson());
@@ -97,7 +95,7 @@ class EventController implements EventControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function updateEvent(Request $request, Response $response, int $id): Response
+    public function update(Request $request, Response $response, int $id): Response
     {
 
         // getParsedBody can return array|object|null based on the Content-Type header
@@ -119,7 +117,7 @@ class EventController implements EventControllerInterface
 
         // Send the filtered data to the repository to update the event in the database
         // TODO Filter the data before sending it to the repository
-        $event = $this->eventRepository->updateEvent($id, $data);
+        $event = $this->repository->update($id, $data);
 
         // If the update was not successful, return a 404 response
         if (!$event) {
@@ -139,10 +137,10 @@ class EventController implements EventControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function deleteEvent(Response $response, int $id): Response
+    public function delete(Response $response, int $id): Response
     {
         // Send the ID to the repository to delete the event from the database
-        $deleted = $this->eventRepository->deleteEvent($id);
+        $deleted = $this->repository->delete($id);
 
         // If the event was not found, return a 404 response
         if (!$deleted) {

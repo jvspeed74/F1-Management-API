@@ -6,31 +6,30 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Contracts\TrackControllerInterface;
+use App\Contracts\AbstractAPIController;
 use App\Repositories\TrackRepository;
 use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class TrackController implements TrackControllerInterface
+class TrackController extends AbstractAPIController
 {
-    protected TrackRepository $trackRepository;
-
-    // Inject the repository via constructor
     public function __construct(TrackRepository $trackRepository)
     {
-        $this->trackRepository = $trackRepository;
+        $this->repository = $trackRepository;
     }
 
-    // Fetch all tracks
+    public function getAll(Response $response): Response
+    {
+        $tracks = $this->repository->getAll();
+        $response->getBody()->write($tracks->toJson());
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 
     /**
-     * @param Response $response
-     * @param Request $request
-     * @return Response
      * @throws JsonException
      */
-    public function getAllTracks(Request $request, Response $response): Response
+    public function getAllWithParams(Request $request, Response $response): Response
     {
         $queryParams = $request->getQueryParams();
         $page = (int) ($queryParams['page'] ?? 1);
@@ -60,9 +59,9 @@ class TrackController implements TrackControllerInterface
             return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
         }
 
-        $tracks = $this->trackRepository->getAllTracks($page, $limit, $sortBy, $order);
+        $tracks = $this->repository->getAllPaginated($page, $limit, $sortBy, $order);
 
-        $totalCount = $this->trackRepository->getTotalCount();
+        $totalCount = $this->repository->getTotalCount();
         $totalPages = ceil($totalCount / $limit);
 
         $response->getBody()->write(json_encode($tracks->items(), JSON_THROW_ON_ERROR));
@@ -73,7 +72,6 @@ class TrackController implements TrackControllerInterface
             ->withHeader('X-Total-Pages', (string) $totalPages)
             ->withHeader('X-Current-Page', (string) $page)
             ->withHeader('X-Items-Per-Page', (string) $limit);
-
     }
 
     // Fetch a track by ID
@@ -84,10 +82,10 @@ class TrackController implements TrackControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function getTrackById(Response $response, int $id): Response
+    public function getById(Response $response, int $id): Response
     {
         // Send the ID to the repository to fetch the track from the database
-        $track = $this->trackRepository->getTrackById($id);
+        $track = $this->repository->getById($id);
 
         // If the track was not found, return a 404 response
         if (!$track) {
@@ -107,7 +105,7 @@ class TrackController implements TrackControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function createTrack(Request $request, Response $response): Response
+    public function create(Request $request, Response $response): Response
     {
         // getParsedBody can return array|object|null based on the Content-Type header
         // Since the content type is application/json, it will return an array OR an object
@@ -128,7 +126,7 @@ class TrackController implements TrackControllerInterface
 
         // Send the filtered data to the repository to create the track in the database
         // TODO Filter the data before sending it to the repository
-        $track = $this->trackRepository->createTrack($data);
+        $track = $this->repository->create($data);
 
         // Return the created track as JSON with a 201 status code
         $response->getBody()->write($track->toJson());
@@ -144,7 +142,7 @@ class TrackController implements TrackControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function updateTrack(Request $request, Response $response, int $id): Response
+    public function update(Request $request, Response $response, int $id): Response
     {
         // getParsedBody can return array|object|null based on the Content-Type header
         // Since the content type is application/json, it will return an array OR an object
@@ -165,7 +163,7 @@ class TrackController implements TrackControllerInterface
 
         // Send the filtered data to the repository to update the track in the database
         // TODO Filter the data before sending it to the repository
-        $track = $this->trackRepository->updateTrack($id, $data);
+        $track = $this->repository->update($id, $data);
 
         // If the update was not successful, return a 404 response
         if (!$track) {
@@ -185,10 +183,10 @@ class TrackController implements TrackControllerInterface
      * @return Response
      * @throws JsonException
      */
-    public function deleteTrack(Response $response, int $id): Response
+    public function delete(Response $response, int $id): Response
     {
         // Send the ID to the repository to delete the track from the database
-        $deleted = $this->trackRepository->deleteTrack($id);
+        $deleted = $this->repository->delete($id);
 
         // If the track was not found, return a 404 response
         if (!$deleted) {

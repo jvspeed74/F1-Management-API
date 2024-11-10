@@ -37,7 +37,7 @@ test('get all teams', function () {
     $response = new Response();
 
     // Call the controller method
-    $result = $controller->getAllTeams($response);
+    $result = $controller->getAll($response);
 
     // Assert that the response is JSON and the status is 200
     expect($result->getStatusCode())
@@ -66,7 +66,7 @@ test('get team by id returns team', function () {
     $response = new Response();
 
     // Call the controller method
-    $result = $controller->getTeamById($response, 1);
+    $result = $controller->getById($response, 1);
 
     // Assert that the response is JSON and the status is 200
     expect($result->getStatusCode())
@@ -92,7 +92,7 @@ test('get team by id returns 404 if not found', function () {
     $response = new Response();
 
     // Call the controller method
-    $result = $controller->getTeamById($response, 1);
+    $result = $controller->getById($response, 1);
 
     // Assert that the response is JSON, the status is 404, and the correct message is returned
     expect($result->getStatusCode())
@@ -127,7 +127,7 @@ test('create team', function () {
         ->andReturn(['official_name' => 'Team A']);
 
     // Call the controller method
-    $result = $controller->createTeam($request, $response);
+    $result = $controller->create($request, $response);
 
     // Assert that the response is JSON, the status is 201, and the correct team is returned
     expect($result->getStatusCode())
@@ -163,7 +163,7 @@ test('update team returns updated team', function () {
         ->andReturn(['official_name' => 'Updated Team']);
 
     // Call the controller method
-    $result = $controller->updateTeam($request, $response, 1);
+    $result = $controller->update($request, $response, 1);
 
     // Assert that the response is JSON, the status is 200, and the updated team is returned
     expect($result->getStatusCode())
@@ -190,7 +190,7 @@ test('delete team returns 204 on success', function () {
     $response = new Response();
 
     // Call the controller method
-    $result = $controller->deleteTeam($response, 1);
+    $result = $controller->delete($response, 1);
 
     // Assert that the response status is 204 (No Content)
     expect($result->getStatusCode())->toBe(204);
@@ -212,7 +212,7 @@ test('delete team returns 404 if not found', function () {
     $response = new Response();
 
     // Call the controller method
-    $result = $controller->deleteTeam($response, 1);
+    $result = $controller->delete($response, 1);
 
     // Assert that the response is JSON, the status is 404, and the correct message is returned
     expect($result->getStatusCode())
