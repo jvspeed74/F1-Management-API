@@ -8,7 +8,6 @@ use App\Contracts\AbstractRepository;
 use App\Models\AbstractModel;
 use App\Models\Driver;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 class DriverRepository extends AbstractRepository
 {

@@ -59,9 +59,9 @@ class TrackController extends AbstractAPIController
             return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
         }
 
-        $tracks = $this->repository->getAllPaginated($page, $limit, $sortBy, $order);
+        $tracks = $this->repository->getAllWithParams($page, $limit, $sortBy, $order);
 
-        $totalCount = $this->repository->getTotalCount();
+        $totalCount = $this->repository->getAll()->count();
         $totalPages = ceil($totalCount / $limit);
 
         $response->getBody()->write(json_encode($tracks->items(), JSON_THROW_ON_ERROR));

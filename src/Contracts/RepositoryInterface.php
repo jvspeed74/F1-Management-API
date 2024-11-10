@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Contracts;
 
 use App\Models\AbstractModel;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,4 +40,11 @@ interface RepositoryInterface
      * @return bool
      */
     public function delete(int $id): bool;
+    public function getAllWithParams(int $page, int $limit, string $sortBy, string $order): LengthAwarePaginator;
+
+    /**
+     * @param string $q
+     * @return Collection<int, AbstractModel>
+     */
+    public function search(string $q): Collection;
 }
