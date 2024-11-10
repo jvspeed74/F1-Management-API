@@ -3377,13 +3377,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/tracks/?page=1&sort_by=name&limit=3&order=desc",
+							"raw": "{{baseUrl}}/tracks?page=1&sort_by=name&limit=3&order=desc",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"tracks",
-								""
+								"tracks"
 							],
 							"query": [
 								{
