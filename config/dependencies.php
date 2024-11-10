@@ -4,10 +4,10 @@
 
 declare(strict_types=1);
 
-use Psr\Log\LoggerInterface;
-use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
+use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 return [
     // Define Monolog logger as a service

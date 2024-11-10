@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Team extends AbstractModel
 {
     // Define the table name explicitly if it's not the plural of the model name
