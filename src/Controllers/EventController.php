@@ -14,7 +14,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class EventController extends AbstractAPIController
 {
-
     public function __construct(EventRepository $eventRepository)
     {
         $this->repository = $eventRepository;

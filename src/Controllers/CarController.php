@@ -15,7 +15,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class CarController extends AbstractAPIController
 {
-
     // Inject the repository via constructor
     public function __construct(CarRepository $repository)
     {
