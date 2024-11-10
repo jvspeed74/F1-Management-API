@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Interfaces\DriverRepositoryInterface;
+use App\Contracts\DriverRepositoryInterface;
 use App\Models\Driver;
 use Illuminate\Database\Eloquent\Collection;
 

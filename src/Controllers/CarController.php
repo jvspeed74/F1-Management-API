@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Interfaces\CarControllerInterface;
+use App\Contracts\CarControllerInterface;
 use App\Repositories\CarRepository;
 use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;

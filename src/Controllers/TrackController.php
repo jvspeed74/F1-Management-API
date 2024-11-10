@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Interfaces\TrackControllerInterface;
+use App\Contracts\TrackControllerInterface;
 use App\Repositories\TrackRepository;
 use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;

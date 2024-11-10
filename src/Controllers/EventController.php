@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Interfaces\EventControllerInterface;
+use App\Contracts\EventControllerInterface;
 use App\Repositories\EventRepository;
 use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;

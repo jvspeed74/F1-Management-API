@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Interfaces\DriverControllerInterface;
+use App\Contracts\DriverControllerInterface;
 use App\Repositories\DriverRepository;
 use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;

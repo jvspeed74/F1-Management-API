@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Interfaces\TrackRepositoryInterface;
+use App\Contracts\TrackRepositoryInterface;
 use App\Models\Track;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
