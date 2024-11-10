@@ -41,8 +41,7 @@ return function (App $app): void {
 
     // Track routes
     $app->group('/tracks', function (RouteCollectorProxy $group) {
-        $group->get('', [TrackController::class, 'getAll']);
-        $group->get('/', [TrackController::class, 'getAllWithParams']);
+        $group->get('', [TrackController::class, 'getAllWithParams']);
         $group->get('/{id:\d+}', [TrackController::class, 'getById']);
         $group->post('', [TrackController::class, 'create']);
         $group->patch('/{id:\d+}', [TrackController::class, 'update']);
