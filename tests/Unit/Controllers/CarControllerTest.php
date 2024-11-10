@@ -24,7 +24,7 @@ test('get all cars', function () {
     $mockCars->shouldReceive('toJson')->andReturn('[]');
 
     // Define the behavior of getAllCars
-    $carRepository->shouldReceive('getAllCars')
+    $carRepository->shouldReceive('getAll')
         ->once()
         ->andReturn($mockCars);
 
@@ -35,7 +35,7 @@ test('get all cars', function () {
     $response = new Response();
 
     // Call the controller method
-    $result = $controller->getAllCars($response);
+    $result = $controller->getAll($response);
 
     // Assert that the response is JSON and the status is 200
     expect($result->getStatusCode())
@@ -53,7 +53,7 @@ test('get car by id', function () {
     $mockCar->shouldReceive('toJson')->andReturn('{"id": 1, "make": "Toyota", "model": "Corolla"}');
 
     // Define the behavior of getCarById
-    $carRepository->shouldReceive('getCarById')
+    $carRepository->shouldReceive('getById')
         ->with(1)
         ->once()
         ->andReturn($mockCar);
@@ -65,7 +65,7 @@ test('get car by id', function () {
     $response = new Response();
 
     // Call the controller method
-    $result = $controller->getCarById($response, 1);
+    $result = $controller->getById($response, 1);
 
     // Assert that the response is JSON and the status is 200
     expect($result->getStatusCode())
@@ -90,7 +90,7 @@ test('create car', function () {
     $mockCar->shouldReceive('toJson')->andReturn('{"id": 1, "make": "Toyota", "model": "Corolla"}');
 
     // Define the behavior of createCar
-    $carRepository->shouldReceive('createCar')
+    $carRepository->shouldReceive('create')
         ->with(['make' => 'Toyota', 'model' => 'Corolla'])
         ->once()
         ->andReturn($mockCar);
@@ -102,7 +102,7 @@ test('create car', function () {
     $response = new Response();
 
     // Call the controller method
-    $result = $controller->createCar($request, $response);
+    $result = $controller->create($request, $response);
 
     // Assert that the response is JSON and the status is 201
     expect($result->getStatusCode())
@@ -127,7 +127,7 @@ test('update car', function () {
     $mockCar->shouldReceive('toJson')->andReturn('{"id": 1, "make": "Toyota", "model": "Corolla"}');
 
     // Define the behavior of updateCar
-    $carRepository->shouldReceive('updateCar')
+    $carRepository->shouldReceive('update')
         ->with(1, ['make' => 'Toyota', 'model' => 'Corolla'])
         ->once()
         ->andReturn($mockCar);
@@ -139,7 +139,7 @@ test('update car', function () {
     $response = new Response();
 
     // Call the controller method
-    $result = $controller->updateCar($request, $response, 1);
+    $result = $controller->update($request, $response, 1);
 
     // Assert that the response is JSON and the status is 200
     expect($result->getStatusCode())
@@ -153,7 +153,7 @@ test('delete car', function () {
     $carRepository = Mockery::mock(CarRepository::class);
 
     // Define the behavior of deleteCar
-    $carRepository->shouldReceive('deleteCar')
+    $carRepository->shouldReceive('delete')
         ->with(1)
         ->once()
         ->andReturn(true);
@@ -165,7 +165,7 @@ test('delete car', function () {
     $response = new Response();
 
     // Call the controller method
-    $result = $controller->deleteCar($response, 1);
+    $result = $controller->delete($response, 1);
 
     // Assert that the status is 204
     expect($result->getStatusCode())->toBe(204);

@@ -60,10 +60,10 @@ return function (App $app): void {
 
     // Car routes
     $app->group('/cars', function (RouteCollectorProxy $group) {
-        $group->get('', [CarController::class, 'getAllCars']);
-        $group->get('/{id:\d+}', [CarController::class, 'getCarById']);
-        $group->post('', [CarController::class, 'createCar']);
-        $group->patch('/{id:\d+}', [CarController::class, 'updateCar']);
-        $group->delete('/{id:\d+}', [CarController::class, 'deleteCar']);
+        $group->get('', [CarController::class, 'getAll']);
+        $group->get('/{id:\d+}', [CarController::class, 'getById']);
+        $group->post('', [CarController::class, 'create']);
+        $group->patch('/{id:\d+}', [CarController::class, 'update']);
+        $group->delete('/{id:\d+}', [CarController::class, 'delete']);
     });
 };

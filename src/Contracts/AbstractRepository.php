@@ -9,38 +9,41 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractRepository implements RepositoryInterface
 {
-    /**
-     * @var Model
-     */
     protected Model $model;
 
-    /**
-     * @return Collection<array-key, Model>
-     */
-    abstract public function getAll(): Collection;
+    public function __construct(Model $model)
+    {
+        $this->model = $model;
+    }
 
-    /**
-     * @param int $id
-     * @return Model|false
-     */
-    abstract public function getById(int $id): Model|false;
+    public function getAll(): Collection
+    {
+        return $this->model::all();
+    }
 
-    /**
-     * @param array<string,string> $data
-     * @return Model
-     */
-    abstract public function create(array $data): Model;
+    public function getById(int $id): Model|false
+    {
+        $record = $this->model::where('id', $id)->first();
+        return $record ?: false;
+    }
 
-    /**
-     * @param int $id
-     * @param array<string,string> $data
-     * @return Model|false
-     */
-    abstract public function update(int $id, array $data): Model|false;
+    public function create(array $data): Model
+    {
+        return $this->model->create($data);
+    }
 
-    /**
-     * @param int $id
-     * @return bool
-     */
-    abstract public function delete(int $id): bool;
+    public function update(int $id, array $data): Model|false
+    {
+        $record = $this->model->find($id);
+        if ($record && $record->update($data)) {
+            return $record;
+        }
+        return false;
+    }
+
+    public function delete(int $id): bool
+    {
+        $record = $this->model->find($id);
+        return $record ? (bool) $record->delete() : false;
+    }
 }
