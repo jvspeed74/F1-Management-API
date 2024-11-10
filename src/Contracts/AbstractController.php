@@ -7,7 +7,7 @@ namespace App\Contracts;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-abstract class AbstractAPIController implements APIControllerInterface
+abstract class AbstractController implements APIControllerInterface
 {
     protected AbstractRepository $repository;
 

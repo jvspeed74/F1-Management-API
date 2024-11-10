@@ -6,13 +6,13 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Contracts\AbstractAPIController;
+use App\Contracts\AbstractController;
 use App\Repositories\DriverRepository;
 use JsonException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class DriverController extends AbstractAPIController
+class DriverController extends AbstractController
 {
     // Inject the repository via constructor
     public function __construct(DriverRepository $driverRepository)
