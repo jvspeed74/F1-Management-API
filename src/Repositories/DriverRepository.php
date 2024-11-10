@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Contracts\AbstractModel;
 use App\Contracts\AbstractRepository;
-use App\Models\AbstractModel;
 use App\Models\Driver;
 use Illuminate\Database\Eloquent\Collection;
 
