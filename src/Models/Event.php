@@ -7,7 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Event extends Model
+class Event extends AbstractModel
 {
     // Define the table name explicitly if it's not the plural of the model name
     protected $table = 'events';

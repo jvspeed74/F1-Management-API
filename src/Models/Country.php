@@ -7,7 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Country extends Model
+class Country extends AbstractModel
 {
     // Define the table name explicitly if it's not the plural of the model name
     protected $table = 'countries';

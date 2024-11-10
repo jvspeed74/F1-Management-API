@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Contracts;
 
+use App\Models\AbstractModel;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 interface RepositoryInterface
 {
     /**
-     * @return Collection<array-key, Model>
+     * @return Collection<int, AbstractModel>
      */
     public function getAll(): Collection;
 

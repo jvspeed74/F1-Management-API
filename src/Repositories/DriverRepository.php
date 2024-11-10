@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Contracts\AbstractRepository;
+use App\Models\AbstractModel;
 use App\Models\Driver;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +23,7 @@ class DriverRepository extends AbstractRepository
 
     /**
      * @param string $q
-     * @return Collection<int, Model>
+     * @return Collection<int, AbstractModel>
      */
     public function search(string $q): Collection
     {

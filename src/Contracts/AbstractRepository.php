@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Contracts;
 
+use App\Models\AbstractModel;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractRepository implements RepositoryInterface
 {
-    protected Model $model;
+    protected AbstractModel $model;
 
-    public function __construct(Model $model)
+    public function __construct(AbstractModel $model)
     {
         $this->model = $model;
     }
@@ -23,7 +24,7 @@ abstract class AbstractRepository implements RepositoryInterface
 
     public function getById(int $id): Model|false
     {
-        $record = $this->model::where('id', $id)->first();
+        $record = $this->model->where('id', $id)->first();
         return $record ?: false;
     }
 
@@ -44,6 +45,6 @@ abstract class AbstractRepository implements RepositoryInterface
     public function delete(int $id): bool
     {
         $record = $this->model->find($id);
-        return $record ? (bool) $record->delete() : false;
+        return $record && $record->delete();
     }
 }
