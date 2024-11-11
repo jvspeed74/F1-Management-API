@@ -11,6 +11,9 @@
     <inspection_tool class="PhpModifierOrderInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="PhpNewClassMissingParameterListInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="PhpSeparateElseIfInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="PhpStanGlobal" enabled="true" level="WEAK WARNING" enabled_by_default="false">
+      <scope name="PHPStan Targeted Inspection" level="WEAK WARNING" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="PhpStrictTypeCheckingInspection" enabled="true" level="ERROR" enabled_by_default="true">
       <option name="ENABLE_WITHOUT_DECLARE_STRICT_DIRECTIVE" value="true" />
     </inspection_tool>
