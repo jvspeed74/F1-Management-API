@@ -42,8 +42,8 @@
     "phpstan/phpstan-strict-rules": "^2.0"
   },
   "scripts": {
-    "format": "vendor/bin/php-cs-fixer fix",
-    "analyze": "vendor/bin/phpstan analyze -c phpstan.neon",
+    "fix": "vendor/bin/php-cs-fixer fix",
+    "phpstan": "vendor/bin/phpstan analyze -c phpstan.neon",
     "start": [
       "Composer\\Config::disableProcessTimeout",
       "php -S localhost:8080 -t public"
