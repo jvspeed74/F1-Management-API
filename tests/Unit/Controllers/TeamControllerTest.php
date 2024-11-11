@@ -69,7 +69,7 @@ test('get team by id returns 404 if not found', function () {
     expect($result->getStatusCode())
         ->toBe(404)
         ->and($result->getHeaderLine('Content-Type'))->toBe('application/json')
-        ->and((string) $result->getBody())->toBe('{"message":"Team not found"}');
+        ->and((string) $result->getBody())->toBe('{"message":"Item not found"}');
 });
 
 test('create team', function () {
@@ -153,5 +153,5 @@ test('delete team returns 404 if not found', function () {
     expect($result->getStatusCode())
         ->toBe(404)
         ->and($result->getHeaderLine('Content-Type'))->toBe('application/json')
-        ->and((string) $result->getBody())->toBe('{"message":"Team not found"}');
+        ->and((string) $result->getBody())->toBe('{"message":"Item not found"}');
 });
