@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Contracts\AbstractModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Nationality extends Model
+class Nationality extends AbstractModel
 {
     // Define the table name explicitly if it's not the plural of the model name
     protected $table = 'nationalities';
@@ -24,7 +24,7 @@ class Nationality extends Model
     /**
      * @return HasMany<Driver, $this>
      */
-    public function drivers(): HasMany
+    public function driver(): HasMany
     {
         return $this->hasMany(Driver::class, 'nationality_id', 'id');
     }
