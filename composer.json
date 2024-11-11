@@ -38,7 +38,8 @@
     "mockery/mockery": "^1.6.12",
     "friendsofphp/php-cs-fixer": "^v3.64.0",
     "pestphp/pest": "^v3.5.1",
-    "phpstan/phpstan-mockery": "^2.0.0"
+    "phpstan/phpstan-mockery": "^2.0.0",
+    "phpstan/phpstan-strict-rules": "^2.0"
   },
   "scripts": {
     "format": "vendor/bin/php-cs-fixer fix",
