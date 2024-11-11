@@ -34,9 +34,8 @@ afterEach(function () {
     Mockery::close();
 });
 
-
 describe('getAll', function () {
-    it('returns a status code of 200 on success', function () {
+    it('returns a 200 status code and an empty JSON array when no items are found', function () {
         $this->repository
             ->shouldReceive('getAll')
             ->once()
@@ -56,7 +55,7 @@ describe('getAll', function () {
 });
 
 describe('getById', function () {
-    it('returns a status code of 200 on success', function () {
+    it('returns a 200 status code and the item as JSON when the item is found', function () {
         $this->repository->shouldReceive('getById')->with(1)->once()->andReturn($this->model);
         $this->model->shouldReceive('toJson')->once()->andReturn('{"id": 1, "name": "Item A"}');
 
@@ -68,7 +67,7 @@ describe('getById', function () {
             ->and((string) $result->getBody())->toBe('{"id": 1, "name": "Item A"}');
     });
 
-    it('returns a status code of 404 if item not found', function () {
+    it('returns a 404 status code and an error message when the item is not found', function () {
         $this->repository->shouldReceive('getById')->with(1)->once()->andReturn(false);
 
         $result = $this->controller->getById($this->response, 1);
@@ -81,8 +80,7 @@ describe('getById', function () {
 });
 
 describe('create', function () {
-
-    it('creates an item and returns it back to the user', function () {
+    it('creates a new item and returns a 201 status code with the created item as JSON', function () {
         $this->mockRequest->shouldReceive('getParsedBody')->once()->andReturn(['name' => 'Item A']);
         $this->repository->shouldReceive('create')->with(['name' => 'Item A'])->once()->andReturn($this->model);
         $this->model->shouldReceive('toJson')->once()->andReturn('{"id": 1, "name": "Item A"}');
@@ -95,7 +93,7 @@ describe('create', function () {
             ->and((string) $result->getBody())->toBe('{"id": 1, "name": "Item A"}');
     });
 
-    it('returns 400 for bad response', function () {
+    it('returns a 400 status code and an error message when the request body is invalid', function () {
         $this->mockRequest->shouldReceive('getParsedBody')->once()->andReturn(null);
 
         $result = $this->controller->create($this->mockRequest, $this->response);
