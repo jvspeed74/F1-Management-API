@@ -8,7 +8,7 @@ use Illuminate\Database\Capsule\Manager;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__.'/bootstrap.php';
 
 /**
  * Create a new DI\ContainerBuilder instance and configure it with the container settings.
