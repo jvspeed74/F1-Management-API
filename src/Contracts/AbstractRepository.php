@@ -25,7 +25,7 @@ abstract class AbstractRepository implements RepositoryInterface
     public function getById(int $id): Model|false
     {
         $record = $this->model->where('id', $id)->first();
-        return $record ?: false;
+        return $record ?? false;
     }
 
     public function create(array $data): Model
