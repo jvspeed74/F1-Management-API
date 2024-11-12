@@ -3,7 +3,7 @@ includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
-    level: 8
+    level: max
     paths:
         - src
         - config
@@ -11,7 +11,7 @@ parameters:
     excludePaths:
         - tests/**
     stubFiles:
-        - stubs/Model.stub
+        - stubs/Model.stub.php
         - stubs/EloquentBuilder.stub
         - stubs/QueryBuilder.stub
     bootstrapFiles:
