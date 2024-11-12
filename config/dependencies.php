@@ -23,11 +23,11 @@ return [
         $capsule = new \Illuminate\Database\Capsule\Manager();
         $capsule->addConnection(
             [
-                'driver' => getenv('DB_DRIVER') ?? 'mysql',
-                'host' => getenv('DB_HOST') ?? '127.0.0.1',
-                'database' => getenv('DB_DATABASE') ?? 'f1_db',
-                'username' => getenv('DB_USERNAME') ?? 'root',
-                'password' => getenv('DB_PASSWORD') ?? '',
+                'driver' => 'mysql',
+                'host' => '127.0.0.1',
+                'database' => 'f1_db',
+                'username' => 'root',
+                'password' => '',
                 'charset' => 'utf8mb4',
                 'collation' => 'utf8mb4_general_ci',
             ],
