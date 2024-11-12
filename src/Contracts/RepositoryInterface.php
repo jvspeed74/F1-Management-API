@@ -22,14 +22,14 @@ interface RepositoryInterface
     public function getById(int $id): Model | false;
 
     /**
-     * @param array<string, string> $data
+     * @param array<mixed> $data
      * @return Model
      */
     public function create(array $data): Model;
 
     /**
      * @param int $id
-     * @param array<string, string> $data
+     * @param array<mixed> $data
      * @return Model|false
      */
     public function update(int $id, array $data): Model | false;

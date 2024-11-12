@@ -8,6 +8,7 @@ use App\Contracts\AbstractRepository;
 use App\Models\Driver;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class DriverRepository extends AbstractRepository
 {
@@ -26,13 +27,11 @@ class DriverRepository extends AbstractRepository
     public function search(string $q): Collection
     {
         $terms = explode(' ', $q);
-        return $this->model::where(function ($query) use ($terms) {
+        return $this->model::where(function (Builder $query) use ($terms) {
             foreach ($terms as $term) {
-                $query
-                    ->orWhere('first_name', 'LIKE', "%$term%")
-                    ->orWhere('last_name', 'LIKE', "%$term%");
+                $query->orWhere('first_name', 'LIKE', "%$term%")
+                      ->orWhere('last_name', 'LIKE', "%$term%");
             }
-        })
-            ->get();
+        })->get();
     }
 }

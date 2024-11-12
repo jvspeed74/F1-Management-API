@@ -18,12 +18,15 @@ class DriverController extends AbstractController
 
     public function search(Request $request, Response $response): Response
     {
-        $q = $request->getQueryParams()['q'] ?? '';
-        if (!$q) {
+        /** @var ?string $q */
+        $q = $request->getQueryParams()['q'] ?? null;
+
+        if ($q === null) {
             $response = $response->withStatus(400)->withHeader('Content-Type', 'application/json');
             $response->getBody()->write(json_encode(["message" => "Missing search query"], JSON_THROW_ON_ERROR));
             return $response;
         }
+
         $drivers = $this->repository->search($q);
         $response->getBody()->write($drivers->toJson());
         return $response->withHeader('Content-Type', 'application/json');
