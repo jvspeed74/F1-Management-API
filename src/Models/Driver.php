@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Contracts\AbstractModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use InvalidArgumentException;
 
-class Driver extends AbstractModel
+class Driver extends Model
 {
     // Define the table name explicitly if it's not the plural of the model name
     protected $table = 'drivers';
@@ -33,9 +33,6 @@ class Driver extends AbstractModel
         'championships',
     ];
 
-    /**
-     * @var string[]
-     */
     protected $casts = [
         'career_points' => 'float',
     ];

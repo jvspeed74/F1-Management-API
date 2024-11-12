@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Contracts\AbstractModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Event extends AbstractModel
+class Event extends Model
 {
     // Define the table name explicitly if it's not the plural of the model name
     protected $table = 'events';
@@ -21,9 +21,6 @@ class Event extends AbstractModel
     // Define the fillable fields for mass assignment
     protected $fillable = ['title', 'scheduled_date', 'track_id', 'status'];
 
-    /**
-     * @var string[]
-     */
     protected $casts = [
         'scheduled_date' => 'date:Y-m-d',
     ];

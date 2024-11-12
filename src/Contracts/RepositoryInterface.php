@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 interface RepositoryInterface
 {
     /**
-     * @return Collection<int, AbstractModel>
+     * @return Collection<int, Model>
      */
     public function getAll(): Collection;
 
@@ -43,7 +43,7 @@ interface RepositoryInterface
 
     /**
      * @param string $q
-     * @return Collection<int, AbstractModel>
+     * @return Collection<int, Model>
      */
     public function search(string $q): Collection;
 }

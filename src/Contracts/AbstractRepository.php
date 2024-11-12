@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractRepository implements RepositoryInterface
 {
-    protected AbstractModel $model;
+    protected Model $model;
 
-    public function __construct(AbstractModel $model)
+    public function __construct(Model $model)
     {
         $this->model = $model;
     }
@@ -67,7 +67,7 @@ abstract class AbstractRepository implements RepositoryInterface
 
     /**
      * @param string $q
-     * @return Collection<int, AbstractModel>
+     * @return Collection<int, Model>
      */
     public function search(string $q): Collection
     {

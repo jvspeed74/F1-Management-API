@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Contracts\AbstractModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use InvalidArgumentException;
 
-class Track extends AbstractModel
+class Track extends Model
 {
     // Define the table name explicitly if it's not the plural of the model name
     protected $table = 'tracks';
@@ -23,9 +23,6 @@ class Track extends AbstractModel
     protected $fillable = ['name', 'length_km', 'continent', 'country_id', 'description'];
 
     // Cast length_km as float
-    /**
-     * @var string[]
-     */
     protected $casts = [
         'length_km' => 'float',
     ];
