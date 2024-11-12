@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Contracts;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -74,7 +75,7 @@ abstract class AbstractRepository implements RepositoryInterface
         $terms = explode(' ', $q);
         $fillable = $this->model->getFillable();
 
-        return $this->model::where(function ($query) use ($terms, $fillable) {
+        return $this->model::where(function (Builder $query) use ($terms, $fillable) {
             foreach ($terms as $term) {
                 foreach ($fillable as $field) {
                     $query->orWhere($field, 'LIKE', "%$term%");
