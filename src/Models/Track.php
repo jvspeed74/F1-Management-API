@@ -11,29 +11,30 @@ use InvalidArgumentException;
 class Track extends Model
 {
     // Define the table name explicitly if it's not the plural of the model name
-    protected $table = 'tracks';
-
-    // Primary key is 'id', and Eloquent will automatically handle it
-    protected $primaryKey = 'id';
-
-    // Disable timestamps since the table doesn't have created_at/updated_at columns
     public $timestamps = false;
 
-    // Define the fillable fields for mass assignment
-    protected $fillable = ['name', 'length_km', 'continent', 'country_id', 'description'];
+    // Primary key is 'id', and Eloquent will automatically handle it
+    protected $table = 'tracks';
 
-    // Cast length_km as float
-    protected $casts = [
-        'length_km' => 'float',
+    // Disable timestamps since the table doesn't have created_at/updated_at columns
+    protected $primaryKey = 'id';
+
+    // Define the fillable fields for mass assignment
+    protected $fillable = [
+        'name',
+        'length_km',
+        'continent',
+        'country_id',
+        'description',
     ];
 
     /**
-     * @return BelongsTo<Country, $this>
+     * @var string[]
+     * todo cast all the fields to their necessary type
      */
-    public function country(): BelongsTo
-    {
-        return $this->belongsTo(Country::class, 'country_id', 'id');
-    }
+    protected $casts = [
+        'length_km' => 'float',
+    ];
 
     /**
      * Override the save method to enforce non-negative length_km
@@ -42,8 +43,18 @@ class Track extends Model
     {
         static::saving(function ($track) {
             if ($track->length_km < 0) {
-                throw new InvalidArgumentException('The length of the track must be a non-negative number.');
+                throw new InvalidArgumentException(
+                    'The length of the track must be a non-negative number.',
+                );
             }
         });
+    }
+
+    /**
+     * @return BelongsTo<Country, $this>
+     */
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 }

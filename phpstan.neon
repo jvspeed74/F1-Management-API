@@ -3,7 +3,7 @@ includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
-    level: 5
+    level: 6
     paths:
         - src
         - config
@@ -19,3 +19,4 @@ parameters:
     ignoreErrors:
         - identifier: argument.type
           path: config/routes.php
+    reportMaybesInPropertyPhpDocTypes: false
