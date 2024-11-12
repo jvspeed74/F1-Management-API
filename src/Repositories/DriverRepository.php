@@ -26,15 +26,13 @@ class DriverRepository extends AbstractRepository
     public function search(string $q): Collection
     {
         $terms = explode(' ', $q);
-        return $this->model
-            ->query()
-            ->where(function ($query) use ($terms) {
-                foreach ($terms as $term) {
-                    $query
-                        ->orWhere('first_name', 'LIKE', "%$term%")
-                        ->orWhere('last_name', 'LIKE', "%$term%");
-                }
-            })
+        return $this->model::where(function ($query) use ($terms) {
+            foreach ($terms as $term) {
+                $query
+                    ->orWhere('first_name', 'LIKE', "%$term%")
+                    ->orWhere('last_name', 'LIKE', "%$term%");
+            }
+        })
             ->get();
     }
 }
