@@ -14,7 +14,7 @@
   - You can run the following commands in your terminal:
     - `composer test` runs the test suite.
     - `composer fix` runs PHP-CS-Fixer, fixing any coding standard issues.
-    - `composer phpstan` runs PHPStan, identifying any potential issues in the code.
+    - `composer lint` runs PHPStan, identifying any potential issues in the code.
     - `composer start` starts the built-in PHP server.
 
 ## Coding Standards
