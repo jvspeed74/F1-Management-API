@@ -2,9 +2,9 @@
 
 namespace Illuminate\Database\Eloquent;
 
+
 /**
- * @mixin \Illuminate\Database\Eloquent\Builder
+ * @mixin Builder
  * @mixin \Illuminate\Database\Query\Builder
- *
  */
-class Model {}
+abstract class Model {}
