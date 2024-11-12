@@ -45,7 +45,7 @@ abstract class AbstractRepository implements RepositoryInterface
     public function delete(int $id): bool
     {
         $record = $this->model::find($id);
-        return $record !== null && $record->delete();
+        return $record !== null && $record->delete() === true;
     }
 
     /**
