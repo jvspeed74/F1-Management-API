@@ -12,7 +12,7 @@ parameters:
         - tests/**
     stubFiles:
         - stubs/Model.stub
-        - stubs/Builder.stub
+        - stubs/EloquentBuilder.stub
         - stubs/QueryBuilder.stub
     bootstrapFiles:
         - vendor/autoload.php
