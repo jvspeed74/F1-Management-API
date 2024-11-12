@@ -8,7 +8,7 @@ use Illuminate\Database\Capsule\Manager;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
-require __DIR__.'/bootstrap.php';
+require __DIR__ . '/../config/bootstrap.php';
 
 /**
  * Create a new DI\ContainerBuilder instance and configure it with the container settings.
@@ -17,7 +17,9 @@ require __DIR__.'/bootstrap.php';
  * @var ContainerInterface $container The built container instance.
  */
 $containerBuilder = new ContainerBuilder();
-(require __DIR__ . '/../config/container.php')($containerBuilder);
+/** @var callable $containerConfig */
+$containerConfig = require __DIR__ . '/../config/container.php';
+$containerConfig($containerBuilder);
 $container = $containerBuilder->build();
 
 /**
@@ -38,13 +40,18 @@ $app = Bridge::create($container);
 
 /**
  * Register middleware
+ *
+ * @var callable $middlewareConfig
  */
-(require __DIR__ . '/../config/middleware.php')($app, $container->get(LoggerInterface::class));
+$middlewareConfig = require __DIR__ . '/../config/middleware.php';
+$middlewareConfig($app, $container->get(LoggerInterface::class));
 
 /**
  * Register routes
+ *
+ * @var callable $routesConfig
  */
-(require __DIR__ . '/../config/routes.php')($app);
-
+$routesConfig = require __DIR__ . '/../config/routes.php';
+$routesConfig($app);
 // Run app
 $app->run();
