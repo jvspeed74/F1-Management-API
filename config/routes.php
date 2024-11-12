@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
-use App\Controllers\{CarController, DriverController, EventController, TeamController, TrackController};
+use App\Controllers\{CarController,
+    DriverController,
+    EventController,
+    TeamController,
+    TrackController};
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
