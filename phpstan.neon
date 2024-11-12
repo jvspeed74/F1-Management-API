@@ -1,12 +1,18 @@
 includes:
     - vendor/phpstan/phpstan-mockery/extension.neon
-    # - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
-    level: 4
+    level: 3
     paths:
         - src
         - config
         - public
     excludePaths:
         - tests/**
+    stubFiles:
+        - stubs/Model.stub
+        - stubs/Builder.stub
+        - stubs/QueryBuilder.stub
+    bootstrapFiles:
+        - vendor/autoload.php
