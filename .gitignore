@@ -88,4 +88,4 @@ fabric.properties
 
 # Code Quality Caches
 .phpunit.cache
-.php-cs-fixer.cache
+/.php-cs-fixer
