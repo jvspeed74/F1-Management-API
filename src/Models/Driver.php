@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use InvalidArgumentException;
 
+/**
+ * @property float $career_points
+ */
 class Driver extends Model
 {
     // Define the table name explicitly if it's not the plural of the model name
@@ -46,7 +49,7 @@ class Driver extends Model
      */
     protected static function booted(): void
     {
-        static::saving(function ($driver) {
+        static::saving(function (self $driver) {
             if ($driver->career_points < 0) {
                 throw new InvalidArgumentException(
                     'Career points must be a non-negative number.',

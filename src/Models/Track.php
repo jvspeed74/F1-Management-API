@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use InvalidArgumentException;
 
+/**
+ * @property float $length_km
+ */
 class Track extends Model
 {
     // Define the table name explicitly if it's not the plural of the model name
@@ -41,7 +44,7 @@ class Track extends Model
      */
     protected static function booted(): void
     {
-        static::saving(function ($track) {
+        static::saving(function (self $track) {
             if ($track->length_km < 0) {
                 throw new InvalidArgumentException(
                     'The length of the track must be a non-negative number.',
