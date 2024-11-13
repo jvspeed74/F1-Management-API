@@ -11,7 +11,7 @@ parameters:
     excludePaths:
         - tests/**
     stubFiles:
-        - stubs/Model.stub.php
+        - stubs/Model.stub
         - stubs/EloquentBuilder.stub
         - stubs/QueryBuilder.stub
     bootstrapFiles:
