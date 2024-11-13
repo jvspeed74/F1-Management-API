@@ -22,7 +22,7 @@ class Event extends Model
     protected $fillable = ['title', 'scheduled_date', 'track_id', 'status'];
 
     /**
-     * @var string[]
+     * @var array<string, string>
      * todo cast all the fields to their necessary type
      */
     protected $casts = [

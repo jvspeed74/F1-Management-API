@@ -26,8 +26,8 @@ class Team extends Model
     ];
 
     /**
-     * @var string[]
+     * @var array<string, string>
      * todo cast all the fields to their necessary type
      */
-    protected $casts;
+    protected $casts = [];
 }
