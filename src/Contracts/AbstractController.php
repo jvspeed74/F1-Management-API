@@ -26,7 +26,7 @@ abstract class AbstractController implements ControllerInterface
     public function getById(Response $response, int $id): Response
     {
         $item = $this->repository->getById($id);
-        if (!$item) {
+        if ($item === false) {
             $response = $response->withStatus(404)->withHeader('Content-Type', 'application/json');
             $response->getBody()->write(json_encode(["message" => "Item not found"], JSON_THROW_ON_ERROR));
             return $response;
@@ -63,7 +63,7 @@ abstract class AbstractController implements ControllerInterface
             $data = (array) $data;
         }
         $item = $this->repository->update($id, $data);
-        if (!$item) {
+        if ($item === false) {
             $response = $response->withStatus(404)->withHeader('Content-Type', 'application/json');
             $response->getBody()->write(json_encode(["message" => "Item not found"], JSON_THROW_ON_ERROR));
             return $response;

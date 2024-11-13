@@ -24,6 +24,7 @@ class TrackController extends AbstractController
      */
     public function getAllWithParams(Request $request, Response $response): Response
     {
+        /** @var array{page?: string, limit?: string, sort_by?: string, order?: string } $queryParams */
         $queryParams = $request->getQueryParams();
         $page = (int) ($queryParams['page'] ?? 1);
         $limit = (int) ($queryParams['limit'] ?? 10);

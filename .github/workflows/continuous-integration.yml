@@ -143,7 +143,13 @@ jobs:
 
       - name: Display PHP server logs
         if: always()
-        run: cat php_server.log
+        run: |
+          cat php_server.log
+          if [ -f logs/app.log ]; then
+            cat logs/app.log
+          else
+            echo "logs/app.log does not exist."
+          fi
 
       - name: Shutdown PHP server
         if: always()
