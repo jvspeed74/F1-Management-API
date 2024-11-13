@@ -16,7 +16,4 @@ parameters:
         - stubs/QueryBuilder.stub
     bootstrapFiles:
         - vendor/autoload.php
-    ignoreErrors:
-        - identifier: argument.type
-          path: config/routes.php
     reportMaybesInPropertyPhpDocTypes: false
