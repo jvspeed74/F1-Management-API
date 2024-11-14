@@ -10,5 +10,7 @@ return function (ContainerBuilder $containerBuilder): void {
     $containerBuilder->useAutowiring(true); // Enabled by default
 
     // Add services to the container
-    $containerBuilder->addDefinitions(require __DIR__ . '/dependencies.php');
+    $definitions = (array) require __DIR__ . '/dependencies.php';
+
+    $containerBuilder->addDefinitions($definitions);
 };
