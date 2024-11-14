@@ -4,6 +4,7 @@
 
 declare(strict_types=1);
 
+use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Logger;
@@ -13,8 +14,14 @@ return [
     // Define Monolog logger as a service
     LoggerInterface::class => function () {
         $logger = new Logger('app');
+
         $fileHandler = new StreamHandler(__DIR__ . '/../logs/app.log', Level::Debug);
-        $fileHandler->setFormatter(new Monolog\Formatter\LineFormatter(null, null, true, true));
+        $fileHandler->setFormatter(
+            new LineFormatter(
+                "[%datetime%] %channel%.%level_name%: %message%",
+                "Y-m-d H:i:s",
+            ),
+        );
         $logger->pushHandler($fileHandler);
 
         return $logger;
