@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Unit\Controllers;
 
 use App\Contracts\AbstractController;
-use App\Contracts\AbstractModel;
 use App\Contracts\AbstractRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Mockery;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
@@ -25,7 +25,7 @@ beforeEach(function () {
     };
     $this->response = new Response();
     $this->collection = Mockery::mock(Collection::class);
-    $this->model = Mockery::mock(AbstractModel::class);
+    $this->model = Mockery::mock(Model::class);
     $this->mockRequest = Mockery::mock(Request::class);
 });
 
@@ -51,7 +51,7 @@ describe('getAll', function () {
             expect($result->getStatusCode())
                 ->toBe(200)
                 ->and($result->getHeaderLine('Content-Type'))->toBe('application/json')
-                ->and((string)$result->getBody())->toBe('[]');
+                ->and((string) $result->getBody())->toBe('[]');
         },
     );
 });
@@ -72,7 +72,7 @@ describe('getById', function () {
             expect($result->getStatusCode())
                 ->toBe(200)
                 ->and($result->getHeaderLine('Content-Type'))->toBe('application/json')
-                ->and((string)$result->getBody())->toBe('{"id": 1, "name": "Item A"}');
+                ->and((string) $result->getBody())->toBe('{"id": 1, "name": "Item A"}');
         },
     );
 
@@ -88,7 +88,7 @@ describe('getById', function () {
             expect($result->getStatusCode())
                 ->toBe(404)
                 ->and($result->getHeaderLine('Content-Type'))->toBe('application/json')
-                ->and((string)$result->getBody())->toBe('{"message":"Item not found"}');
+                ->and((string) $result->getBody())->toBe('{"message":"Item not found"}');
         },
     );
 });
@@ -114,7 +114,7 @@ describe('create', function () {
             expect($result->getStatusCode())
                 ->toBe(201)
                 ->and($result->getHeaderLine('Content-Type'))->toBe('application/json')
-                ->and((string)$result->getBody())->toBe('{"id": 1, "name": "Item A"}');
+                ->and((string) $result->getBody())->toBe('{"id": 1, "name": "Item A"}');
         },
     );
 
@@ -128,7 +128,7 @@ describe('create', function () {
             expect($result->getStatusCode())
                 ->toBe(400)
                 ->and($result->getHeaderLine('Content-Type'))->toBe('application/json')
-                ->and((string)$result->getBody())->toBe(
+                ->and((string) $result->getBody())->toBe(
                     '{"message":"Invalid JSON body"}',
                 );
         },
