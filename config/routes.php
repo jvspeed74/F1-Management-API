@@ -6,7 +6,10 @@ use App\Controllers\{CarController,
     DriverController,
     EventController,
     TeamController,
-    TrackController};
+    TrackController,
+    UserController};
+use Chatter\Middleware\Logging as ChatterLogging;
+use Chatter\Authentication\BearerAuthenticator;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
@@ -19,11 +22,27 @@ use Slim\Routing\RouteCollectorProxy;
  * @return void
  */
 return function (App $app): void {
-    // Greet route
-    $app->get('/hello/{name}', function (Response $response, string $name) {
-        $response->getBody()->write("Hello, $name");
-        return $response;
+
+    // Root route
+    $app->get('/', function ($request, $response, $args) {
+        return $response->write('Welcome to Chatter API!');
     });
+
+    // Hello route
+    $app->get('/hello/{name}', function ($request, $response, $args) {
+        return $response->write("Hello " . $args['name']);
+    });
+
+    // User routes (with Bearer token authentication)
+    $app->group('/users', function (RouteCollectorProxy $group) {
+        $group->get('', UserController::class . ':getAll');
+        $group->get('/{id:\d+}', UserController::class . ':getById');
+        $group->post('', UserController::class . ':create');
+        $group->put('/{id:\d+}', UserController::class . ':update');
+        $group->patch('/{id:\d+}', UserController::class . ':update');
+        $group->delete('/{id:\d+}', UserController::class . ':delete');
+        $group->post('/authBearer', UserController::class . ':authBearer');
+    })->add(new BearerAuthenticator()); // Protecting user routes with Bearer Authenticator
 
     // Team routes
     $app->group('/teams', function (RouteCollectorProxy $group) {
@@ -70,4 +89,7 @@ return function (App $app): void {
         $group->patch('/{id:\d+}', CarController::class . ':update');
         $group->delete('/{id:\d+}', CarController::class . ':delete');
     });
+
+    // Run the application
+    $app->run();
 };
