@@ -29,7 +29,18 @@ class BearerAuthenticator
             $results = [
                 'status' => 'Authorization header not available'
             ];
-            $response->getBody()->write(json_encode($results, JSON_PRETTY_PRINT));
+
+            $encodedResults = json_encode($results, JSON_PRETTY_PRINT);
+
+            // Check if JSON encoding failed
+            if ($encodedResults === false) {
+                $encodedResults = json_encode(['status' => 'Failed to encode JSON response'], JSON_PRETTY_PRINT);
+            }
+
+            // Write the JSON string to the response body
+            $response->getBody()->write($encodedResults);
+
+            // Set the Content-Type to application/json and return 401 status
             return $response->withHeader('Content-Type', 'application/json')
                 ->withStatus(401);
         }
@@ -42,7 +53,20 @@ class BearerAuthenticator
             $results = [
                 'status' => 'Invalid Authorization header format'
             ];
-            $response->getBody()->write(json_encode($results, JSON_PRETTY_PRINT));
+
+            // Encode the results into JSON
+            $encodedResults = json_encode($results, JSON_PRETTY_PRINT);
+
+            // Check if JSON encoding failed
+            if ($encodedResults === false) {
+                // Handle JSON encoding error (fallback response)
+                $encodedResults = json_encode(['status' => 'Failed to encode JSON response'], JSON_PRETTY_PRINT);
+            }
+
+            // Write the JSON string to the response body
+            $response->getBody()->write($encodedResults);
+
+            // Set the Content-Type to application/json and return 400 status
             return $response->withHeader('Content-Type', 'application/json')
                 ->withStatus(400);
         }
@@ -54,11 +78,24 @@ class BearerAuthenticator
         $tokenRecord = $this->tokenRepository->validateBearerToken($token);
 
         // Handle the case where the token is invalid
-        if (!$tokenRecord) {
+        if ($tokenRecord === null) {
             $results = [
                 'status' => 'Authentication failed'
             ];
-            $response->getBody()->write(json_encode($results, JSON_PRETTY_PRINT));
+
+            // Encode the results into JSON
+            $encodedResults = json_encode($results, JSON_PRETTY_PRINT);
+
+            // Check if JSON encoding failed
+            if ($encodedResults === false) {
+                // Handle JSON encoding error (fallback response)
+                $encodedResults = json_encode(['status' => 'Failed to encode JSON response'], JSON_PRETTY_PRINT);
+            }
+
+            // Write the JSON string to the response body
+            $response->getBody()->write($encodedResults);
+
+            // Set the Content-Type to application/json and return 401 status
             return $response->withHeader('Content-Type', 'application/json')
                 ->withStatus(401);
         }
@@ -67,4 +104,3 @@ class BearerAuthenticator
         return $next($request, $response);
     }
 }
-
