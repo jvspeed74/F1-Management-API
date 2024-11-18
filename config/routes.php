@@ -24,16 +24,17 @@ use Psr\Http\Server\MiddlewareInterface;
  */
 return function (App $app): void {
 
-    // Root route
     $app->get('/', function ($request, $response, $args) {
-        return $response->write('Welcome to Chatter API!');
+        $response->getBody()->write('Welcome to Chatter API!');
+        return $response;
     });
 
-    // Hello route with proper handling of the 'name' parameter
     $app->get('/hello/{name}', function ($request, $response, $args) {
         $name = isset($args['name']) ? (string)$args['name'] : 'Guest';
-        return $response->write("Hello " . $name);
+        $response->getBody()->write("Hello, {$name}!");
+        return $response;
     });
+
 
     // User routes (with Bearer token authentication)
     $app->group('/users', function (RouteCollectorProxy $group) {

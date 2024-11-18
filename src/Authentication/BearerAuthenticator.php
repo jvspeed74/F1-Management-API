@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Authentication;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -30,9 +29,9 @@ class BearerAuthenticator
             $results = [
                 'status' => 'Authorization header not available'
             ];
+            $response->getBody()->write(json_encode($results, JSON_PRETTY_PRINT));
             return $response->withHeader('Content-Type', 'application/json')
-                ->withStatus(401)
-                ->write(json_encode($results, JSON_PRETTY_PRINT));
+                ->withStatus(401);
         }
 
         // Retrieve the Authorization header
@@ -43,9 +42,9 @@ class BearerAuthenticator
             $results = [
                 'status' => 'Invalid Authorization header format'
             ];
+            $response->getBody()->write(json_encode($results, JSON_PRETTY_PRINT));
             return $response->withHeader('Content-Type', 'application/json')
-                ->withStatus(400)
-                ->write(json_encode($results, JSON_PRETTY_PRINT));
+                ->withStatus(400);
         }
 
         // Extract the token by removing the "Bearer " prefix
@@ -53,16 +52,19 @@ class BearerAuthenticator
 
         // Validate the Bearer token using TokenRepository
         $tokenRecord = $this->tokenRepository->validateBearerToken($token);
+
+        // Handle the case where the token is invalid
         if (!$tokenRecord) {
             $results = [
                 'status' => 'Authentication failed'
             ];
+            $response->getBody()->write(json_encode($results, JSON_PRETTY_PRINT));
             return $response->withHeader('Content-Type', 'application/json')
-                ->withStatus(401)
-                ->write(json_encode($results, JSON_PRETTY_PRINT));
+                ->withStatus(401);
         }
 
         // Continue to the next middleware or handler
         return $next($request, $response);
     }
 }
+
