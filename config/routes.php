@@ -13,6 +13,7 @@ use Chatter\Authentication\BearerAuthenticator;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
+use Psr\Http\Server\MiddlewareInterface;
 
 /**
  * Register application routes.
@@ -28,9 +29,10 @@ return function (App $app): void {
         return $response->write('Welcome to Chatter API!');
     });
 
-    // Hello route
+    // Hello route with proper handling of the 'name' parameter
     $app->get('/hello/{name}', function ($request, $response, $args) {
-        return $response->write("Hello " . $args['name']);
+        $name = isset($args['name']) ? (string)$args['name'] : 'Guest';
+        return $response->write("Hello " . $name);
     });
 
     // User routes (with Bearer token authentication)
@@ -42,7 +44,16 @@ return function (App $app): void {
         $group->patch('/{id:\d+}', UserController::class . ':update');
         $group->delete('/{id:\d+}', UserController::class . ':delete');
         $group->post('/authBearer', UserController::class . ':authBearer');
-    })->add(new BearerAuthenticator()); // Protecting user routes with Bearer Authenticator
+    })
+        ->add(function ($request, $handler) {
+            // Check if BearerAuthenticator class exists
+            if (!class_exists(BearerAuthenticator::class)) {
+                throw new \RuntimeException("BearerAuthenticator class not found.");
+            }
+            // Create instance of BearerAuthenticator middleware
+            $authenticator = new BearerAuthenticator();
+            return $authenticator->process($request, $handler);
+        }); // Protecting user routes with Bearer Authenticator
 
     // Team routes
     $app->group('/teams', function (RouteCollectorProxy $group) {

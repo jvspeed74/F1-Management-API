@@ -8,7 +8,7 @@ use App\Repositories\TokenRepository;
 
 class BearerAuthenticator
 {
-    protected $tokenRepository;
+    protected TokenRepository $tokenRepository;
 
     public function __construct(TokenRepository $tokenRepository)
     {
@@ -23,26 +23,29 @@ class BearerAuthenticator
      * @param callable $next The next middleware or route handler
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, $next)
+    public function __invoke(Request $request, Response $response, $next): Response
     {
         // If the Authorization header is not present, return an error
         if (!$request->hasHeader('Authorization')) {
             $results = [
                 'status' => 'Authorization header not available'
             ];
-            return $response->withJson($results, 401, JSON_PRETTY_PRINT);
+            return $response->withHeader('Content-Type', 'application/json')
+                ->withStatus(401)
+                ->write(json_encode($results, JSON_PRETTY_PRINT));
         }
 
         // Retrieve the Authorization header
         $auth = $request->getHeader('Authorization');
 
         // The value of the Authorization header is in the form "Bearer <token>"
-        // Check if the header starts with "Bearer " and extract the token
         if (strpos($auth[0], 'Bearer ') !== 0) {
             $results = [
                 'status' => 'Invalid Authorization header format'
             ];
-            return $response->withJson($results, 400, JSON_PRETTY_PRINT);
+            return $response->withHeader('Content-Type', 'application/json')
+                ->withStatus(400)
+                ->write(json_encode($results, JSON_PRETTY_PRINT));
         }
 
         // Extract the token by removing the "Bearer " prefix
@@ -54,10 +57,12 @@ class BearerAuthenticator
             $results = [
                 'status' => 'Authentication failed'
             ];
-            return $response->withJson($results, 401, JSON_PRETTY_PRINT);
+            return $response->withHeader('Content-Type', 'application/json')
+                ->withStatus(401)
+                ->write(json_encode($results, JSON_PRETTY_PRINT));
         }
 
-        $response = $next($request, $response);
-        return $response;
+        // Continue to the next middleware or handler
+        return $next($request, $response);
     }
 }
