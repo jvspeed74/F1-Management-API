@@ -31,7 +31,8 @@
     "php-di/slim-bridge": "^3.4.0",
     "slim/http": "^1.4.0",
     "monolog/monolog": "^3.7.0",
-    "illuminate/pagination": "^v11.30.0"
+    "illuminate/pagination": "^v11.30.0",
+    "firebase/php-jwt": "^6.10"
   },
   "require-dev": {
     "phpstan/phpstan": "^2.0.1",
