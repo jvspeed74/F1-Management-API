@@ -26,7 +26,7 @@ class JWTAuthenticator
     {
         try {
             $decoded = JWT::decode($token, new Key(self::SECRET_KEY, 'HS256'));
-            return (array)$decoded;
+            return (array) $decoded;
         } catch (\Throwable) {
             return [];
         }
