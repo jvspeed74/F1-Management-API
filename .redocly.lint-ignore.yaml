@@ -70,18 +70,11 @@ docs/paths/teams.yaml:
     - '#/post/operationId'
   operation-4xx-response:
     - '#/get/responses'
-  security-defined:
-    - '#/get'
-    - '#/post'
 docs/paths/teams/{id}.yaml:
   operation-operationId:
     - '#/get/operationId'
     - '#/delete/operationId'
     - '#/patch/operationId'
-  security-defined:
-    - '#/get'
-    - '#/delete'
-    - '#/patch'
 docs/paths/tracks.yaml:
   operation-operationId:
     - '#/get/operationId'
