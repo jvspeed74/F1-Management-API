@@ -4,6 +4,12 @@
     application/json:
       schema:
         $ref: './schemas/error.yaml'
+'401':
+  description: Unauthorized
+  content:
+    application/json:
+      schema:
+        $ref: './schemas/error.yaml'
 '404':
   description: Resource not found
   content:

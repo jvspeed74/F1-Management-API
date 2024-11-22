@@ -2,6 +2,10 @@ get:
   summary: Get team by ID
   tags:
     - Teams
+  security:
+    - basicAuth: [ ]
+    - bearerAuth: [ ]
+    - JWTAuth: [ ]
   parameters:
     - $ref: '../../components/parameters.yaml#/id'
   responses:
@@ -19,6 +23,10 @@ patch:
   summary: Update fields for a team
   tags:
     - Teams
+  security:
+    - basicAuth: [ ]
+    - bearerAuth: [ ]
+    - JWTAuth: [ ]
   parameters:
     - $ref: '../../components/parameters.yaml#/id'
   requestBody:
@@ -44,6 +52,10 @@ delete:
   summary: Delete a team
   tags:
     - Teams
+  security:
+    - basicAuth: [ ]
+    - bearerAuth: [ ]
+    - JWTAuth: [ ]
   parameters:
     - $ref: '../../components/parameters.yaml#/id'
   responses:

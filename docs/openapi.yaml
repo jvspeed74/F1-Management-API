@@ -29,3 +29,15 @@ paths:
     $ref: './paths/tracks.yaml'
   /tracks/{id}:
     $ref: './paths/tracks/{id}.yaml'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
+    JWTAuth:
+      type: apiKey
+      in: header
+      name: Authorization

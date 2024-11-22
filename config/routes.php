@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Middleware\AuthMiddleware;
 use App\Controllers\{CarController,
     DriverController,
     EventController,
@@ -32,7 +33,7 @@ return function (App $app): void {
         $group->post('', TeamController::class . ':create');
         $group->patch('/{id:\d+}', TeamController::class . ':update');
         $group->delete('/{id:\d+}', TeamController::class . ':delete');
-    });
+    })->add(AuthMiddleware::class);
 
     // Event routes
     $app->group('/events', function (RouteCollectorProxy $group) {
