@@ -17,7 +17,7 @@ class BasicAuthenticator
         $this->userRepository = $userRepository;
     }
 
-    public function authenticate(string $username, string $password): bool
+    public function validate(string $username, string $password): bool
     {
         /** @var User|null $user */
         $user = $this->userRepository->findBy('username', $username);

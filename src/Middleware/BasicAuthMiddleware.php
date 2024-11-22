@@ -38,7 +38,7 @@ class BasicAuthMiddleware implements MiddlewareInterface
 
         $credentials = base64_decode(str_replace('Basic ', '', $authHeader[0]));
         [$username, $password] = explode(':', $credentials, 2);
-        if (!$this->basicAuthenticator->authenticate($username, $password)) {
+        if (!$this->basicAuthenticator->validate($username, $password)) {
             return $this->responseHandler->unauthorized('Invalid credentials');
         }
 
