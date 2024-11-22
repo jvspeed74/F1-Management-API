@@ -5,46 +5,42 @@ declare(strict_types=1);
 namespace App\Middleware;
 
 use App\Authentication\JWTAuthenticator;
+use App\Helpers\ResponseHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Slim\Psr7\Factory\ResponseFactory;
 
 class JWTAuthMiddleware implements MiddlewareInterface
 {
     private JWTAuthenticator $jwtAuthenticator;
-    private ResponseFactory $responseFactory;
+    private ResponseHandler $responseHandler;
 
     public function __construct(
         JWTAuthenticator $jwtAuthenticator,
-        ResponseFactory $responseFactory,
+        ResponseHandler $responseHandler,
     ) {
         $this->jwtAuthenticator = $jwtAuthenticator;
-        $this->responseFactory = $responseFactory;
+        $this->responseHandler = $responseHandler;
     }
 
+    /**
+     * @throws \JsonException
+     */
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler,
     ): ResponseInterface {
         $authHeader = $request->getHeader('Authorization');
         if (empty($authHeader) || !str_starts_with($authHeader[0], 'JWT ')) {
-            return $this->unauthorizedResponse('JWT token not received');
+            return $this->responseHandler->unauthorized('JWT token not received');
         }
 
         $token = str_replace('JWT ', '', $authHeader[0]);
         if (!$this->jwtAuthenticator->validate($token)) {
-            return $this->unauthorizedResponse('Invalid JWT token');
+            return $this->responseHandler->unauthorized('Invalid');
         }
 
         return $handler->handle($request);
-    }
-
-    private function unauthorizedResponse(string $message): ResponseInterface
-    {
-        $response = $this->responseFactory->createResponse(401);
-        $response->getBody()->write(json_encode(['error' => $message], JSON_THROW_ON_ERROR));
-        return $response;
     }
 }
