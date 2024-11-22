@@ -84,4 +84,9 @@ abstract class AbstractRepository implements RepositoryInterface
         })
             ->get();
     }
+
+    public function findBy(string $field, mixed $value): Model|null
+    {
+        return $this->model::where($field, $value)->first();
+    }
 }

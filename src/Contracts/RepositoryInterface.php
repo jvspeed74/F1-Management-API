@@ -46,4 +46,6 @@ interface RepositoryInterface
      * @return Collection<int, Model>
      */
     public function search(string $q): Collection;
+
+    public function findBy(string $field, mixed $value): Model|null;
 }
