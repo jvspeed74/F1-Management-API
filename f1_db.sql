@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2024 at 02:27 AM
+-- Generation Time: Nov 22, 2024 at 05:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -329,51 +329,22 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`id`, `title`, `scheduled_date`, `track_id`, `status`) VALUES (1,
-                                                                                     'Formula 1 Grand Prix de Monaco 2024',
-                                                                                     '2024-05-26', 1, 'Completed'),
-                                                                                    (2,
-                                                                                     'Formula 1 Aramco British Grand Prix 2024',
-                                                                                     '2024-07-07', 2, 'Completed'),
-                                                                                    (3,
-                                                                                     'Formula 1 Pirelli Gran Premio D\'Italia 2024',
-                                                                                     '2024-09-08', 3, 'Completed'),
-                                                                                    (4,
-                                                                                     'Formula 1 Rolex Belgian Grand Prix 2024',
-                                                                                     '2024-08-25', 4, 'Completed'),
-                                                                                    (5,
-                                                                                     'Formula 1 Honda Japanese Grand Prix 2024',
-                                                                                     '2024-10-13', 5, 'Completed'),
-                                                                                    (6,
-                                                                                     'Formula 1 Pirelli Grand Prix du Canada 2024',
-                                                                                     '2024-06-09', 6, 'Completed'),
-                                                                                    (7,
-                                                                                     'Formula 1 Singapore Airlines Singapore Grand Prix 2024',
-                                                                                     '2024-09-22', 7, 'Completed'),
-                                                                                    (8,
-                                                                                     'Formula 1 Heineken Grande Prêmio de São Paulo 2024',
-                                                                                     '2024-11-17', 8, 'Planned'),
-                                                                                    (9,
-                                                                                     'Formula 1 Lenovo United States Grand Prix 2024',
-                                                                                     '2024-10-20', 9, 'Planned'),
-                                                                                    (10,
-                                                                                     'Formula 1 Etihad Airways Abu Dhabi Grand Prix 2024',
-                                                                                     '2024-12-01', 10, 'Planned'),
-                                                                                    (11,
-                                                                                     'Formula 1 Rolex Australian Grand Prix 2024',
-                                                                                     '2024-03-17', 11, 'Completed'),
-                                                                                    (12,
-                                                                                     'Formula 1 STC Saudi Arabian Grand Prix 2024',
-                                                                                     '2024-03-31', 12, 'Completed'),
-                                                                                    (13,
-                                                                                     'Formula 1 Rolex Großer Preis von Österreich 2024',
-                                                                                     '2024-07-14', 13, 'Completed'),
-                                                                                    (14,
-                                                                                     'Formula 1 Gulf Air Bahrain Grand Prix 2024',
-                                                                                     '2024-03-03', 14, 'Completed'),
-                                                                                    (15,
-                                                                                     'Formula 1 Qatar Airways Hungarian Grand Prix 2024',
-                                                                                     '2024-08-04', 15, 'Completed');
+INSERT INTO `events` (`id`, `title`, `scheduled_date`, `track_id`, `status`) VALUES
+(1, 'Formula 1 Grand Prix de Monaco 2024', '2024-05-26', 1, 'Completed'),
+(2, 'Formula 1 Aramco British Grand Prix 2024', '2024-07-07', 2, 'Completed'),
+(3, 'Formula 1 Pirelli Gran Premio D\'Italia 2024', '2024-09-08', 3, 'Completed'),
+(4, 'Formula 1 Rolex Belgian Grand Prix 2024', '2024-08-25', 4, 'Completed'),
+(5, 'Formula 1 Honda Japanese Grand Prix 2024', '2024-10-13', 5, 'Completed'),
+(6, 'Formula 1 Pirelli Grand Prix du Canada 2024', '2024-06-09', 6, 'Completed'),
+(7, 'Formula 1 Singapore Airlines Singapore Grand Prix 2024', '2024-09-22', 7, 'Completed'),
+(8, 'Formula 1 Heineken Grande Prêmio de São Paulo 2024', '2024-11-17', 8, 'Planned'),
+(9, 'Formula 1 Lenovo United States Grand Prix 2024', '2024-10-20', 9, 'Planned'),
+(10, 'Formula 1 Etihad Airways Abu Dhabi Grand Prix 2024', '2024-12-01', 10, 'Planned'),
+(11, 'Formula 1 Rolex Australian Grand Prix 2024', '2024-03-17', 11, 'Completed'),
+(12, 'Formula 1 STC Saudi Arabian Grand Prix 2024', '2024-03-31', 12, 'Completed'),
+(13, 'Formula 1 Rolex Großer Preis von Österreich 2024', '2024-07-14', 13, 'Completed'),
+(14, 'Formula 1 Gulf Air Bahrain Grand Prix 2024', '2024-03-03', 14, 'Completed'),
+(15, 'Formula 1 Qatar Airways Hungarian Grand Prix 2024', '2024-08-04', 15, 'Completed');
 
 -- --------------------------------------------------------
 
@@ -622,6 +593,23 @@ INSERT INTO `teams` (`id`, `official_name`, `short_name`, `headquarters`, `team_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tokens`
+--
+
+CREATE TABLE `tokens` (
+  `id` smallint(6) NOT NULL,
+  `user_id` smallint(6) NOT NULL,
+  `token` varchar(800) NOT NULL,
+  `token_type` enum('bearer','jwt') NOT NULL,
+  `revoked` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `expires_at` timestamp NOT NULL DEFAULT (current_timestamp() + interval 15 minute)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tracks`
 --
 
@@ -654,6 +642,28 @@ INSERT INTO `tracks` (`id`, `name`, `length_km`, `continent`, `country_id`, `des
 (13, 'Red Bull Ring', 4.32, 'Europe', 10, 'A short but high-speed track located in Austria with stunning scenic views.'),
 (14, 'Bahrain International Circuit', 5.41, 'Asia', 13, 'A desert circuit known for its night race and heavy braking zones.'),
 (15, 'Hungaroring', 4.38, 'Europe', 74, 'A technical track in Hungary, often called \"Monaco without the walls\".');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` smallint(6) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `created_at`, `updated_at`) VALUES
+(1, 'default', '$2y$10$rd3rB1CpuT44jEnDBITGYe9j8m7Ndtsqv2gvTZqnUMioCjOS0nzIe', '2024-11-21 23:09:38', '2024-11-21 23:09:38'),
+(2, 'test', '$2y$10$xZ/6bz./NVyTVnBZLmXPtuDKUEVKXzYDIjoK9psKYwVwwdJfTi4Zy', '2024-11-21 23:10:44', '2024-11-21 23:10:44');
 
 --
 -- Indexes for dumped tables
@@ -707,12 +717,27 @@ ALTER TABLE `teams`
   ADD UNIQUE KEY `short_name` (`short_name`) USING BTREE;
 
 --
+-- Indexes for table `tokens`
+--
+ALTER TABLE `tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `token` (`token`) USING HASH,
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `tracks`
 --
 ALTER TABLE `tracks`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`),
   ADD KEY `country_id` (`country_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -755,10 +780,22 @@ ALTER TABLE `teams`
   MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `tokens`
+--
+ALTER TABLE `tokens`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tracks`
 --
 ALTER TABLE `tracks`
   MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -782,6 +819,12 @@ ALTER TABLE `drivers`
 --
 ALTER TABLE `events`
   ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `tokens`
+--
+ALTER TABLE `tokens`
+  ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `tracks`
