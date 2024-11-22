@@ -46,7 +46,4 @@ return [
         $capsule->bootEloquent();
         return $capsule;
     },
-    JWTAuthenticator::class => function () {
-        return new JWTAuthenticator('secret');
-    },
 ];

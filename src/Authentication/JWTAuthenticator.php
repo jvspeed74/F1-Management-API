@@ -10,12 +10,11 @@ use Firebase\JWT\Key;
 
 class JWTAuthenticator
 {
-    private string $secretKey;
+    private const SECRET_KEY = 'secret';
     private TokenRepository $tokenRepository;
 
-    public function __construct(string $secretKey, TokenRepository $tokenRepository)
+    public function __construct(TokenRepository $tokenRepository)
     {
-        $this->secretKey = $secretKey;
         $this->tokenRepository = $tokenRepository;
     }
 
@@ -26,8 +25,8 @@ class JWTAuthenticator
     public function validate(string $token): array
     {
         try {
-            $decoded = JWT::decode($token, new Key($this->secretKey, 'HS256'));
-            return (array) $decoded;
+            $decoded = JWT::decode($token, new Key(self::SECRET_KEY, 'HS256'));
+            return (array)$decoded;
         } catch (\Throwable) {
             return [];
         }
@@ -42,7 +41,7 @@ class JWTAuthenticator
             'exp' => $expirationTime,
         ];
 
-        $jwtToken = JWT::encode($payload, $this->secretKey, 'HS256');
+        $jwtToken = JWT::encode($payload, self::SECRET_KEY, 'HS256');
         $this->tokenRepository->create([
             'token' => $jwtToken,
             'token_type' => 'jwt',

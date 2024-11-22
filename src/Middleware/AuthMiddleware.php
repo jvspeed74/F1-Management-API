@@ -14,15 +14,18 @@ class AuthMiddleware implements MiddlewareInterface
 {
     private BearerAuthMiddleware $bearerAuthMiddleware;
     private BasicAuthMiddleware $basicAuthMiddleware;
+    private JWTAuthMiddleware $jwtAuthMiddleware;
     private ResponseHandler $responseHandler;
 
     public function __construct(
         BearerAuthMiddleware $bearerAuthMiddleware,
         BasicAuthMiddleware $basicAuthMiddleware,
+        JWTAuthMiddleware $jwtAuthMiddleware,
         ResponseHandler $responseHandler,
     ) {
         $this->bearerAuthMiddleware = $bearerAuthMiddleware;
         $this->basicAuthMiddleware = $basicAuthMiddleware;
+        $this->jwtAuthMiddleware = $jwtAuthMiddleware;
         $this->responseHandler = $responseHandler;
     }
 
@@ -46,6 +49,10 @@ class AuthMiddleware implements MiddlewareInterface
 
         if (str_starts_with($authHeader[0], 'Basic ')) {
             return $this->basicAuthMiddleware->process($request, $handler);
+        }
+
+        if (str_starts_with($authHeader[0], 'JWT ')) {
+            return $this->jwtAuthMiddleware->process($request, $handler);
         }
 
         return $this->responseHandler->unauthorized('Invalid authorization header');
