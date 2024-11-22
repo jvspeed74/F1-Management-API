@@ -17,7 +17,7 @@ class BearerAuthenticator
         $this->tokenRepository = $tokenRepository;
     }
 
-    public function validate(string $token): ?string
+    public function validate(string $token): bool
     {
         /** @var Token|null $model */
         $model = $this->tokenRepository->findBy('token', $token);
@@ -25,8 +25,8 @@ class BearerAuthenticator
             && $model->token_type === 'bearer'
             && $model->expires_at > date(self::DATE_FORMAT)
         ) {
-            return $token;
+            return true;
         }
-        return null;
+        return false;
     }
 }

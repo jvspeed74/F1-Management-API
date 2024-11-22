@@ -17,13 +17,13 @@ class BasicAuthenticator
         $this->userRepository = $userRepository;
     }
 
-    public function authenticate(string $username, string $password): ?Model
+    public function authenticate(string $username, string $password): bool
     {
         /** @var User|null $user */
         $user = $this->userRepository->findBy('username', $username);
         if ($user && password_verify($password, $user->password)) {
-            return $user;
+            return true;
         }
-        return null;
+        return false;
     }
 }
