@@ -18,7 +18,7 @@ class JWTAuthMiddleware implements MiddlewareInterface
 
     public function __construct(
         JWTAuthenticator $jwtAuthenticator,
-        ResponseFactory $responseFactory
+        ResponseFactory $responseFactory,
     ) {
         $this->jwtAuthenticator = $jwtAuthenticator;
         $this->responseFactory = $responseFactory;
@@ -26,7 +26,7 @@ class JWTAuthMiddleware implements MiddlewareInterface
 
     public function process(
         ServerRequestInterface $request,
-        RequestHandlerInterface $handler
+        RequestHandlerInterface $handler,
     ): ResponseInterface {
         $authHeader = $request->getHeader('Authorization');
         if (empty($authHeader) || !str_starts_with($authHeader[0], 'JWT ')) {
