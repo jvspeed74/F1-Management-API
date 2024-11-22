@@ -4,29 +4,20 @@ declare(strict_types=1);
 
 namespace App\Authentication;
 
+use App\Repositories\TokenRepository;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 class JWTAuthenticator
 {
     private string $secretKey;
+    private TokenRepository $tokenRepository;
 
-    public function __construct(string $secretKey)
+    public function __construct(string $secretKey, TokenRepository $tokenRepository)
     {
         $this->secretKey = $secretKey;
+        $this->tokenRepository = $tokenRepository;
     }
-
-    //    public function createToken(array $data): string
-    //    {
-    //        $issuedAt = time();
-    //        $expirationTime = $issuedAt + 3600; // jwt valid for 1 hour
-    //        $payload = array_merge($data, [
-    //            'iat' => $issuedAt,
-    //            'exp' => $expirationTime,
-    //        ]);
-    //
-    //        return JWT::encode($payload, $this->secretKey, 'HS256');
-    //    }
 
     /**
      * @param string $token
@@ -40,5 +31,24 @@ class JWTAuthenticator
         } catch (\Throwable) {
             return [];
         }
+    }
+
+    public function generate(): string
+    {
+        $issuedAt = time();
+        $expirationTime = $issuedAt + 3600; // jwt valid for 1 hour
+        $payload = [
+            'iat' => $issuedAt,
+            'exp' => $expirationTime,
+        ];
+
+        $jwtToken = JWT::encode($payload, $this->secretKey, 'HS256');
+        $this->tokenRepository->create([
+            'token' => $jwtToken,
+            'token_type' => 'jwt',
+            'expires_at' => date('Y-m-d H:i:s', $expirationTime),
+        ]);
+
+        return $jwtToken;
     }
 }

@@ -6,6 +6,7 @@ namespace App\Authentication;
 
 use App\Models\Token;
 use App\Repositories\TokenRepository;
+use Random\RandomException;
 
 class BearerAuthenticator
 {
@@ -28,5 +29,19 @@ class BearerAuthenticator
             return true;
         }
         return false;
+    }
+
+    /**
+     * @throws RandomException
+     */
+    public function generate(): string
+    {
+        $token = bin2hex(random_bytes(32));
+        $this->tokenRepository->create([
+            'token' => $token,
+            'token_type' => 'bearer',
+            'expires_at' => date(self::DATE_FORMAT, strtotime('+1 hour')),
+        ]);
+        return $token;
     }
 }
