@@ -2,12 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Middleware\AuthMiddleware;
-use App\Controllers\{CarController,
-    DriverController,
-    EventController,
-    TeamController,
-    TrackController};
+use App\Controllers\{CarController, DriverController, EventController, TeamController, TrackController};
+use App\Middleware\JWTAuthMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
@@ -33,7 +29,7 @@ return function (App $app): void {
         $group->post('', TeamController::class . ':create');
         $group->patch('/{id:\d+}', TeamController::class . ':update');
         $group->delete('/{id:\d+}', TeamController::class . ':delete');
-    })->add(AuthMiddleware::class);
+    })->add(JWTAuthMiddleware::class);
 
     // Event routes
     $app->group('/events', function (RouteCollectorProxy $group) {
@@ -42,7 +38,7 @@ return function (App $app): void {
         $group->post('', EventController::class . ':create');
         $group->patch('/{id:\d+}', EventController::class . ':update');
         $group->delete('/{id:\d+}', EventController::class . ':delete');
-    });
+    })->add(JWTAuthMiddleware::class);
 
     // Track routes
     $app->group('/tracks', function (RouteCollectorProxy $group) {
@@ -51,7 +47,7 @@ return function (App $app): void {
         $group->post('', TrackController::class . ':create');
         $group->patch('/{id:\d+}', TrackController::class . ':update');
         $group->delete('/{id:\d+}', TrackController::class . ':delete');
-    });
+    })->add(JWTAuthMiddleware::class);
 
     // Driver routes
     $app->group('/drivers', function (RouteCollectorProxy $group) {
@@ -61,7 +57,7 @@ return function (App $app): void {
         $group->patch('/{id:\d+}', DriverController::class . ':update');
         $group->delete('/{id:\d+}', DriverController::class . ':delete');
         $group->get('/search', DriverController::class . ':search');
-    });
+    })->add(JWTAuthMiddleware::class);
 
     // Car routes
     $app->group('/cars', function (RouteCollectorProxy $group) {
@@ -70,5 +66,5 @@ return function (App $app): void {
         $group->post('', CarController::class . ':create');
         $group->patch('/{id:\d+}', CarController::class . ':update');
         $group->delete('/{id:\d+}', CarController::class . ':delete');
-    });
+    })->add(JWTAuthMiddleware::class);
 };
