@@ -30,7 +30,7 @@ paths:
   /tracks/{id}:
     $ref: './paths/tracks/{id}.yaml'
 components:
-  securitySchemes:
+  securitySchemes: # TODO Update security schemas for all endpoints to use JWT
     basicAuth:
       type: http
       scheme: basic
