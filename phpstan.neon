@@ -10,9 +10,9 @@ parameters:
     excludePaths:
         - tests/**
     stubFiles:
-        - stubs/Model.stub
-        - stubs/EloquentBuilder.stub
-        - stubs/QueryBuilder.stub
+        - .stubs/Model.stub
+        - .stubs/EloquentBuilder.stub
+        - .stubs/QueryBuilder.stub
     bootstrapFiles:
         - vendor/autoload.php
     reportMaybesInPropertyPhpDocTypes: false
