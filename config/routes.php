@@ -38,7 +38,7 @@ return function (App $app): void {
         $group->post('', EventController::class . ':create');
         $group->patch('/{id:\d+}', EventController::class . ':update');
         $group->delete('/{id:\d+}', EventController::class . ':delete');
-    })->add(JWTAuthMiddleware::class);
+    });  // TODO Enable JWT middleware
 
     // Track routes
     $app->group('/tracks', function (RouteCollectorProxy $group) {
