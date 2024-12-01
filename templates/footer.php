@@ -36,6 +36,7 @@
 <script src="js/signup.js"></script>
 <script src="js/signout.js"></script>
 <script src="js/message.js"></script>
+<script src="js/event.js"></script>
 <script src="js/index.js"></script>
 </body>
 </html>

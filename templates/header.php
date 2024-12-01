@@ -41,6 +41,9 @@
             </button>
             <div class="navbar-collapse collapse" id="navbarCollapse" style="">
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item" id="li-event">
+                        <a class="nav-link" href="#event">Event</a>
+                    </li>
                     <li class="nav-item" id="li-user">
                         <a class="nav-link disabled" href="#user">Users <span class="sr-only">(current)</span></a>
                     </li>
