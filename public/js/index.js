@@ -1,5 +1,5 @@
 var oldHash = '';
-var baseUrl_API = "http://localhost:8080/I425/Practice2022Fall/chatter/api"; // you need to fill this variable with your own api url
+var baseUrl_API = "http://localhost:8080"; // you need to fill this variable with your own api url
 
 $(function () {
     //Handle hashchange event; when a click is clicked, invoke an appropriate function
@@ -21,14 +21,8 @@ $(function () {
             case 'home':
                 home();
                 break;
-            case 'user':
-                showUsers();
-                break;
-            case 'post':
-                showPosts();
-                break;
-            case 'admin':
-                showAllPosts();
+            case 'event':
+                getAllEvents();
                 break;
             case 'signin':
                 signin();
@@ -39,13 +33,11 @@ $(function () {
             case 'signout':
                 signout();
                 break;
-            case 'message':
-                break;
             default:
                 home();
         }
     });
-    if(jwt == '') {
+    if(jwt === '') {
         //display homepage content and set the hash to 'home'
         home();
         window.location.hash = 'home';
