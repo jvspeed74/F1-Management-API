@@ -1,0 +1,19 @@
+type: object
+properties:
+  id:
+    type: integer
+    format: int32
+    minimum: 0
+    maximum: 65535
+    readOnly: true
+    example: 1
+  username:
+    type: string
+    nullable: false
+    maxLength: 100
+    example: 'john_doe'
+  password:
+    type: string
+    nullable: false
+    maxLength: 100
+    example: 'password'

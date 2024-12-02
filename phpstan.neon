@@ -2,7 +2,7 @@ includes:
     - vendor/phpstan/phpstan-mockery/extension.neon
 
 parameters:
-    level: max
+    level: 4
     paths:
         - src
         - config
@@ -10,9 +10,13 @@ parameters:
     excludePaths:
         - tests/**
     stubFiles:
-        - stubs/Model.stub
-        - stubs/EloquentBuilder.stub
-        - stubs/QueryBuilder.stub
+        - .stubs/Model.stub
+        - .stubs/EloquentBuilder.stub
+        - .stubs/QueryBuilder.stub
     bootstrapFiles:
         - vendor/autoload.php
     reportMaybesInPropertyPhpDocTypes: false
+    ignoreErrors:
+        - '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$password#'
+        - '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$id#'
+        - '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$username#'

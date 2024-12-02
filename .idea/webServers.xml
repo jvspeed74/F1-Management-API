@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8714d042-57ec-4d70-9647-819bbeb63e8b" name="API" url="http://localhost:8080">
+        <fileTransfer accessType="LOCAL" port="0" />
+      </webServer>
+      <webServer id="763fc026-c936-4ea3-acae-665d6db6e762" name="SPA" url="http://localhost">
+        <fileTransfer accessType="LOCAL" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

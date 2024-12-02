@@ -68,8 +68,6 @@ docs/paths/teams.yaml:
   operation-operationId:
     - '#/get/operationId'
     - '#/post/operationId'
-  operation-4xx-response:
-    - '#/get/responses'
 docs/paths/teams/{id}.yaml:
   operation-operationId:
     - '#/get/operationId'
@@ -79,8 +77,6 @@ docs/paths/tracks.yaml:
   operation-operationId:
     - '#/get/operationId'
     - '#/post/operationId'
-  operation-4xx-response:
-    - '#/get/responses'
   security-defined:
     - '#/get'
     - '#/post'
@@ -93,3 +89,8 @@ docs/paths/tracks/{id}.yaml:
     - '#/get'
     - '#/delete'
     - '#/patch'
+docs/paths/users/authJWT.yaml:
+  operation-operationId:
+    - '#/post/operationId'
+  security-defined:
+    - '#/post'

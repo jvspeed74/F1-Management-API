@@ -3,11 +3,8 @@
 declare(strict_types=1);
 
 use App\Middleware\AuthMiddleware;
-use App\Controllers\{CarController,
-    DriverController,
-    EventController,
-    TeamController,
-    TrackController};
+use App\Controllers\{CarController, DriverController, EventController, TeamController, TrackController, UserController};
+use App\Middleware\JWTAuthMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
@@ -42,7 +39,7 @@ return function (App $app): void {
         $group->post('', EventController::class . ':create');
         $group->patch('/{id:\d+}', EventController::class . ':update');
         $group->delete('/{id:\d+}', EventController::class . ':delete');
-    });
+    });  // TODO Enable JWT middleware
 
     // Track routes
     $app->group('/tracks', function (RouteCollectorProxy $group) {
@@ -71,4 +68,9 @@ return function (App $app): void {
         $group->patch('/{id:\d+}', CarController::class . ':update');
         $group->delete('/{id:\d+}', CarController::class . ':delete');
     });
+
+    // User routes
+    $app->group('/users', function (RouteCollectorProxy $group) {
+        $group->post('/authJWT', UserController::class . ':signin');
+    });  // TODO Add test or something IDC
 };

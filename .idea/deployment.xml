@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" serverName="SPA" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="XAMPP">
+      <paths name="API">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/src" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="SPA">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/I425-Team-Project" />
           </mappings>
         </serverdata>
       </paths>
