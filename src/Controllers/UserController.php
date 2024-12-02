@@ -42,7 +42,7 @@ class UserController extends AbstractController
         return $response->withHeader('Content-Type', 'application/json')->withStatus(401);
     }
 
-//    public function signout() {}
-//
-//    public function signup() {}
+    //    public function signout() {}
+    //
+    //    public function signup() {}
 }
