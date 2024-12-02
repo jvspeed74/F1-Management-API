@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Controllers\{CarController, DriverController, EventController, TeamController, TrackController};
+use App\Controllers\{CarController, DriverController, EventController, TeamController, TrackController, UserController};
 use App\Middleware\JWTAuthMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
@@ -67,4 +67,9 @@ return function (App $app): void {
         $group->patch('/{id:\d+}', CarController::class . ':update');
         $group->delete('/{id:\d+}', CarController::class . ':delete');
     })->add(JWTAuthMiddleware::class);
+
+    // User routes
+    $app->group('/users', function (RouteCollectorProxy $group) {
+        $group->post('/authJWT', UserController::class . ':signin');
+    });
 };
