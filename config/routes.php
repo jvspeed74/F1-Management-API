@@ -72,5 +72,5 @@ return function (App $app): void {
     // User routes
     $app->group('/users', function (RouteCollectorProxy $group) {
         $group->post('/authJWT', UserController::class . ':signin');
-    });
+    });  // TODO Add test or something IDC
 };
