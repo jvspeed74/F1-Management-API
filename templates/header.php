@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/signin.css">
-    <title>MyChatter Single Page Application</title>
+    <link rel="stylesheet" href="css/event.css">
+    <title>F1 Single Page Application</title>
 
 </head>
 <body class="d-flex flex-column h-100">
