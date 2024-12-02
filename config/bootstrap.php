@@ -2,11 +2,6 @@
 
 declare(strict_types=1);
 
-// TODO: Remove these lines after you have configured your project
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-header('Access-Control-Allow-Origin: *');
-
 require __DIR__ . '/../vendor/autoload.php';
 
 use DI\Bridge\Slim\Bridge;
@@ -60,3 +55,8 @@ $routesConfig = require __DIR__ . '/../config/routes.php';
 $routesConfig($app);
 // Run app
 $app->run();
+
+// TODO: Remove these lines after you have configured your project
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+header('Access-Control-Allow-Origin: *');

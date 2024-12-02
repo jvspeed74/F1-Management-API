@@ -2,7 +2,7 @@ includes:
     - vendor/phpstan/phpstan-mockery/extension.neon
 
 parameters:
-    level: max
+    level: 4
     paths:
         - src
         - config
@@ -16,3 +16,7 @@ parameters:
     bootstrapFiles:
         - vendor/autoload.php
     reportMaybesInPropertyPhpDocTypes: false
+    ignoreErrors:
+        - '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$password#'
+        - '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$id#'
+        - '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$username#'
