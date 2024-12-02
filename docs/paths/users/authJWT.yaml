@@ -1,0 +1,27 @@
+post:
+  summary: Authenticate a user and return a JWT
+  tags:
+    - Users
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../components/schemas/user.yaml'
+  responses:
+    '200':
+      description: Successful Response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              jwt:
+                type: string
+                example: 'eyJhbGciOi'
+    '400':
+      $ref: '../../components/responses.yaml#/400'
+    '401':
+      $ref: '../../components/responses.yaml#/401'
+    '500':
+      $ref: '../../components/responses.yaml#/500'
