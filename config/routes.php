@@ -20,11 +20,7 @@ use Slim\Routing\RouteCollectorProxy;
  * @return void
  */
 return function (App $app): void {
-    // Greet route
-    $app->get('/hello/{name}', function (Response $response, string $name) {
-        $response->getBody()->write("Hello, $name");
-        return $response;
-    });
+
     // homePage
     $app->get('/', function ($request, $response) {
         ob_start();
