@@ -21,7 +21,7 @@ class JWTAuthenticator
 
     public function __construct(TokenRepository $tokenRepository, LoggerInterface $logger)
     {
-        $this->secretKey = getenv('JWT_SECRET_KEY') ?: 'default_secret';
+        $this->secretKey = getenv('JWT_SECRET_KEY') ?: 'secret';
         $this->tokenRepository = $tokenRepository;
         $this->logger = $logger;
     }
