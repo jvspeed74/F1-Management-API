@@ -23,6 +23,8 @@ return [
             new LineFormatter(
                 "[%datetime%] %channel%.%level_name%: %message%\n",
                 "Y-m-d H:i:s",
+                true,
+                true
             ),
         );
         $logger->pushHandler($fileHandler);
