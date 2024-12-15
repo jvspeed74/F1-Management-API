@@ -1,4 +1,4 @@
-POST http://localhost:8080/auth/logout
+POST http://localhost:8080/auth/revoke
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MzIyNjE2MjcsImV4cCI6MTczNDg5MTY0M30.Sc8UicNae0t2MYbjp3vSFJu-BKveY1Bp81Pv7fuY3ns
 
