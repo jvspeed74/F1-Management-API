@@ -42,7 +42,7 @@ class AuthController
         $this->logger->info('Handling login request');
         /** @var string[] $data */
         $data = json_decode(
-            (string)$request->getBody(),
+            (string) $request->getBody(),
             true,
             512,
             JSON_THROW_ON_ERROR,
@@ -84,17 +84,17 @@ class AuthController
         $this->logger->info('Handling register request');
         /** @var array{username: string|null, password: string|null} $data */
         $data = json_decode(
-            (string)$request->getBody(),
+            (string) $request->getBody(),
             true,
             512,
             JSON_THROW_ON_ERROR,
         );
-        $username = isset($data['username']) ? (string)$data['username'] : null;
+        $username = isset($data['username']) ? (string) $data['username'] : null;
         if (!$username) {
             throw new HttpBadRequestException($request, 'Username is required');
         }
 
-        $password = isset($data['password']) ? (string)$data['password'] : null;
+        $password = isset($data['password']) ? (string) $data['password'] : null;
         if (!$password) {
             throw new HttpBadRequestException($request, 'Password is required');
         }
@@ -113,8 +113,10 @@ class AuthController
                 ['username' => $data['username']],
             );
             $response->getBody()->write(
-                json_encode(['error' => 'Username already exists'],
-                    JSON_THROW_ON_ERROR),
+                json_encode(
+                    ['error' => 'Username already exists'],
+                    JSON_THROW_ON_ERROR
+                ),
             );
             return $response->withStatus(400)->withHeader(
                 'Content-Type',
@@ -133,8 +135,10 @@ class AuthController
             ['username' => $user->username],
         );
         $response->getBody()->write(
-            json_encode(['message' => 'User registered successfully'],
-                JSON_THROW_ON_ERROR),
+            json_encode(
+                ['message' => 'User registered successfully'],
+                JSON_THROW_ON_ERROR
+            ),
         );
         return $response->withHeader('Content-Type', 'application/json')->withStatus(
             201,
@@ -151,8 +155,10 @@ class AuthController
         if ($authHeader === null) {
             $this->logger->warning('Authorization header missing');
             $response->getBody()->write(
-                json_encode(['error' => 'Authorization header missing'],
-                    JSON_THROW_ON_ERROR),
+                json_encode(
+                    ['error' => 'Authorization header missing'],
+                    JSON_THROW_ON_ERROR
+                ),
             );
             return $response->withStatus(400)->withHeader(
                 'Content-Type',
@@ -163,8 +169,10 @@ class AuthController
         if (!preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
             $this->logger->warning('Invalid Authorization header format');
             $response->getBody()->write(
-                json_encode(['error' => 'Invalid Authorization header format'],
-                    JSON_THROW_ON_ERROR),
+                json_encode(
+                    ['error' => 'Invalid Authorization header format'],
+                    JSON_THROW_ON_ERROR
+                ),
             );
             return $response->withStatus(400)->withHeader(
                 'Content-Type',
@@ -176,8 +184,10 @@ class AuthController
         if ($this->tokenRepository->revoke($token) == 0) {
             $this->logger->error('Failed to revoke token', ['token' => $token]);
             $response->getBody()->write(
-                json_encode(['error' => 'Failed to revoke token'],
-                    JSON_THROW_ON_ERROR),
+                json_encode(
+                    ['error' => 'Failed to revoke token'],
+                    JSON_THROW_ON_ERROR
+                ),
             );
             return $response->withStatus(500)->withHeader(
                 'Content-Type',
@@ -187,8 +197,10 @@ class AuthController
 
         $this->logger->info('Revoke request successful');
         $response->getBody()->write(
-            json_encode(['message' => 'Token revocation successful'],
-                JSON_THROW_ON_ERROR),
+            json_encode(
+                ['message' => 'Token revocation successful'],
+                JSON_THROW_ON_ERROR
+            ),
         );
         return $response->withHeader('Content-Type', 'application/json');
     }

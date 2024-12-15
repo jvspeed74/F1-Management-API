@@ -68,7 +68,7 @@ class JWTAuthenticator
         $token = JWT::encode($payload, $this->secretKey, 'HS256');
         return [
             'token' => $token,
-            'exp' => $expiresAt
+            'exp' => $expiresAt,
         ];
     }
 }
