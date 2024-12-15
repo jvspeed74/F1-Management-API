@@ -40,6 +40,7 @@ class AuthController
     public function login(Request $request, Response $response): Response
     {
         $this->logger->info('Handling login request');
+        /** @var string[] $data */
         $data = json_decode(
             (string)$request->getBody(),
             true,
@@ -81,13 +82,24 @@ class AuthController
     public function register(Request $request, Response $response): Response
     {
         $this->logger->info('Handling register request');
+        /** @var array{username: string|null, password: string|null} $data */
         $data = json_decode(
             (string)$request->getBody(),
             true,
             512,
             JSON_THROW_ON_ERROR,
         );
-        $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+        $username = isset($data['username']) ? (string)$data['username'] : null;
+        if (!$username) {
+            throw new HttpBadRequestException($request, 'Username is required');
+        }
+
+        $password = isset($data['password']) ? (string)$data['password'] : null;
+        if (!$password) {
+            throw new HttpBadRequestException($request, 'Password is required');
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         if (!$hashedPassword) {
             throw new HttpInternalServerErrorException(
                 $request,
@@ -175,7 +187,8 @@ class AuthController
 
         $this->logger->info('Revoke request successful');
         $response->getBody()->write(
-            json_encode(['message' => 'Token revokation successful'], JSON_THROW_ON_ERROR),
+            json_encode(['message' => 'Token revocation successful'],
+                JSON_THROW_ON_ERROR),
         );
         return $response->withHeader('Content-Type', 'application/json');
     }
