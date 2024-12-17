@@ -13,4 +13,11 @@ class TokenRepository extends AbstractRepository
     {
         parent::__construct($model);
     }
+
+    public function revoke(string $token): int
+    {
+        return $this->model::query()
+            ->where('token', $token)
+            ->update(['revoked' => true]);
+    }
 }

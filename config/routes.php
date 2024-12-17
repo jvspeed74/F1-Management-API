@@ -3,11 +3,7 @@
 declare(strict_types=1);
 
 use App\Middleware\AuthMiddleware;
-use App\Controllers\{CarController,
-    DriverController,
-    EventController,
-    TeamController,
-    TrackController};
+use App\Controllers\{AuthController, CarController, DriverController, EventController, TeamController, TrackController};
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
@@ -114,5 +110,12 @@ return function (App $app): void {
         $group->post('', CarController::class . ':create');
         $group->patch('/{id:\d+}', CarController::class . ':update');
         $group->delete('/{id:\d+}', CarController::class . ':delete');
+    });
+
+    // Auth routes TODO need documentation
+    $app->group('/auth', function (RouteCollectorProxy $group) {
+        $group->post('/login', AuthController::class . ':login');
+        $group->post('/register', AuthController::class . ':register');
+        $group->post('/revoke', AuthController::class . ':revoke');
     });
 };
