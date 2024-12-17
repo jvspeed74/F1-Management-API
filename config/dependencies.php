@@ -21,8 +21,10 @@ return [
         $fileHandler = new StreamHandler(__DIR__ . '/../logs/app.log', Level::Debug);
         $fileHandler->setFormatter(
             new LineFormatter(
-                "[%datetime%] %channel%.%level_name%: %message%",
+                "[%datetime%] %channel%.%level_name%: %message%\n",
                 "Y-m-d H:i:s",
+                true,
+                true
             ),
         );
         $logger->pushHandler($fileHandler);
