@@ -16,7 +16,7 @@
             });
 
             function fetchTeams() {
-                fetch('/teams')
+                fetch('http://localhost:8080/teams')
                     .then(response => response.json())
                     .then(teams => {
                     allTeams = teams;

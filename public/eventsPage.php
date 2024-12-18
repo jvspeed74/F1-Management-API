@@ -16,7 +16,7 @@
             });
 
             function fetchEvents() {
-                fetch('/events')
+                fetch('http://localhost:8080/events')
                     .then(response => response.json())
                     .then(events => {
                     allEvents = events;

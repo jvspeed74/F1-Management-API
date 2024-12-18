@@ -16,7 +16,7 @@
             });
 
             function fetchTracks() {
-                fetch('/tracks')
+                fetch('http://localhost:8080/tracks')
                     .then(response => response.json())
                     .then(tracks => {
                     allTracks = tracks;

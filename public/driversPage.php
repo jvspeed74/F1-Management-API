@@ -16,7 +16,7 @@
             });
 
             function fetchDrivers() {
-                fetch('/drivers')
+                fetch('http://localhost:8080/drivers')
                     .then(response => response.json())
                     .then(drivers => {
                     allDrivers = drivers;
