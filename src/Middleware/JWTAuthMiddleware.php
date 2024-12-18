@@ -32,11 +32,11 @@ class JWTAuthMiddleware implements MiddlewareInterface
         RequestHandlerInterface $handler,
     ): ResponseInterface {
         $authHeader = $request->getHeader('Authorization');
-        if (empty($authHeader) || !str_starts_with($authHeader[0], 'JWT ')) {
+        if (empty($authHeader) || !str_starts_with($authHeader[0], 'Bearer ')) {
             return $this->responseHandler->unauthorized('JWT token not received');
         }
 
-        $token = str_replace('JWT ', '', $authHeader[0]);
+        $token = str_replace('Bearer ', '', $authHeader[0]);
         if (!$this->jwtAuthenticator->validate($token)) {
             return $this->responseHandler->unauthorized('Invalid');
         }
