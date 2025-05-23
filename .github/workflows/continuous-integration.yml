@@ -5,9 +5,14 @@ on:
     branches:
       - main
       - staging/**
+    paths-ignore:
+      - README.md
   push:
     branches-ignore:
       - '**'
+    paths-ignore:
+      - README.md
+
 
 permissions:
   contents: read
